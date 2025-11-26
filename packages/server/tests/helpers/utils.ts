@@ -277,7 +277,7 @@ export class Utils {
     const mirrorNodeAccount = (await mirrorNode.get(`/accounts/${address}`)).account;
     const accountId = AccountId.fromString(mirrorNodeAccount);
     const client: ServicesClient = new ServicesClient(
-      ConfigService.get('HEDERA_NETWORK')!,
+      ConfigService.get('HIERONET_NETWORK')!,
       accountId.toString(),
       privateKey.toStringDer(),
     );

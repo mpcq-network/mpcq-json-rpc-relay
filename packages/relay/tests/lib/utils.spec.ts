@@ -67,7 +67,7 @@ describe('Utils', () => {
       ).to.be.false;
     });
 
-    ConfigService.get('HEDERA_SPECIFIC_REVERT_STATUSES').forEach((status) => {
+    ConfigService.get('HIERONET_SPECIFIC_REVERT_STATUSES').forEach((status) => {
       it(`should exclude transaction with result ${status}`, () => {
         expect(Utils.isRevertedDueToMPCQSpecificValidation({ result: status, error_message: null })).to.be.true;
       });

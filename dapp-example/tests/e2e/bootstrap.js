@@ -32,7 +32,7 @@ const toHex = (num) => {
 const supportedEnvs = ['previewnet', 'testnet', 'mainnet'];
 
 let client;
-const network = process.env.HEDERA_NETWORK || '{}';
+const network = process.env.HIERONET_NETWORK || '{}';
 if (supportedEnvs.includes(network.toLowerCase())) {
   client = MPCQSDK.Client.forName(network);
 } else {

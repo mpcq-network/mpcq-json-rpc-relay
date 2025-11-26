@@ -2,7 +2,7 @@
 relay:
   config:
     CHAIN_ID: '0x128'
-    HEDERA_NETWORK: 'testnet'
+    HIERONET_NETWORK: 'testnet'
     MIRROR_NODE_URL: 'https://testnet.mirrornode.hedera.com'
     READ_ONLY: true
 
@@ -13,7 +13,7 @@ relay:
 ws:
   config:
     CHAIN_ID: '0x128'
-    HEDERA_NETWORK: 'testnet'
+    HIERONET_NETWORK: 'testnet'
     MIRROR_NODE_URL: 'https://testnet.mirrornode.hedera.com'
     READ_ONLY: true
 

@@ -6,7 +6,7 @@ const { Options, addressToBytes32 } = require('@layerzerolabs/lz-v2-utilities');
 const { expect } = require('chai');
 const CONSTANTS = require('./constants');
 
-const { HEDERA_EID, BSC_EID, RECEIVER_ADDRESS } = CONSTANTS;
+const { HIERONET_EID, BSC_EID, RECEIVER_ADDRESS } = CONSTANTS;
 const amount = '100000000000000000';
 
 describe('OFTTests', function() {
@@ -23,7 +23,7 @@ describe('OFTTests', function() {
       oftCmd: ethers.utils.arrayify('0x')
     };
 
-    const contract = await ethers.getContractAt('ExampleOFT', process.env.OFT_HEDERA_CONTRACT);
+    const contract = await ethers.getContractAt('ExampleOFT', process.env.OFT_HIERONET_CONTRACT);
     const tx = await contract.send(sendParam, { nativeFee: '500000000', lzTokenFee: 0 }, signers[0].address, {
       gasLimit: 10_000_000,
       value: '5000000000000000000'
@@ -41,7 +41,7 @@ describe('OFTTests', function() {
     const signers = await ethers.getSigners();
 
     const sendParam = {
-      dstEid: HEDERA_EID,
+      dstEid: HIERONET_EID,
       to: addressToBytes32(RECEIVER_ADDRESS),
       amountLD: amount,
       minAmountLD: amount,
@@ -67,7 +67,7 @@ describe('OFTTests', function() {
   it('@hedera @test balance', async () => {
     const signers = await ethers.getSigners();
 
-    const contract = await ethers.getContractAt('ExampleOFT', process.env.OFT_HEDERA_CONTRACT);
+    const contract = await ethers.getContractAt('ExampleOFT', process.env.OFT_HIERONET_CONTRACT);
     const receiverBalance = await contract.balanceOf(RECEIVER_ADDRESS);
 
     console.log(`(${hre.network.name}) signer balance: ${await contract.balanceOf(signers[0].address)}`);

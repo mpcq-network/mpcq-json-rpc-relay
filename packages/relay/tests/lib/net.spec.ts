@@ -49,16 +49,16 @@ describe('Net', async function () {
     });
   });
 
-  withOverriddenEnvsInMochaTest({ HEDERA_NETWORK: undefined }, () => {
+  withOverriddenEnvsInMochaTest({ HIERONET_NETWORK: undefined }, () => {
     it('should throw error if required configuration is set to undefined', async () => {
       await expect(Relay.init(logger, new Registry())).to.be.rejectedWith(
-        'Configuration error: HEDERA_NETWORK is a mandatory configuration for relay operation.',
+        'Configuration error: HIERONET_NETWORK is a mandatory configuration for relay operation.',
       );
     });
   });
 
-  withOverriddenEnvsInMochaTest({ HEDERA_NETWORK: 'mainnet', CHAIN_ID: '0x2' }, () => {
-    it('should prioritize CHAIN_ID over HEDERA_NETWORK', async () => {
+  withOverriddenEnvsInMochaTest({ HIERONET_NETWORK: 'mainnet', CHAIN_ID: '0x2' }, () => {
+    it('should prioritize CHAIN_ID over HIERONET_NETWORK', async () => {
       const relay = await Relay.init(logger, new Registry());
       const actualNetVersion = relay.net().version();
       expect(actualNetVersion).to.equal('2'); // 0x2 in decimal is 2

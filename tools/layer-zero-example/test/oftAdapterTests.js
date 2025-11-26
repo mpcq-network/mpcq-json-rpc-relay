@@ -6,13 +6,13 @@ const { Options, addressToBytes32 } = require('@layerzerolabs/lz-v2-utilities');
 const { expect } = require('chai');
 const CONSTANTS = require('./constants');
 
-const { HEDERA_EID, BSC_EID, RECEIVER_ADDRESS } = CONSTANTS;
+const { HIERONET_EID, BSC_EID, RECEIVER_ADDRESS } = CONSTANTS;
 const amount = '100000000000000000';
 
 describe('OFTAdapterTests', function() {
   it('@hedera @fund-and-approve transfer to adapter', async () => {
-    const contractERC20 = await ethers.getContractAt('ERC20Mock', process.env.ERC20_HEDERA_CONTRACT);
-    const transferTx = await contractERC20.transfer(process.env.OFT_ADAPTER_HEDERA_CONTRACT, amount);
+    const contractERC20 = await ethers.getContractAt('ERC20Mock', process.env.ERC20_HIERONET_CONTRACT);
+    const transferTx = await contractERC20.transfer(process.env.OFT_ADAPTER_HIERONET_CONTRACT, amount);
     const receipt = await transferTx.wait();
     console.log(`(${hre.network.name}) successfully sent to MPCQ via tx: ${transferTx.hash}`);
     expect(!!receipt.status).to.be.true;
@@ -27,8 +27,8 @@ describe('OFTAdapterTests', function() {
   });
 
   it('@hedera @fund-and-approve adapter approval', async () => {
-    const contractERC20 = await ethers.getContractAt('ERC20Mock', process.env.ERC20_HEDERA_CONTRACT);
-    const approveTx = await contractERC20.approve(process.env.OFT_ADAPTER_HEDERA_CONTRACT, amount);
+    const contractERC20 = await ethers.getContractAt('ERC20Mock', process.env.ERC20_HIERONET_CONTRACT);
+    const approveTx = await contractERC20.approve(process.env.OFT_ADAPTER_HIERONET_CONTRACT, amount);
     const receipt = await approveTx.wait();
     console.log(`(${hre.network.name}) successfully sent to MPCQ via tx: ${approveTx.hash}`);
     expect(!!receipt.status).to.be.true;
@@ -55,7 +55,7 @@ describe('OFTAdapterTests', function() {
       oftCmd: ethers.utils.arrayify('0x')
     };
 
-    const contract = await ethers.getContractAt('ExampleOFTAdapter', process.env.OFT_ADAPTER_HEDERA_CONTRACT);
+    const contract = await ethers.getContractAt('ExampleOFTAdapter', process.env.OFT_ADAPTER_HIERONET_CONTRACT);
     const tx = await contract.send(sendParam, { nativeFee: '500000000', lzTokenFee: 0 }, signers[0].address, {
       gasLimit: 10_000_000,
       value: '5000000000000000000'
@@ -73,7 +73,7 @@ describe('OFTAdapterTests', function() {
     const signers = await ethers.getSigners();
 
     const sendParam = {
-      dstEid: HEDERA_EID,
+      dstEid: HIERONET_EID,
       to: addressToBytes32(RECEIVER_ADDRESS),
       amountLD: amount,
       minAmountLD: amount,
@@ -99,11 +99,11 @@ describe('OFTAdapterTests', function() {
   it('@hedera @test balance', async () => {
     const signers = await ethers.getSigners();
 
-    const contractERC20 = await ethers.getContractAt('ERC20Mock', process.env.ERC20_HEDERA_CONTRACT);
+    const contractERC20 = await ethers.getContractAt('ERC20Mock', process.env.ERC20_HIERONET_CONTRACT);
     const receiverBalance = await contractERC20.balanceOf(RECEIVER_ADDRESS);
 
     console.log(`(${hre.network.name}) signer balance: ${await contractERC20.balanceOf(signers[0].address)}`);
-    console.log(`(${hre.network.name}) oft adapter balance: ${await contractERC20.balanceOf(process.env.OFT_ADAPTER_HEDERA_CONTRACT)}`);
+    console.log(`(${hre.network.name}) oft adapter balance: ${await contractERC20.balanceOf(process.env.OFT_ADAPTER_HIERONET_CONTRACT)}`);
     console.log(`(${hre.network.name}) receiver balance: ${receiverBalance}`);
 
     expect(receiverBalance).to.equal(amount);

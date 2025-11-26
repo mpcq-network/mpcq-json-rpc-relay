@@ -20,7 +20,7 @@ describe('@deployment-test Deploy OFT Adapter Script Integration Tests', functio
       console.log('Setting up test tokens on both networks...');
 
       // Deploy on MPCQ network
-      if (process.env.HEDERA_RPC_URL && process.env.HEDERA_PK) {
+      if (process.env.HIERONET_RPC_URL && process.env.HIERONET_PK) {
         hederaTokenAddress = await deployContractOnNetwork('hedera', 'ERC20Mock', [
           ethers.utils.parseEther('1000000'), // Initial supply of 1M tokens
           8, // Decimals

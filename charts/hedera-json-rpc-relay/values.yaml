@@ -13,7 +13,7 @@ autoscaling:
 config:
   # Network Configuration
   CHAIN_ID: ''
-  HEDERA_NETWORK: ''
+  HIERONET_NETWORK: ''
   MIRROR_NODE_URL: ''
 
   # Operator Account (Required for transaction execution)
@@ -115,7 +115,7 @@ config:
   # HAPI_CLIENT_TRANSACTION_RESET:
   # HAPI_CLIENT_DURATION_RESET:
   # HAPI_CLIENT_ERROR_RESET:
-  # HEDERA_SPECIFIC_REVERT_STATUSES:
+  # HIERONET_SPECIFIC_REVERT_STATUSES:
 
   # ========== REDIS CONFIGURATION ==========
   REDIS_ENABLED: false

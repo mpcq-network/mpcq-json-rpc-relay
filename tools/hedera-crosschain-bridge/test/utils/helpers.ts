@@ -90,20 +90,20 @@ export async function runHardhatScript(network: string, pathToScript: string, en
 export function getNetworkConfigs(network: string) {
   if (network === 'hedera') {
     if (
-      !process.env.HEDERA_RPC_URL ||
-      !process.env.HEDERA_PK ||
-      !process.env.HEDERA_LZ_EID_V2 ||
-      !process.env.HEDERA_LZ_ENDPOINT_V2
+      !process.env.HIERONET_RPC_URL ||
+      !process.env.HIERONET_PK ||
+      !process.env.HIERONET_LZ_EID_V2 ||
+      !process.env.HIERONET_LZ_ENDPOINT_V2
     ) {
       throw new Error('Missing required environment variables for MPCQ network');
     }
 
-    const networkProvider = new hre.ethers.providers.JsonRpcProvider(process.env.HEDERA_RPC_URL);
-    const networkSigner = new hre.ethers.Wallet(process.env.HEDERA_PK, networkProvider);
+    const networkProvider = new hre.ethers.providers.JsonRpcProvider(process.env.HIERONET_RPC_URL);
+    const networkSigner = new hre.ethers.Wallet(process.env.HIERONET_PK, networkProvider);
 
     return {
-      lzEID: process.env.HEDERA_LZ_EID_V2,
-      lzEndpointV2: process.env.HEDERA_LZ_ENDPOINT_V2,
+      lzEID: process.env.HIERONET_LZ_EID_V2,
+      lzEndpointV2: process.env.HIERONET_LZ_ENDPOINT_V2,
       networkProvider,
       networkSigner,
     };
@@ -692,12 +692,12 @@ export async function executeContractCallOnNetwork(
   let wallet;
 
   if (network === 'hedera') {
-    if (!process.env.HEDERA_RPC_URL || !process.env.HEDERA_PK) {
-      throw new Error('HEDERA_RPC_URL and HEDERA_PK environment variables are required for MPCQ deployment');
+    if (!process.env.HIERONET_RPC_URL || !process.env.HIERONET_PK) {
+      throw new Error('HIERONET_RPC_URL and HIERONET_PK environment variables are required for MPCQ deployment');
     }
     wallet = new hre.ethers.Wallet(
-      process.env.HEDERA_PK,
-      new hre.ethers.providers.JsonRpcProvider(process.env.HEDERA_RPC_URL),
+      process.env.HIERONET_PK,
+      new hre.ethers.providers.JsonRpcProvider(process.env.HIERONET_RPC_URL),
     );
   } else if (network === 'sepolia') {
     if (!process.env.SEPOLIA_RPC_URL || !process.env.SEPOLIA_PK) {

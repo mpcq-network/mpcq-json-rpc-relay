@@ -6,13 +6,13 @@ const { Options } = require('@layerzerolabs/lz-v2-utilities');
 const { expect } = require('chai');
 const CONSTANTS = require('./constants');
 
-const { HEDERA_EID, BSC_EID } = CONSTANTS;
+const { HIERONET_EID, BSC_EID } = CONSTANTS;
 const DATA_FROM_HEDERA = 'dataFromMPCQ';
 const DATA_FROM_BSC = 'dataFromBsc';
 
 describe('OAppTests', function() {
   it('@hedera @send to bsc', async () => {
-    const contract = await ethers.getContractAt('ExampleOApp', process.env.OAPP_HEDERA_CONTRACT);
+    const contract = await ethers.getContractAt('ExampleOApp', process.env.OAPP_HIERONET_CONTRACT);
     const tx = await contract.send(
       BSC_EID,
       DATA_FROM_HEDERA,
@@ -31,7 +31,7 @@ describe('OAppTests', function() {
   it('@bsc @send to hedera', async () => {
     const contract = await ethers.getContractAt('ExampleOApp', process.env.OAPP_BSC_CONTRACT);
     const tx = await contract.send(
-      HEDERA_EID,
+      HIERONET_EID,
       DATA_FROM_BSC,
       Options.newOptions().addExecutorLzReceiveOption(300000, 0).toHex(),
       { gasLimit: 12_000_000, value: '1000000000000000' }
@@ -46,7 +46,7 @@ describe('OAppTests', function() {
   });
 
   it('@hedera @test data()', async () => {
-    const contract = await ethers.getContractAt('ExampleOApp', process.env.OAPP_HEDERA_CONTRACT);
+    const contract = await ethers.getContractAt('ExampleOApp', process.env.OAPP_HIERONET_CONTRACT);
     const data = await contract.data();
     console.log(`(${hre.network.name}) data: ${data}`);
 

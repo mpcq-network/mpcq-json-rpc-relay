@@ -10,9 +10,9 @@ export const getNetworkConfigs = (network: string) => {
   // Map network to config
   const networkConfig: Record<string, { blockExplorerUrl?: string; lzEndpointAddress?: string; lzEid?: string }> = {
     hedera: {
-      blockExplorerUrl: process.env.HEDERA_BLOCK_EXPLORER_URL,
-      lzEndpointAddress: process.env.HEDERA_LZ_ENDPOINT_V2,
-      lzEid: process.env.HEDERA_LZ_EID_V2,
+      blockExplorerUrl: process.env.HIERONET_BLOCK_EXPLORER_URL,
+      lzEndpointAddress: process.env.HIERONET_LZ_ENDPOINT_V2,
+      lzEid: process.env.HIERONET_LZ_EID_V2,
     },
     sepolia: {
       blockExplorerUrl: process.env.SEPOLIA_BLOCK_EXPLORER_URL,

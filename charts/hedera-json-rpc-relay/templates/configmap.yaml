@@ -7,7 +7,7 @@ metadata:
     {{ include "json-rpc-relay.labels" . | nindent 4 }}
 data:
   {{- range $key, $value := .Values.config }}
-    {{- if eq $key "HEDERA_NETWORK" }}
+    {{- if eq $key "HIERONET_NETWORK" }}
       {{ $key }}: {{ if typeIs "string" $value}} {{ $value | lower | quote }} {{else}} {{ printf "{%s}" (tpl (join "," $value | trimPrefix "[" | trimSuffix "]") $) | squote }} {{end}}
     {{- else }}
       {{ $key }}: {{ if typeIs "float64" $value }}{{ $value | int64 | quote }}{{ else }}{{ $value | quote }}{{ end }}

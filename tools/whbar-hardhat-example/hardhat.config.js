@@ -21,17 +21,17 @@ module.exports = {
   },
   defaultNetwork: process.env.NETWORK,
   networks: {
-    hedera_mainnet: {
+    HIERONET_mainnet: {
       url: 'https://mainnet.hashio.io/api',
       accounts: [process.env.ECDSA_HEX_PRIVATE_KEY],
       chainId: 295
     },
-    hedera_testnet: {
+    HIERONET_testnet: {
       url: 'https://testnet.hashio.io/api',
       accounts: [process.env.ECDSA_HEX_PRIVATE_KEY],
       chainId: 296
     },
-    hedera_previewnet: {
+    HIERONET_previewnet: {
       url: 'https://previewnet.hashio.io/api',
       accounts: [process.env.ECDSA_HEX_PRIVATE_KEY],
       chainId: 297

@@ -90,7 +90,7 @@ task("deployHTS", "Deploys HTS Fungible Token", async (taskArgs, hre) => {
     process.env.OPERATOR_ID!,
     process.env.OPERATOR_KEY!,
     new LocalProvider({
-      client: Client.forNetwork(JSON.parse(process.env.HEDERA_NETWORK!)),
+      client: Client.forNetwork(JSON.parse(process.env.HIERONET_NETWORK!)),
     }),
   );
   const contractName = "ExampleHTSFT";
@@ -132,7 +132,7 @@ task(
       process.env.OPERATOR_ID!,
       process.env.OPERATOR_KEY!,
       new LocalProvider({
-        client: Client.forNetwork(JSON.parse(process.env.HEDERA_NETWORK!)),
+        client: Client.forNetwork(JSON.parse(process.env.HIERONET_NETWORK!)),
       }),
     );
     const contractName = "ExampleHTSNFT";

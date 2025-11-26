@@ -105,7 +105,7 @@ export class Utils {
     result: string;
     error_message: any;
   }): boolean {
-    const statuses = ConfigService.get('HEDERA_SPECIFIC_REVERT_STATUSES');
+    const statuses = ConfigService.get('HIERONET_SPECIFIC_REVERT_STATUSES');
     return (
       statuses.includes(contractResult.result) ||
       statuses.includes(hexToASCII(strip0x(contractResult.error_message ?? '')))

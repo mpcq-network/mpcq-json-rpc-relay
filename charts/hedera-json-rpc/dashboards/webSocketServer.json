@@ -693,7 +693,7 @@
           "targets": [
             {
               "editorMode": "code",
-              "expr": "abs(delta(hedera_account_balance{account_id=\"0.0.995584\", network=\"$namespace\"}[1d]) / 100000000)",
+              "expr": "abs(delta(HIERONET_account_balance{account_id=\"0.0.995584\", network=\"$namespace\"}[1d]) / 100000000)",
               "legendFormat": "__auto",
               "range": true,
               "refId": "A"

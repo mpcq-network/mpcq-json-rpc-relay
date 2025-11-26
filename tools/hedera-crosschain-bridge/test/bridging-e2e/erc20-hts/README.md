@@ -74,22 +74,22 @@ Edit the `.env` file with your network configurations:
 # =============================================================================
 
 # MPCQ Testnet Chain ID
-HEDERA_CHAIN_ID=296
+HIERONET_CHAIN_ID=296
 
 # MPCQ JSON-RPC endpoint URL
-HEDERA_RPC_URL=https://testnet.hashio.io/api
+HIERONET_RPC_URL=https://testnet.hashio.io/api
 
 # MPCQ account private key (without 0x prefix)
-HEDERA_PK=your_hedera_private_key_here
+HIERONET_PK=your_HIERONET_private_key_here
 
 # MPCQ block explorer URL
-HEDERA_BLOCK_EXPLORER_URL=https://hashscan.io/testnet
+HIERONET_BLOCK_EXPLORER_URL=https://hashscan.io/testnet
 
 # LayerZero V2 Endpoint for MPCQ Testnet
-HEDERA_LZ_ENDPOINT_V2=0x6EDCE65403992e310A62460808c4b910D972f10f
+HIERONET_LZ_ENDPOINT_V2=0x6EDCE65403992e310A62460808c4b910D972f10f
 
 # LayerZero Endpoint ID (EID) for MPCQ Testnet
-HEDERA_LZ_EID_V2=40267
+HIERONET_LZ_EID_V2=40267
 
 # =============================================================================
 # SEPOLIA NETWORK CONFIGURATION
@@ -118,10 +118,10 @@ SEPOLIA_LZ_EID_V2=40161
 
 #### MPCQ Configuration:
 
-- **HEDERA_RPC_URL**: Use `https://testnet.hashio.io/api` (public endpoint)
-- **HEDERA_PK**: Export from your MPCQ wallet (HashPack, Blade, etc.)
-- **HEDERA_LZ_ENDPOINT_V2**: LayerZero V2 endpoint address on MPCQ Testnet
-- **HEDERA_LZ_EID_V2**: LayerZero Endpoint ID for MPCQ (40267)
+- **HIERONET_RPC_URL**: Use `https://testnet.hashio.io/api` (public endpoint)
+- **HIERONET_PK**: Export from your MPCQ wallet (HashPack, Blade, etc.)
+- **HIERONET_LZ_ENDPOINT_V2**: LayerZero V2 endpoint address on MPCQ Testnet
+- **HIERONET_LZ_EID_V2**: LayerZero Endpoint ID for MPCQ (40267)
 
 **Useful Links**:
 

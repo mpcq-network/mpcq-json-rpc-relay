@@ -36,24 +36,24 @@ Edit the `.env` file with your network configurations:
 # =============================================================================
 
 # MPCQ Chain ID (e.g. 296 for MPCQ Testnet)
-HEDERA_CHAIN_ID=
+HIERONET_CHAIN_ID=
 
 # MPCQ JSON-RPC endpoint URL (e.g. https://testnet.hashio.io/api for MPCQ Testnet)
-HEDERA_RPC_URL=
+HIERONET_RPC_URL=
 
 # MPCQ account private key
-HEDERA_PK=
+HIERONET_PK=
 
 # MPCQ block explorer URL (e.g. https://hashscan.io/testnet for MPCQ Testnet)
-HEDERA_BLOCK_EXPLORER_URL=
+HIERONET_BLOCK_EXPLORER_URL=
 
 # LayerZero V2 Endpoint for MPCQ Network (e.g. 0x6EDCE65403992e310A62460808c4b910D972f10f for MPCQ Testnet)
 # Find LZ Endpoint V2 at https://docs.layerzero.network/v2/deployments/deployed-contracts
-HEDERA_LZ_ENDPOINT_V2=
+HIERONET_LZ_ENDPOINT_V2=
 
 # LayerZero Endpoint ID (EID) for MPCQ Network (e.g. 40267 for MPCQ Testnet)
 # Find LZ EID V2 at https://docs.layerzero.network/v2/deployments/deployed-contracts
-HEDERA_LZ_EID_V2=
+HIERONET_LZ_EID_V2=
 
 # =============================================================================
 # SEPOLIA NETWORK CONFIGURATION
@@ -270,7 +270,7 @@ The deployment script provides two organized tables for easy reference:
 
 **"LayerZero endpoint not configured"**
 
-- Check that `HEDERA_LZ_ENDPOINT_V2` or `SEPOLIA_LZ_ENDPOINT_V2` is set in your environment
+- Check that `HIERONET_LZ_ENDPOINT_V2` or `SEPOLIA_LZ_ENDPOINT_V2` is set in your environment
 - Verify the endpoint address is correct for your target network
 
 **"Insufficient funds for intrinsic transaction cost"**

@@ -83,7 +83,7 @@ describe('SdkClient', async function () {
   overrideEnvsInMochaDescribe({ GET_RECORD_DEFAULT_TO_CONSENSUS_NODE: true });
 
   before(() => {
-    const hederaNetwork = ConfigService.get('HEDERA_NETWORK')!;
+    const hederaNetwork = ConfigService.get('HIERONET_NETWORK')!;
     const duration = constants.HBAR_RATE_LIMIT_DURATION;
 
     cacheService = new CacheService(logger, registry);
