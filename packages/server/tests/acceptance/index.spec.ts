@@ -50,7 +50,7 @@ describe('RPC Server Acceptance Tests', function () {
   });
   const logger = testLogger.child({ name: 'rpc-acceptance-test' });
 
-  const NETWORK = ConfigService.get('HIERONET_NETWORK');
+  const NETWORK = ConfigService.get('MPCQNET_NETWORK');
   const OPERATOR_KEY = ConfigService.get('OPERATOR_KEY_MAIN');
   const OPERATOR_ID = ConfigService.get('OPERATOR_ID_MAIN');
   const MIRROR_NODE_URL = ConfigService.get('MIRROR_NODE_URL');
@@ -88,7 +88,7 @@ describe('RPC Server Acceptance Tests', function () {
     logger.info('Acceptance Tests Configurations successfully loaded');
     logger.info(`LOCAL_NODE: ${ConfigService.get('LOCAL_NODE')}`);
     logger.info(`CHAIN_ID: ${ConfigService.get('CHAIN_ID')}`);
-    logger.info(`HIERONET_NETWORK: ${NETWORK}`);
+    logger.info(`MPCQNET_NETWORK: ${NETWORK}`);
     logger.info(`OPERATOR_ID_MAIN: ${OPERATOR_ID}`);
     logger.info(`MIRROR_NODE_URL: ${MIRROR_NODE_URL}`);
     logger.info(`E2E_RELAY_HOST: ${ConfigService.get('E2E_RELAY_HOST')}`);

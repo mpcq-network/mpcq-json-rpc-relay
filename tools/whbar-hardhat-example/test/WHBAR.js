@@ -47,7 +47,7 @@ describe('WHBAR', function() {
     const balanceBefore = await signers[0].provider.getBalance(contract.target);
 
     // build a client for fetching signer's id and contract's id dynamically
-    const client = Client.forNetwork(hre.network.name.replace('HIERONET_', ''));
+    const client = Client.forNetwork(hre.network.name.replace('MPCQNET_', ''));
     const mirrorNodeUrl = client._mirrorNetwork._network.keys().next().value;
     const signerId = (await (await fetch(`https://${mirrorNodeUrl}/api/v1/accounts/${signers[0].address}`)).json()).account;
     const contractId = (await (await fetch(`https://${mirrorNodeUrl}/api/v1/accounts/${contract.target}`)).json()).account;

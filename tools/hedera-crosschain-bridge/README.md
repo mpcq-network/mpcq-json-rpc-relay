@@ -100,11 +100,11 @@ Create a .env file based on the .env.example file and fill out the configuration
 
 ```bash
 # MPCQ Network Configuration
-HIERONET_CHAIN_ID=
-HIERONET_RPC=
-HIERONET_PK= # for HTS-related operations, the deployer account should have enabled "Auto Associations"
-HIERONET_LZ_ENDPOINT_V2=
-HIERONET_LZ_EID_V2=
+MPCQNET_CHAIN_ID=
+MPCQNET_RPC=
+MPCQNET_PK= # for HTS-related operations, the deployer account should have enabled "Auto Associations"
+MPCQNET_LZ_ENDPOINT_V2=
+MPCQNET_LZ_EID_V2=
 
 # Sepolia Network Configuration
 SEPOLIA_CHAIN_ID=

@@ -49,16 +49,16 @@ describe('Net', async function () {
     });
   });
 
-  withOverriddenEnvsInMochaTest({ HIERONET_NETWORK: undefined }, () => {
+  withOverriddenEnvsInMochaTest({ MPCQNET_NETWORK: undefined }, () => {
     it('should throw error if required configuration is set to undefined', async () => {
       await expect(Relay.init(logger, new Registry())).to.be.rejectedWith(
-        'Configuration error: HIERONET_NETWORK is a mandatory configuration for relay operation.',
+        'Configuration error: MPCQNET_NETWORK is a mandatory configuration for relay operation.',
       );
     });
   });
 
-  withOverriddenEnvsInMochaTest({ HIERONET_NETWORK: 'mainnet', CHAIN_ID: '0x2' }, () => {
-    it('should prioritize CHAIN_ID over HIERONET_NETWORK', async () => {
+  withOverriddenEnvsInMochaTest({ MPCQNET_NETWORK: 'mainnet', CHAIN_ID: '0x2' }, () => {
+    it('should prioritize CHAIN_ID over MPCQNET_NETWORK', async () => {
       const relay = await Relay.init(logger, new Registry());
       const actualNetVersion = relay.net().version();
       expect(actualNetVersion).to.equal('2'); // 0x2 in decimal is 2

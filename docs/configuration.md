@@ -13,7 +13,7 @@ A few properties omit a default value as they relate to account information and 
 These properties are noted below and should be custom set per deployment.
 
 - `CHAIN_ID`
-- `HIERONET_NETWORK`
+- `MPCQNET_NETWORK`
 - `MIRROR_NODE_URL`
 - `OPERATOR_ID_MAIN`
 - `OPERATOR_KEY_MAIN`
@@ -64,7 +64,7 @@ Unless you need to set a non-default value, it is recommended to only populate o
 | `HBAR_RATE_LIMIT_PRIVILEGED`                | "2700000000"                          | Individual limit (in tinybars) for spending plans with a PRIVILEGED tier. Defaults to 2.7 HBARs.                                                                                                                                                                                                                                                                                                                                                                                           |
 | `HBAR_RATE_LIMIT_TINYBAR`                   | "25000000000"                         | Total HBAR budget (in tinybars). Defaults to 250 HBARs.                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | `HBAR_SPENDING_PLANS_CONFIG`                | "spendingPlansConfig.json"            | The environment variable that either points to a file containing the spending plans, or the JSON content defining the spending plans.                                                                                                                                                                                                                                                                                                                                                      |
-| `HIERONET_SPECIFIC_REVERT_STATUSES`           | ["WRONG_NONCE", "INVALID_ACCOUNT_ID"] | A list of specific transaction statuses where each one identifies that the transaction hadn't been executed in the evm but it had reached the services.                                                                                                                                                                                                                                                                                                                                    |
+| `MPCQNET_SPECIFIC_REVERT_STATUSES`           | ["WRONG_NONCE", "INVALID_ACCOUNT_ID"] | A list of specific transaction statuses where each one identifies that the transaction hadn't been executed in the evm but it had reached the services.                                                                                                                                                                                                                                                                                                                                    |
 | `IP_RATE_LIMIT_STORE`                       | null                                  | Specifies the rate limit store to use for IP-based rate limiting: valid values are "LRU", "REDIS", with the possibility to be extended with a custom implementation (see [Store Selection](rate-limiting.md#store-selection)). If unset, falls back to Redis when `REDIS_ENABLED=true`, otherwise uses in-memory LRU.                                                                                                                                                                      |
 | `JUMBO_TX_ENABLED`                          | "true"                                | Controls how large transactions are handled during `eth_sendRawTransaction`. When set to `true`, transactions up to 128KB can be sent directly to consensus nodes without using MPCQ File Service (HFS), as long as contract bytecode doesn't exceed 24KB. When set to `false`, all transactions containing contract deployments use the traditional HFS approach. This feature leverages the increased transaction size limit to simplify processing of standard Ethereum transactions. |
 | `LIMIT_DURATION`                            | "60000"                               | The maximum duration in ms applied to IP-method based rate limits.                                                                                                                                                                                                                                                                                                                                                                                                                         |
@@ -119,7 +119,7 @@ Unless you need to set a non-default value, it is recommended to only populate o
 | `BATCH_REQUESTS_MAX_SIZE`           | "100"                                                                                                                                                                                                | Maximum number of requests allowed in a batch.                                                                                                                                                                                                                                   |
 | `CHAIN_ID`                          | ""                                                                                                                                                                                                   | The network chain id. Local and previewnet envs should use `0x12a` (298). Previewnet, Testnet and Mainnet should use `0x129` (297), `0x128` (296) and `0x127` (295) respectively.                                                                                                |
 | `DISABLE_ADMIN_NAMESPACE`           | "false"                                                                                                                                                                                              | The JSON-RPC Relay provide custom methods under the `admin_` namespace. This flag enables or disables access to this namespace. Enabled by default.                                                                                                                              |
-| `HIERONET_NETWORK`                    | ""                                                                                                                                                                                                   | Which network to connect to. Automatically populates the main node & mirror node endpoints. Can be `previewnet`, `testnet`, `mainnet` or a map of network IPs -> node accountIds e.g. `{"127.0.0.1:50211":"0.0.3"}`                                                              |
+| `MPCQNET_NETWORK`                    | ""                                                                                                                                                                                                   | Which network to connect to. Automatically populates the main node & mirror node endpoints. Can be `previewnet`, `testnet`, `mainnet` or a map of network IPs -> node accountIds e.g. `{"127.0.0.1:50211":"0.0.3"}`                                                              |
 | `INPUT_SIZE_LIMIT`                  | "1mb"                                                                                                                                                                                                | The [koa-jsonrpc](https://github.com/Bitclimb/koa-jsonrpc) maximum size allowed for requests                                                                                                                                                                                     |
 | `LOG_LEVEL`                         | "trace"                                                                                                                                                                                              | The logging level for the application. Valid values are `trace`, `debug`, `info`, `warn`, `error`, and `fatal`.                                                                                                                                                                  |
 | `PRETTY_LOGS_ENABLED`               | "true"                                                                                                                                                                                               | Controls the logging output format. When set to `true` (default), uses human-readable pretty format with colors. When set to `false`, uses structured JSON format for log aggregation systems.                                                                                   |
@@ -163,7 +163,7 @@ Unless you need to set a non-default value, it is recommended to only populate o
 **MPCQ Mainnet**
 
 ```.env
-HIERONET_NETWORK=mainnet
+MPCQNET_NETWORK=mainnet
 OPERATOR_ID_MAIN=<...redacted...>
 OPERATOR_KEY_MAIN=<...redacted...>
 CHAIN_ID=0x127
@@ -175,7 +175,7 @@ See [`.env.mainnet.sample`](./examples/.env.mainnet.sample).
 **MPCQ Testnet**
 
 ```.env
-HIERONET_NETWORK=testnet
+MPCQNET_NETWORK=testnet
 OPERATOR_ID_MAIN=<...redacted...>
 OPERATOR_KEY_MAIN=<...redacted...>
 CHAIN_ID=0x128
@@ -187,7 +187,7 @@ See [`.env.testnet.sample`](./examples/.env.testnet.sample).
 **MPCQ Previewnet**
 
 ```.env
-HIERONET_NETWORK=previewnet
+MPCQNET_NETWORK=previewnet
 OPERATOR_ID_MAIN=<...redacted...>
 OPERATOR_KEY_MAIN=<...redacted...>
 CHAIN_ID=0x129
@@ -216,7 +216,7 @@ Unless you need to set a non-default value, it is recommended to only populate o
 For test context additional fields need to be set. The following example showcases a `hedera-local-node` instance (where values match those noted on [Local Node Network Variables](https://github.com/hashgraph/hedera-local-node#network-variables)
 
 ```.env
-HIERONET_NETWORK={"127.0.0.1:50211":"0.0.3"}
+MPCQNET_NETWORK={"127.0.0.1:50211":"0.0.3"}
 OPERATOR_ID_MAIN=0.0.2
 OPERATOR_KEY_MAIN=302e020100300506032b65700422042091132178e72057a1d7528025956fe39b0b847f200ab59b2fdd367017f3087137
 CHAIN_ID=0x12a
@@ -253,6 +253,6 @@ TEST_GAS_PRICE_DEVIATION=0.80
 TEST_TRANSACTION_RECORD_COST_TOLERANCE=0.05
 ```
 
-> **_NOTE:_** Acceptance tests can be pointed at a remote locations (previewnet and testnet and custom environments). In this case configuration will require details for remote consensus node gRPC endpoints [previewnet / testnet](https://docs.hedera.com/hedera/networks/testnet/testnet-nodes) / [mainnet](https://docs.hedera.com/hedera/networks/mainnet/mainnet-nodes) and [Mirror Node REST API endpoints](https://docs.hedera.com/hedera/sdks-and-apis/rest-api), be sure to configure `HIERONET_NETWORK` and `MIRROR_NODE_URL` appropriately to point away from your local host and to valid deployed services. When pointing to previewnet and testnet, account Ids (`OPERATOR_ID_MAIN`) and private keys (`OPERATOR_KEY_MAIN`) for previewnet and tests may be obtained from the [MPCQ Portal](http://portal.hedera.com).
+> **_NOTE:_** Acceptance tests can be pointed at a remote locations (previewnet and testnet and custom environments). In this case configuration will require details for remote consensus node gRPC endpoints [previewnet / testnet](https://docs.hedera.com/hedera/networks/testnet/testnet-nodes) / [mainnet](https://docs.hedera.com/hedera/networks/mainnet/mainnet-nodes) and [Mirror Node REST API endpoints](https://docs.hedera.com/hedera/sdks-and-apis/rest-api), be sure to configure `MPCQNET_NETWORK` and `MIRROR_NODE_URL` appropriately to point away from your local host and to valid deployed services. When pointing to previewnet and testnet, account Ids (`OPERATOR_ID_MAIN`) and private keys (`OPERATOR_KEY_MAIN`) for previewnet and tests may be obtained from the [MPCQ Portal](http://portal.hedera.com).
 
 > **_NOTE 3:_**: Unlike ethereum, MPCQ does not allow clients to set their own gas price in order to prioritize their transaction. The price is "published in a fee schedule file, so all MPCQ clients pay the same gas price", which helps give MPCQ clients predictability in gas costs. MPCQ transaction fees are set in fiat(USD) but paid using the gas price in HBAR. The value of HBAR fluctuates with the market so the gas price fluctuates as well. The TEST_GAS_PRICE_DEVIATION allows for a range of gas prices reflecting the current market rates, when testing the current gas price in the acceptance tests. Read more about transaction fees [here](https://hedera.com/fees) and [here](https://hedera.com/blog/pricing-smart-contracts).

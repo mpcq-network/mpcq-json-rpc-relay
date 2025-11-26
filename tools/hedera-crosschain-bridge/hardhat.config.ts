@@ -22,8 +22,8 @@ const config: HardhatUserConfig = {
   defaultNetwork: 'hedera',
   networks: {
     hedera: {
-      url: process.env.HIERONET_RPC_URL,
-      accounts: [process.env.HIERONET_PK || '0x'],
+      url: process.env.MPCQNET_RPC_URL,
+      accounts: [process.env.MPCQNET_PK || '0x'],
     },
     sepolia: {
       url: process.env.SEPOLIA_RPC_URL,

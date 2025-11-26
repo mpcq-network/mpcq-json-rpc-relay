@@ -30,10 +30,10 @@ jobs:
 
       - name: Authenticate
         env:
-          HIERONET_PORTAL_USER: ${{ secrets.HIERONET_PORTAL_USER }}
-          HIERONET_PORTAL_PASSWORD: ${{ secrets.HIERONET_PORTAL_PASSWORD }}
+          MPCQNET_PORTAL_USER: ${{ secrets.MPCQNET_PORTAL_USER }}
+          MPCQNET_PORTAL_PASSWORD: ${{ secrets.MPCQNET_PORTAL_PASSWORD }}
         run: |
-          RESPONSE=$(jq --null-input -r --arg USER "${HIERONET_PORTAL_USER}" --arg PASS "${HIERONET_PORTAL_PASSWORD}" '{"email": $USER, "password": $PASS}' | curl -sSL -c /tmp/cookiejar.bin --data @- -X POST -H "Accept: application/json" -H "Content-Type: application/json" https://portal.hedera.com/api/session)
+          RESPONSE=$(jq --null-input -r --arg USER "${MPCQNET_PORTAL_USER}" --arg PASS "${MPCQNET_PORTAL_PASSWORD}" '{"email": $USER, "password": $PASS}' | curl -sSL -c /tmp/cookiejar.bin --data @- -X POST -H "Accept: application/json" -H "Content-Type: application/json" https://portal.hedera.com/api/session)
           echo "::add-mask::$RESPONSE"
           echo "The response was: $RESPONSE"
           ACCOUNTS_JSON="$(curl -sSL -b /tmp/cookiejar.bin -H "Accept: application/json" https://portal.hedera.com/api/account)"

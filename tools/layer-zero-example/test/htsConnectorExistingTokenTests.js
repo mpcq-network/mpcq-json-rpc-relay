@@ -6,7 +6,7 @@ const { Options, addressToBytes32 } = require('@layerzerolabs/lz-v2-utilities');
 const { expect } = require('chai');
 const CONSTANTS = require('./constants');
 
-const { HIERONET_EID, BSC_EID, RECEIVER_ADDRESS } = CONSTANTS;
+const { MPCQNET_EID, BSC_EID, RECEIVER_ADDRESS } = CONSTANTS;
 const amount = '100';
 
 describe('HTSConnectorExistingToken', function() {
@@ -14,7 +14,7 @@ describe('HTSConnectorExistingToken', function() {
     const contract = await ethers.getContractAt('CreateHTS', process.env.HTS_CONNECTOR_CREATE_HTS_CONTRACT);
     const updatedKey = [
       false,
-      process.env.HTS_CONNECTOR_EXISTING_TOKEN_HIERONET_CONTRACT,
+      process.env.HTS_CONNECTOR_EXISTING_TOKEN_MPCQNET_CONTRACT,
       '0x',
       '0x',
       '0x0000000000000000000000000000000000000000'
@@ -32,11 +32,11 @@ describe('HTSConnectorExistingToken', function() {
   });
 
   it('@hedera @fund', async () => {
-    const oftHts = await ethers.getContractAt('ExampleHTSConnectorExistingToken', process.env.HTS_CONNECTOR_EXISTING_TOKEN_HIERONET_CONTRACT);
+    const oftHts = await ethers.getContractAt('ExampleHTSConnectorExistingToken', process.env.HTS_CONNECTOR_EXISTING_TOKEN_MPCQNET_CONTRACT);
     const tokenAddress = await oftHts.htsTokenAddress();
 
     const contract = await ethers.getContractAt('ERC20', tokenAddress);
-    const txTransfer = await contract.transfer(process.env.HTS_CONNECTOR_EXISTING_TOKEN_HIERONET_CONTRACT, '200');
+    const txTransfer = await contract.transfer(process.env.HTS_CONNECTOR_EXISTING_TOKEN_MPCQNET_CONTRACT, '200');
     const receipt = await txTransfer.wait();
     console.log(`(${hre.network.name}) successfully sent to MPCQ via tx: ${txTransfer.hash}`);
 
@@ -44,11 +44,11 @@ describe('HTSConnectorExistingToken', function() {
   });
 
   it('@hedera @approve oft hts contract', async () => {
-    const oftHts = await ethers.getContractAt('ExampleHTSConnectorExistingToken', process.env.HTS_CONNECTOR_EXISTING_TOKEN_HIERONET_CONTRACT);
+    const oftHts = await ethers.getContractAt('ExampleHTSConnectorExistingToken', process.env.HTS_CONNECTOR_EXISTING_TOKEN_MPCQNET_CONTRACT);
     const tokenAddress = await oftHts.htsTokenAddress();
 
     const contract = await ethers.getContractAt('ERC20', tokenAddress);
-    const txApprove = await contract.approve(process.env.HTS_CONNECTOR_EXISTING_TOKEN_HIERONET_CONTRACT, amount);
+    const txApprove = await contract.approve(process.env.HTS_CONNECTOR_EXISTING_TOKEN_MPCQNET_CONTRACT, amount);
     const receipt = await txApprove.wait();
     console.log(`(${hre.network.name}) successfully sent to MPCQ via tx: ${txApprove.hash}`);
 
@@ -68,7 +68,7 @@ describe('HTSConnectorExistingToken', function() {
       oftCmd: ethers.utils.arrayify('0x')
     };
 
-    const contract = await ethers.getContractAt('ExampleHTSConnectorExistingToken', process.env.HTS_CONNECTOR_EXISTING_TOKEN_HIERONET_CONTRACT);
+    const contract = await ethers.getContractAt('ExampleHTSConnectorExistingToken', process.env.HTS_CONNECTOR_EXISTING_TOKEN_MPCQNET_CONTRACT);
     const tx = await contract.send(sendParam, { nativeFee: '500000000', lzTokenFee: 0 }, signers[0].address, {
       gasLimit: 10_000_000,
       value: '5000000000000000000'
@@ -86,7 +86,7 @@ describe('HTSConnectorExistingToken', function() {
     const signers = await ethers.getSigners();
 
     const sendParam = {
-      dstEid: HIERONET_EID,
+      dstEid: MPCQNET_EID,
       to: addressToBytes32(RECEIVER_ADDRESS),
       amountLD: amount,
       minAmountLD: amount,
@@ -112,13 +112,13 @@ describe('HTSConnectorExistingToken', function() {
   it('@hedera @test balance', async () => {
     const signers = await ethers.getSigners();
 
-    const oftHts = await ethers.getContractAt('ExampleHTSConnectorExistingToken', process.env.HTS_CONNECTOR_EXISTING_TOKEN_HIERONET_CONTRACT);
+    const oftHts = await ethers.getContractAt('ExampleHTSConnectorExistingToken', process.env.HTS_CONNECTOR_EXISTING_TOKEN_MPCQNET_CONTRACT);
     const tokenAddress = await oftHts.htsTokenAddress();
 
     const contract = await ethers.getContractAt('ERC20', tokenAddress);
     const receiverBalance = await contract.balanceOf(RECEIVER_ADDRESS);
 
-    console.log(`(${hre.network.name}) oft contract balance: ${await contract.balanceOf(process.env.HTS_CONNECTOR_EXISTING_TOKEN_HIERONET_CONTRACT)}`);
+    console.log(`(${hre.network.name}) oft contract balance: ${await contract.balanceOf(process.env.HTS_CONNECTOR_EXISTING_TOKEN_MPCQNET_CONTRACT)}`);
     console.log(`(${hre.network.name}) signer balance: ${await contract.balanceOf(signers[0].address)}`);
     console.log(`(${hre.network.name}) total supply: ${await contract.totalSupply()}`);
     console.log(`(${hre.network.name}) receiver balance: ${receiverBalance}`);

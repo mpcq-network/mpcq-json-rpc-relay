@@ -524,7 +524,7 @@ All phases use configurable durations and maintain traffic-weighted RPS allocati
 For optimal stress testing, start the Relay with the following environment variables. These settings help ensure the stress test runs smoothly and with minimal friction under heavy load:
 
 ```env
-HIERONET_NETWORK=
+MPCQNET_NETWORK=
 OPERATOR_ID_MAIN=
 OPERATOR_KEY_MAIN=
 OPERATOR_KEY_FORMAT=

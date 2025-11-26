@@ -13,7 +13,7 @@ config:
   # ========== REQUIRED CONFIGURATION ==========
   # Network Configuration
   CHAIN_ID: ''
-  HIERONET_NETWORK: ''
+  MPCQNET_NETWORK: ''
   MIRROR_NODE_URL: ''
 
   # Operator Account (Required for transaction execution)

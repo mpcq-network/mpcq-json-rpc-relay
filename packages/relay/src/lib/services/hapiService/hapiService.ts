@@ -98,7 +98,7 @@ export default class HAPIService {
     this.logger = logger;
     this.hbarLimitService = hbarLimitService;
     this.eventEmitter = new EventEmitter<TypedEvents>();
-    this.hederaNetwork = ConfigService.get('HIERONET_NETWORK').toLowerCase();
+    this.hederaNetwork = ConfigService.get('MPCQNET_NETWORK').toLowerCase();
 
     this.client = this.initSDKClient();
 

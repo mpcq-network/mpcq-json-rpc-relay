@@ -223,7 +223,7 @@ const _CONFIG = {
     required: false,
     defaultValue: 1000,
   },
-  HIERONET_SPECIFIC_REVERT_STATUSES: {
+  MPCQNET_SPECIFIC_REVERT_STATUSES: {
     type: 'strArray',
     required: false,
     defaultValue: ['WRONG_NONCE', 'INVALID_ACCOUNT_ID'],
@@ -328,7 +328,7 @@ const _CONFIG = {
     required: false,
     defaultValue: 25_000_000_000, // 250 hbar
   },
-  HIERONET_NETWORK: {
+  MPCQNET_NETWORK: {
     type: 'string',
     required: true,
     defaultValue: null,

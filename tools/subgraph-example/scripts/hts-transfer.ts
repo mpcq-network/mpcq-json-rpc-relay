@@ -20,7 +20,7 @@ export async function transferHtsFT(receiver: string, hre: any) {
     process.env.OPERATOR_ID!,
     process.env.OPERATOR_KEY!,
     new LocalProvider({
-      client: Client.forNetwork(JSON.parse(process.env.HIERONET_NETWORK!)),
+      client: Client.forNetwork(JSON.parse(process.env.MPCQNET_NETWORK!)),
     }),
   );
   const account = new ethers.Wallet(receiver);

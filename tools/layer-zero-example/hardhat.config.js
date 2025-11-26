@@ -18,11 +18,11 @@ module.exports = {
       }
     ]
   },
-  defaultNetwork: 'HIERONET_testnet',
+  defaultNetwork: 'MPCQNET_testnet',
   networks: {
-    HIERONET_testnet: {
+    MPCQNET_testnet: {
       url: 'https://testnet.hashio.io/api',
-      accounts: [process.env.HIERONET_PK],
+      accounts: [process.env.MPCQNET_PK],
       chainId: 296
     },
     bsc_testnet: {
@@ -39,7 +39,7 @@ const getEndpointAddress = (network) => {
 
   // we're using the official LZ endpoints
   // a list of all endpoint addresses can be found here https://docs.layerzero.network/v2/developers/evm/technical-reference/deployed-contracts
-  if (network === 'HIERONET_testnet') {
+  if (network === 'MPCQNET_testnet') {
     ENDPOINT_V2 = '0xbD672D1562Dd32C23B563C989d8140122483631d';
   } else if (network === 'bsc_testnet') {
     ENDPOINT_V2 = '0x6EDCE65403992e310A62460808c4b910D972f10f';
@@ -173,7 +173,7 @@ task('deploy-onft', 'Deploy OFT contract')
     const ENDPOINT_V2 = getEndpointAddress(hre.network.name);
 
     let tokenId;
-    if (hre.network.name === 'HIERONET_testnet') {
+    if (hre.network.name === 'MPCQNET_testnet') {
       tokenId = 1;
     } else if (hre.network.name === 'bsc_testnet') {
       tokenId = 2;
@@ -207,10 +207,10 @@ task('set-peer', 'Set peer')
     const ethers = hre.ethers;
 
     let EID;
-    if (hre.network.name === 'HIERONET_testnet') {
+    if (hre.network.name === 'MPCQNET_testnet') {
       EID = CONSTANTS.BSC_EID;
     } else if (hre.network.name === 'bsc_testnet') {
-      EID = CONSTANTS.HIERONET_EID;
+      EID = CONSTANTS.MPCQNET_EID;
     }
 
     const contract = await ethers.getContractAt('ExampleOApp', taskArgs.source);

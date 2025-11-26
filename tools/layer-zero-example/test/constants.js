@@ -4,7 +4,7 @@ module.exports = {
   // we're using the official LZ endpoints
   // and a list of all EIDs can be found here
   // EIDs are defined in the layer zero documentation https://docs.layerzero.network/v2/developers/evm/technical-reference/deployed-contracts#contract-address-table
-  HIERONET_EID: 40285,
+  MPCQNET_EID: 40285,
   BSC_EID: 40102,
 
   // a random account

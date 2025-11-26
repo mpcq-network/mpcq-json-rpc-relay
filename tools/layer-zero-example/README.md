@@ -6,21 +6,21 @@ Message-passing interface to send and receive arbitrary pieces of data between c
 
 - Deploying the oapp contract on each network we're going to interact
 ```typescript
-npx hardhat deploy-oapp --network HIERONET_testnet
+npx hardhat deploy-oapp --network MPCQNET_testnet
 npx hardhat deploy-oapp --network bsc_testnet
 ```
 
 - In order to connect oapps together, we need to set the peer of the target oapp, more info can be found here https://docs.layerzero.network/v2/developers/evm/getting-started#connecting-your-contracts
 ```typescript
-npx hardhat set-peer --source <HIERONET_oapp_address> --target <bsc_oapp_address> --network HIERONET_testnet
-npx hardhat set-peer --source <bsc_oapp_address> --target <HIERONET_oapp_address> --network bsc_testnet
+npx hardhat set-peer --source <MPCQNET_oapp_address> --target <bsc_oapp_address> --network MPCQNET_testnet
+npx hardhat set-peer --source <bsc_oapp_address> --target <MPCQNET_oapp_address> --network bsc_testnet
 ```
 
 - Fill the .env
 
 - On these steps, we're sending messages from one chain to another and vice versa
 ```typescript
-npx hardhat test --grep "OAppTests @hedera @send" --network HIERONET_testnet
+npx hardhat test --grep "OAppTests @hedera @send" --network MPCQNET_testnet
 npx hardhat test --grep "OAppTests @bsc @send" --network bsc_testnet
 ```
 
@@ -28,7 +28,7 @@ npx hardhat test --grep "OAppTests @bsc @send" --network bsc_testnet
 
 - Finally we're checking whether the messages are received on both chains
 ```typescript
-npx hardhat test --grep "OAppTests @hedera @test" --network HIERONET_testnet
+npx hardhat test --grep "OAppTests @hedera @test" --network MPCQNET_testnet
 npx hardhat test --grep "OAppTests @bsc @test" --network bsc_testnet
 ```
 
@@ -38,21 +38,21 @@ Allows fungible tokens to be transferred across multiple chains.
 
 - Deploying OFT tokens which under the hood are ERC20s and contain the messaging between chains functionality provided by LZ
 ```typescript
-npx hardhat deploy-oft --decimals 18 --mint 1000000000000000000 --network HIERONET_testnet
+npx hardhat deploy-oft --decimals 18 --mint 1000000000000000000 --network MPCQNET_testnet
 npx hardhat deploy-oft --decimals 18 --mint 1000000000000000000 --network bsc_testnet
 ```
 
 - In order to connect OFTs together, we need to set the peer of the target OFT, more info can be found here https://docs.layerzero.network/v2/developers/evm/getting-started#connecting-your-contracts
 ```typescript
-npx hardhat set-peer --source <HIERONET_oft_address> --target <bsc_oft_address> --network HIERONET_testnet
-npx hardhat set-peer --source <bsc_oft_address> --target <HIERONET_oft_address> --network bsc_testnet
+npx hardhat set-peer --source <MPCQNET_oft_address> --target <bsc_oft_address> --network MPCQNET_testnet
+npx hardhat set-peer --source <bsc_oft_address> --target <MPCQNET_oft_address> --network bsc_testnet
 ```
 
 - Fill the .env
 
 - On these steps, we're sending tokens between chains. That means we're burning tokens on the source chain and minting new ones on the destination chain
 ```typescript
-npx hardhat test --grep "OFTTests @hedera @send" --network HIERONET_testnet
+npx hardhat test --grep "OFTTests @hedera @send" --network MPCQNET_testnet
 npx hardhat test --grep "OFTTests @bsc @send" --network bsc_testnet
 ```
 
@@ -60,7 +60,7 @@ npx hardhat test --grep "OFTTests @bsc @send" --network bsc_testnet
 
 - Finally we're checking whether the token balances are as expected on both the source and destination chains.
 ```typescript
-npx hardhat test --grep "OFTTests @hedera @test" --network HIERONET_testnet
+npx hardhat test --grep "OFTTests @hedera @test" --network MPCQNET_testnet
 npx hardhat test --grep "OFTTests @bsc @test" --network bsc_testnet
 ```
 
@@ -70,33 +70,33 @@ If your token already exists on the chain you want to connect, you can deploy th
 
 - Deploying ERC20 tokens on each chain
 ```typescript
-npx hardhat deploy-erc20 --decimals 18 --mint 10000000000000000000 --network HIERONET_testnet
+npx hardhat deploy-erc20 --decimals 18 --mint 10000000000000000000 --network MPCQNET_testnet
 npx hardhat deploy-erc20 --decimals 18 --mint 10000000000000000000 --network bsc_testnet
 ```
 
 - Deploying an OFT Adapters which will be used as a lockbox of ERC20s deployed the step above, you can use an already existing HTS token as well
 ```typescript
-npx hardhat deploy-oft-adapter --token <erc20_HIERONET_address> --network HIERONET_testnet
+npx hardhat deploy-oft-adapter --token <erc20_MPCQNET_address> --network MPCQNET_testnet
 npx hardhat deploy-oft-adapter --token <erc20_bsc_address> --network bsc_testnet
 ```
 
 - In order to connect OFT Adapters together, we need to set the peer of the target OFT Adapter, more info can be found here https://docs.layerzero.network/v2/developers/evm/getting-started#connecting-your-contracts
 ```typescript
-npx hardhat set-peer --source <HIERONET_oft_adapter_address> --target <bsc_oft_adapter_address> --network HIERONET_testnet
-npx hardhat set-peer --source <bsc_oft_adapter_address> --target <HIERONET_oft_adapter_address> --network bsc_testnet
+npx hardhat set-peer --source <MPCQNET_oft_adapter_address> --target <bsc_oft_adapter_address> --network MPCQNET_testnet
+npx hardhat set-peer --source <bsc_oft_adapter_address> --target <MPCQNET_oft_adapter_address> --network bsc_testnet
 ```
 
 - Fill the .env
 
 - Here we're funding the Adapter on both chains with some liquidity and after that we're approving it to spend the signer's token
 ```typescript
-npx hardhat test --grep "OFTAdapterTests @hedera @fund-and-approve" --network HIERONET_testnet
+npx hardhat test --grep "OFTAdapterTests @hedera @fund-and-approve" --network MPCQNET_testnet
 npx hardhat test --grep "OFTAdapterTests @bsc @fund-and-approve" --network bsc_testnet
 ```
 
 - On these steps, we're sending already existing tokens that are used by OFT Adapter between different chains
 ```typescript
-npx hardhat test --grep "OFTAdapterTests @hedera @send" --network HIERONET_testnet
+npx hardhat test --grep "OFTAdapterTests @hedera @send" --network MPCQNET_testnet
 npx hardhat test --grep "OFTAdapterTests @bsc @send" --network bsc_testnet
 ```
 
@@ -104,7 +104,7 @@ npx hardhat test --grep "OFTAdapterTests @bsc @send" --network bsc_testnet
 
 - Finally we're checking the balances on each chain
 ```typescript
-npx hardhat test --grep "OFTAdapterTests @hedera @test" --network HIERONET_testnet
+npx hardhat test --grep "OFTAdapterTests @hedera @test" --network MPCQNET_testnet
 npx hardhat test --grep "OFTAdapterTests @bsc @test" --network bsc_testnet
 ```
 
@@ -114,21 +114,21 @@ Allows non-fungible tokens to be transferred across multiple chains.
 
 - Deploying ONFT tokens which under the hood are ERC721s and contain the messaging between chains functionality provided by LZ
 ```typescript
-npx hardhat deploy-onft --network HIERONET_testnet
+npx hardhat deploy-onft --network MPCQNET_testnet
 npx hardhat deploy-onft --network bsc_testnet
 ```
 
 - In order to connect ONFTs together, we need to set the peer of the target ONFT, more info can be found here https://docs.layerzero.network/v2/developers/evm/getting-started#connecting-your-contracts
 ```typescript
-npx hardhat set-peer --source <HIERONET_onft_address> --target <bsc_onft_address> --network HIERONET_testnet
-npx hardhat set-peer --source <bsc_onft_address> --target <HIERONET_onft_address> --network bsc_testnet
+npx hardhat set-peer --source <MPCQNET_onft_address> --target <bsc_onft_address> --network MPCQNET_testnet
+npx hardhat set-peer --source <bsc_onft_address> --target <MPCQNET_onft_address> --network bsc_testnet
 ```
 
 - Fill the .env
 
 - On these steps, we're sending NFTs between chains. That means we're burning the NFT on the source chain and minting new one on the destination chain
 ```typescript
-npx hardhat test --grep "ONFTTests @hedera @send" --network HIERONET_testnet
+npx hardhat test --grep "ONFTTests @hedera @send" --network MPCQNET_testnet
 npx hardhat test --grep "ONFTTests @bsc @send" --network bsc_testnet
 ```
 
@@ -136,7 +136,7 @@ npx hardhat test --grep "ONFTTests @bsc @send" --network bsc_testnet
 
 - Finally we're checking whether the NFTs are transferred successfully
 ```typescript
-npx hardhat test --grep "ONFTTests @hedera @send" --network HIERONET_testnet
+npx hardhat test --grep "ONFTTests @hedera @send" --network MPCQNET_testnet
 npx hardhat test --grep "ONFTTests @bsc @send" --network bsc_testnet
 ```
 
@@ -146,39 +146,39 @@ If your NFT contract already exists on the chain you want to connect, you can de
 
 - Deploying ERC721s on each chain we want to connect
 ```typescript
-npx hardhat deploy-erc721 --network HIERONET_testnet
+npx hardhat deploy-erc721 --network MPCQNET_testnet
 npx hardhat deploy-erc721 --network bsc_testnet
 ```
 
 - Deploying an ONFT Adapter which will be used as a lockbox of ERC721s deployed the step above
 ```typescript
-npx hardhat deploy-onft-adapter --token <erc721_HIERONET_address> --network HIERONET_testnet
+npx hardhat deploy-onft-adapter --token <erc721_MPCQNET_address> --network MPCQNET_testnet
 npx hardhat deploy-onft-adapter --token <erc721_bsc_address> --network bsc_testnet
 ```
 
 - In order to connect ONFT Adapters together, we need to set the peer of the target ONFT Adapter, more info can be found here https://docs.layerzero.network/v2/developers/evm/getting-started#connecting-your-contracts
 ```typescript
-npx hardhat set-peer --source <HIERONET_onft_adapter_address> --target <bsc_onft_adapter_address> --network HIERONET_testnet
-npx hardhat set-peer --source <bsc_onft_adapter_address> --target <HIERONET_onft_adapter_address> --network bsc_testnet
+npx hardhat set-peer --source <MPCQNET_onft_adapter_address> --target <bsc_onft_adapter_address> --network MPCQNET_testnet
+npx hardhat set-peer --source <bsc_onft_adapter_address> --target <MPCQNET_onft_adapter_address> --network bsc_testnet
 ```
 
 - Fill the .env
 
 - First, we have to mint some NFTs on each chain
 ```typescript
-npx hardhat test --grep "ONFTAdapterTests @hedera @mint" --network HIERONET_testnet
+npx hardhat test --grep "ONFTAdapterTests @hedera @mint" --network MPCQNET_testnet
 npx hardhat test --grep "ONFTAdapterTests @bsc @mint" --network bsc_testnet
 ```
 
 - Then, we have to approve the Adapter to be able to spend the NFT we want to send to another chain
 ```typescript
-npx hardhat test --grep "ONFTAdapterTests @hedera @approve" --network HIERONET_testnet
+npx hardhat test --grep "ONFTAdapterTests @hedera @approve" --network MPCQNET_testnet
 npx hardhat test --grep "ONFTAdapterTests @bsc @approve" --network bsc_testnet
 ```
 
 - On these steps, we're sending already existing NFTs between chains
 ```typescript
-npx hardhat test --grep "ONFTAdapterTests @hedera @send" --network HIERONET_testnet
+npx hardhat test --grep "ONFTAdapterTests @hedera @send" --network MPCQNET_testnet
 npx hardhat test --grep "ONFTAdapterTests @bsc @send" --network bsc_testnet
 ```
 
@@ -186,7 +186,7 @@ npx hardhat test --grep "ONFTAdapterTests @bsc @send" --network bsc_testnet
 
 - Finally we're checking whether the NFTs are transferred successfully
 ```typescript
-npx hardhat test --grep "ONFTAdapterTests @hedera @test" --network HIERONET_testnet
+npx hardhat test --grep "ONFTAdapterTests @hedera @test" --network MPCQNET_testnet
 npx hardhat test --grep "ONFTAdapterTests @bsc @test" --network bsc_testnet
 ```
 
@@ -196,26 +196,26 @@ That's a variant of OFT but using an HTS token. Due to several incompatibilities
 
 - Deploying OFT on an EVM chain and HTS Connector on the MPCQ chain. The HTS Connector extends OFTCore and creates HTS token within its constructor. Also, overrides OFTCore _debit and _credit with related HTS mint and burn precompile calls
 ```typescript
-npx hardhat deploy-hts-connector --network HIERONET_testnet
+npx hardhat deploy-hts-connector --network MPCQNET_testnet
 npx hardhat deploy-oft --decimals 8 --mint 1000 --network bsc_testnet
 ```
 
 - In order to connect OFTs together, we need to set the peer of the target OFT, more info can be found here https://docs.layerzero.network/v2/developers/evm/getting-started#connecting-your-contracts
 ```typescript
-npx hardhat set-peer --source <HIERONET_oft_address> --target <bsc_oft_address> --network HIERONET_testnet
-npx hardhat set-peer --source <bsc_oft_address> --target <HIERONET_oft_address> --network bsc_testnet
+npx hardhat set-peer --source <MPCQNET_oft_address> --target <bsc_oft_address> --network MPCQNET_testnet
+npx hardhat set-peer --source <bsc_oft_address> --target <MPCQNET_oft_address> --network bsc_testnet
 ```
 
 - Fill the .env
 
 - Approving HTS Connector to use some signer's tokens
 ```typescript
-npx hardhat test --grep "HTSConnectorTests @hedera @approve" --network HIERONET_testnet
+npx hardhat test --grep "HTSConnectorTests @hedera @approve" --network MPCQNET_testnet
 ```
 
 - On these steps, we're sending tokens from an EVM chain to MPCQ and receiving HTS tokens and vice versa
 ```typescript
-npx hardhat test --grep "HTSConnectorTests @hedera @send" --network HIERONET_testnet
+npx hardhat test --grep "HTSConnectorTests @hedera @send" --network MPCQNET_testnet
 npx hardhat test --grep "HTSConnectorTests @bsc @send" --network bsc_testnet
 ```
 
@@ -223,7 +223,7 @@ npx hardhat test --grep "HTSConnectorTests @bsc @send" --network bsc_testnet
 
 Finally we're checking whether the balances are expected on both source and destination chains
 ```typescript
-npx hardhat test --grep "HTSConnectorTests @hedera @test" --network HIERONET_testnet
+npx hardhat test --grep "HTSConnectorTests @hedera @test" --network MPCQNET_testnet
 npx hardhat test --grep "HTSConnectorTests @bsc @test" --network bsc_testnet
 ```
 
@@ -233,41 +233,41 @@ That's a variant of OFT but using an already existing HTS token. Keep in mind th
 
 - Create an HTS token
 ```typescript
-npx hardhat create-hts-token --network HIERONET_testnet
+npx hardhat create-hts-token --network MPCQNET_testnet
 ```
 
 - Deploying OFT on an EVM chain and HTS Connector on the MPCQ chain. The HTS Connector for existing token extends OFTCore and receives the HTS tokens address as constructor parameter. Also, overrides OFTCore _debit and _credit with related HTS mint and burn precompile calls
 ```
-npx hardhat deploy-hts-connector-existing-token --token <existing_hts_token_address> --network HIERONET_testnet
+npx hardhat deploy-hts-connector-existing-token --token <existing_hts_token_address> --network MPCQNET_testnet
 npx hardhat deploy-oft --decimals 8 --mint 1000 --network bsc_testnet
 ```
 
 - In order to connect OFTs together, we need to set the peer of the target OFT, more info can be found here https://docs.layerzero.network/v2/developers/evm/getting-started#connecting-your-contracts
 ```typescript
-npx hardhat set-peer --source <HIERONET_oft_address> --target <bsc_oft_address> --network HIERONET_testnet
-npx hardhat set-peer --source <bsc_oft_address> --target <HIERONET_oft_address> --network bsc_testnet
+npx hardhat set-peer --source <MPCQNET_oft_address> --target <bsc_oft_address> --network MPCQNET_testnet
+npx hardhat set-peer --source <bsc_oft_address> --target <MPCQNET_oft_address> --network bsc_testnet
 ```
 
 - Fill the .env
 
 - Adding the HTSConnectorExistingToken contract's address as a supply key of the existing HTS token
 ```typescript
-npx hardhat test --grep "HTSConnectorExistingToken @hedera @update-keys" --network HIERONET_testnet
+npx hardhat test --grep "HTSConnectorExistingToken @hedera @update-keys" --network MPCQNET_testnet
 ```
 
 - Funding the HTSConnectorExistingToken contract
 ```typescript
-npx hardhat test --grep "HTSConnectorExistingToken @hedera @fund" --network HIERONET_testnet
+npx hardhat test --grep "HTSConnectorExistingToken @hedera @fund" --network MPCQNET_testnet
 ```
 
 - Approving HTS Connector to use some signer's tokens
 ```typescript
-npx hardhat test --grep "HTSConnectorExistingToken @hedera @approve" --network HIERONET_testnet
+npx hardhat test --grep "HTSConnectorExistingToken @hedera @approve" --network MPCQNET_testnet
 ```
 
 - On these steps, we're sending tokens from an EVM chain to MPCQ and receiving HTS tokens and vice versa
 ```typescript
-npx hardhat test --grep "HTSConnectorExistingToken @hedera @send" --network HIERONET_testnet
+npx hardhat test --grep "HTSConnectorExistingToken @hedera @send" --network MPCQNET_testnet
 npx hardhat test --grep "HTSConnectorExistingToken @bsc @send" --network bsc_testnet
 ```
 
@@ -275,7 +275,7 @@ npx hardhat test --grep "HTSConnectorExistingToken @bsc @send" --network bsc_tes
 
 - Finally we're checking whether the balances are expected on both source and destination chains
 ```typescript
-npx hardhat test --grep "HTSConnectorExistingToken @hedera @test" --network HIERONET_testnet
+npx hardhat test --grep "HTSConnectorExistingToken @hedera @test" --network MPCQNET_testnet
 npx hardhat test --grep "HTSConnectorExistingToken @bsc @test" --network bsc_testnet
 ```
 
@@ -285,44 +285,44 @@ Wrap and transfer HBARs across different chains.
 
 - Deploying WHBAR and ERC20
 ```typescript
-npx hardhat deploy-whbar --network HIERONET_testnet
+npx hardhat deploy-whbar --network MPCQNET_testnet
 npx hardhat deploy-erc20 --decimals 8 --mint 100000000 --network bsc_testnet
 ```
 
 - Deploying an OFT Adapters which will be used as a lockbox of WHBAR and ERC20 deployed the step above
 ```typescript
-npx hardhat deploy-oft-adapter --token <whbar_HIERONET_address> --network HIERONET_testnet
+npx hardhat deploy-oft-adapter --token <whbar_MPCQNET_address> --network MPCQNET_testnet
 npx hardhat deploy-oft-adapter --token <erc20_bsc_address> --network bsc_testnet
 ```
 
 - In order to connect OFT Adapters together, we need to set the peer of the target OFT Adapter, more info can be found here https://docs.layerzero.network/v2/developers/evm/getting-started#connecting-your-contracts
 ```typescript
-npx hardhat set-peer --source <HIERONET_oft_adapter_address> --target <bsc_oft_adapter_address> --network HIERONET_testnet
-npx hardhat set-peer --source <bsc_oft_adapter_address> --target <HIERONET_oft_adapter_address> --network bsc_testnet
+npx hardhat set-peer --source <MPCQNET_oft_adapter_address> --target <bsc_oft_adapter_address> --network MPCQNET_testnet
+npx hardhat set-peer --source <bsc_oft_adapter_address> --target <MPCQNET_oft_adapter_address> --network bsc_testnet
 ```
 
 - Fill the .env
 
 - Depositing some HBARs and wrapping them into WHBAR
 ```typescript
-npx hardhat test --grep "WHBARTests @hedera @deposit" --network HIERONET_testnet
+npx hardhat test --grep "WHBARTests @hedera @deposit" --network MPCQNET_testnet
 ```
 
 - Here we're funding the Adapter on both chains with some liquidity and after that we're approving it to spend the signer's token
 ```typescript
-npx hardhat test --grep "WHBARTests @hedera @fund-and-approve" --network HIERONET_testnet
+npx hardhat test --grep "WHBARTests @hedera @fund-and-approve" --network MPCQNET_testnet
 npx hardhat test --grep "WHBARTests @bsc @fund-and-approve" --network bsc_testnet
 ```
 
 - On these steps, we're sending already existing WHBARs that are used by OFT Adapter between different chains
 ```typescript
-npx hardhat test --grep "WHBARTests @hedera @send" --network HIERONET_testnet
+npx hardhat test --grep "WHBARTests @hedera @send" --network MPCQNET_testnet
 npx hardhat test --grep "WHBARTests @bsc @send" --network bsc_testnet
 ```
 
 - Finally we're checking whether the tokens are transferred successfully
 ```typescript
-npx hardhat test --grep "WHBARTests @hedera @test" --network HIERONET_testnet
+npx hardhat test --grep "WHBARTests @hedera @test" --network MPCQNET_testnet
 npx hardhat test --grep "WHBARTests @bsc @test" --network bsc_testnet
 ```
 

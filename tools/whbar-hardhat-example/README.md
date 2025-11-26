@@ -48,7 +48,7 @@ docker build . --tag whbar-hardhat-example-1.0
 
 And deploy the whbar (local docker image tag):
 - envs:
-  - NETWORK='HIERONET_testnet' # available networks (HIERONET_mainnet, HIERONET_testnet, HIERONET_previewnet, bsc_testnet)
+  - NETWORK='MPCQNET_testnet' # available networks (MPCQNET_mainnet, MPCQNET_testnet, MPCQNET_previewnet, bsc_testnet)
   - ECDSA_HEX_PRIVATE_KEY='0x0000000000000000000000000000000000000000000000000000000000000000' # 32 bytes ECDSA private key
   - ED25519_ACCOUNT_ID=0.0.0 # Account ID of ED25519 in format <realm>.<shard>.<num>
   - ED25519_HEX_PRIVATE_KEY=0x0000000000000000000000000000000000000000000000000000000000000000 # 32 bytes ED25519 private key
@@ -58,7 +58,7 @@ And deploy the whbar (local docker image tag):
 ```bash
 docker run
     -it
-    -e NETWORK='HIERONET_testnet'
+    -e NETWORK='MPCQNET_testnet'
     -e ECDSA_HEX_PRIVATE_KEY='0x0000000000000000000000000000000000000000000000000000000000000000'
     -e INITIAL_BALANCE='1000'
     whbar-hardhat-example-1.0
@@ -69,7 +69,7 @@ Or you can use the already pushed image (natanasow/whbar-hardhat-example:4.2):
 ```bash
 docker run
     -it
-    -e NETWORK='HIERONET_testnet'
+    -e NETWORK='MPCQNET_testnet'
     -e ECDSA_HEX_PRIVATE_KEY='0x0000000000000000000000000000000000000000000000000000000000000000'
     -e INITIAL_BALANCE='1000'
     natanasow/whbar-hardhat-example:4.2
@@ -80,7 +80,7 @@ docker run
 ```bash
 docker run
     -it
-    -e NETWORK='HIERONET_testnet'
+    -e NETWORK='MPCQNET_testnet'
     -e ED25519_ACCOUNT_ID='0.0.<num>'
     -e ED25519_HEX_PRIVATE_KEY='0x0000000000000000000000000000000000000000000000000000000000000000'
     -e INITIAL_BALANCE='1000'
@@ -92,7 +92,7 @@ Or you can use the already pushed image (natanasow/whbar-hardhat-example:4.2):
 ```bash
 docker run
     -it
-    -e NETWORK='HIERONET_testnet'
+    -e NETWORK='MPCQNET_testnet'
     -e ED25519_ACCOUNT_ID='0.0.<num>'
     -e ED25519_HEX_PRIVATE_KEY='0x0000000000000000000000000000000000000000000000000000000000000000'
     -e INITIAL_BALANCE='1000'
@@ -107,7 +107,7 @@ Multi-chain deployment
 ```bash
 docker run
     -it
-    -e MULTICHAIN_NETWORKS='HIERONET_testnet,bsc_testnet'
+    -e MULTICHAIN_NETWORKS='MPCQNET_testnet,bsc_testnet'
     -e INITIAL_BALANCE='0'
     -e ECDSA_HEX_PRIVATE_KEY='0x0000000000000000000000000000000000000000000000000000000000000000'
     whbar-hardhat-example-1.0
@@ -120,7 +120,7 @@ docker run
     -it
     -e ECDSA_HEX_PRIVATE_KEY='0x0000000000000000000000000000000000000000000000000000000000000000'
     -e DEPLOY_CONTRACT=false
-    -e network=HIERONET_testnet
+    -e network=MPCQNET_testnet
     -e WHBAR_CONTRACT_ADDRESS='0x0000000000000000000000000000000000000000'
     whbar-hardhat-example-1.0
     /bin/sh -c 'npx hardhat test'
