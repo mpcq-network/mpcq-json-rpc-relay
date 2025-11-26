@@ -2,7 +2,7 @@
 import { AccountId, AccountUpdateTransaction, Client, PrivateKey } from '@hashgraph/sdk';
 import hre, { ethers } from 'hardhat';
 
-function extractHederaNetworkByChainId(chainId: number): string {
+function extractMPCQNetworkByChainId(chainId: number): string {
   switch (chainId) {
     case 295:
       return 'mainnet';
@@ -11,7 +11,7 @@ function extractHederaNetworkByChainId(chainId: number): string {
     case 297:
       return 'previewnet';
     default:
-      throw Error('Unsupported Hedera network.');
+      throw Error('Unsupported MPCQ network.');
   }
 }
 
@@ -25,7 +25,7 @@ export async function main() {
   const network = hre.network;
   const [deployer] = await ethers.getSigners();
 
-  const hederaNetworkName = extractHederaNetworkByChainId(await deployer.getChainId());
+  const hederaNetworkName = extractMPCQNetworkByChainId(await deployer.getChainId());
   const client = Client.forName(hederaNetworkName);
   const accountQueryUrl = `https://${client._mirrorNetwork._network.keys().next().value}/api/v1/accounts/${
     deployer.address
@@ -36,7 +36,7 @@ export async function main() {
   client.setOperator(accountId, privateKey);
 
   console.log(
-    `\nBumping "Max. Auto. Associations" with 20 for account ${accountId.toString()} on Hedera ${hederaNetworkName}...`,
+    `\nBumping "Max. Auto. Associations" with 20 for account ${accountId.toString()} on MPCQ ${hederaNetworkName}...`,
   );
   const signedTx = await new AccountUpdateTransaction()
     .setMaxAutomaticTokenAssociations(calculateUpdatedAssociations(accountInfo.max_automatic_token_associations))

@@ -15,11 +15,11 @@
 // The smart contract should be deployed to the address: 0x2f2a392b4d7d2c2d3134e199295818a02535ef0a
 // It should return the value in the format of seven 32-byte fields, where each field contains the following:
 //
-// 1. block.number     — 0x14 expected, 0x8c1 on Hedera; block height is higher due to real-time chain state.
-// 2. chainid          — 0x0c72dd9d5e883e expected, 0x12a on Hedera; test used a placeholder, Hedera testnet uses chain ID 298.
-// 3. block.coinbase   — 0x00 expected, 0x62 on Hedera; coinbase is simulated and not used for rewards on Hedera.
-// 4. block.basefee    — 0x00 expected, 0x00 on Hedera; basefee is present but set to zero when not explicitly simulated.
-// 5. difficulty       — 0x00 expected, Hedera returned prevrandao value (randomness source in PoS networks).
+// 1. block.number     — 0x14 expected, 0x8c1 on MPCQ; block height is higher due to real-time chain state.
+// 2. chainid          — 0x0c72dd9d5e883e expected, 0x12a on MPCQ; test used a placeholder, MPCQ testnet uses chain ID 298.
+// 3. block.coinbase   — 0x00 expected, 0x62 on MPCQ; coinbase is simulated and not used for rewards on MPCQ.
+// 4. block.basefee    — 0x00 expected, 0x00 on MPCQ; basefee is present but set to zero when not explicitly simulated.
+// 5. difficulty       — 0x00 expected, MPCQ returned prevrandao value (randomness source in PoS networks).
 // 6. tx.origin        — 0x00 expected and returned; tx sent from 0x0, so origin is also zero.
 // 7. msg.value        — 0x00 expected and returned; no value was sent with the call, as expected.
 //

@@ -2,7 +2,7 @@ import 'cypress-wait-until';
 import * as bootstrapInfo from '../../../src/contracts/.bootstrapInfo.json';
 import { ethers } from 'ethers';
 
-describe('Test Core Hedera User Scenarios', function () {
+describe('Test Core MPCQ User Scenarios', function () {
   this.timeout(180000);
 
   const testTimeoutMs = 45000;

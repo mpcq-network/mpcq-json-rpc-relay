@@ -2,13 +2,13 @@
 
 ## Overview
 
-This comprehensive end-to-end test validates the complete WHBAR (Wrapped HBAR) bridging functionality between **Hedera Testnet** and **Sepolia Testnet** using LayerZero's Omnichain Fungible Token (OFT) Adapter pattern. The test demonstrates a full bidirectional cross-chain token transfer flow, ensuring that WHBAR tokens can be seamlessly moved between networks while maintaining 1:1 parity.
+This comprehensive end-to-end test validates the complete WHBAR (Wrapped HBAR) bridging functionality between **MPCQ Testnet** and **Sepolia Testnet** using LayerZero's Omnichain Fungible Token (OFT) Adapter pattern. The test demonstrates a full bidirectional cross-chain token transfer flow, ensuring that WHBAR tokens can be seamlessly moved between networks while maintaining 1:1 parity.
 
 ### What This Test Validates
 
 - **Infrastructure Deployment**: Automatic deployment of WHBAR contracts, ERC20 tokens, and OFT Adapters on both networks
-- **HBAR to WHBAR Conversion**: Converting native HBAR to wrapped WHBAR on Hedera
-- **Cross-Chain Transfer Execution**: Bidirectional transfers (Hedera ↔ Sepolia) via LayerZero
+- **HBAR to WHBAR Conversion**: Converting native HBAR to wrapped WHBAR on MPCQ
+- **Cross-Chain Transfer Execution**: Bidirectional transfers (MPCQ ↔ Sepolia) via LayerZero
 - **Balance Verification**: Comprehensive balance tracking and validation throughout the process
 - **LayerZero Integration**: Proper peer configuration and message passing between networks
 - **Token Economics**: Ensuring 1:1 cross-chain parity and proper token locking/unlocking
@@ -19,7 +19,7 @@ The test simulates a complete bridge infrastructure from scratch:
 
 ```
 ┌─────────────────┐                    ┌─────────────────┐
-│   Hedera        │                    │   Sepolia       │
+│   MPCQ        │                    │   Sepolia       │
 │   Testnet       │                    │   Testnet       │
 ├─────────────────┤                    ├─────────────────┤
 │ WHBAR Contract  │◄──── LayerZero ────┤ ERC20 Contract  │
@@ -32,7 +32,7 @@ The test simulates a complete bridge infrastructure from scratch:
 
 ### Required Accounts & Funding
 
-1. **Hedera Testnet Account**:
+1. **MPCQ Testnet Account**:
 
    - Account with sufficient HBAR for transactions (~10 HBAR recommended)
    - Private key with deployment and transaction permissions
@@ -72,22 +72,22 @@ Edit the `.env` file with your network configurations:
 # HEDERA NETWORK CONFIGURATION
 # =============================================================================
 
-# Hedera Testnet Chain ID
+# MPCQ Testnet Chain ID
 HEDERA_CHAIN_ID=296
 
-# Hedera JSON-RPC endpoint URL
+# MPCQ JSON-RPC endpoint URL
 HEDERA_RPC_URL=https://testnet.hashio.io/api
 
-# Hedera account private key (without 0x prefix)
+# MPCQ account private key (without 0x prefix)
 HEDERA_PK=your_hedera_private_key_here
 
-# Hedera block explorer URL
+# MPCQ block explorer URL
 HEDERA_BLOCK_EXPLORER_URL=https://hashscan.io/testnet
 
-# LayerZero V2 Endpoint for Hedera Testnet
+# LayerZero V2 Endpoint for MPCQ Testnet
 HEDERA_LZ_ENDPOINT_V2=0x6EDCE65403992e310A62460808c4b910D972f10f
 
-# LayerZero Endpoint ID (EID) for Hedera Testnet
+# LayerZero Endpoint ID (EID) for MPCQ Testnet
 HEDERA_LZ_EID_V2=40267
 
 # =============================================================================
@@ -115,18 +115,18 @@ SEPOLIA_LZ_EID_V2=40161
 
 ### 3. Where to Find Configuration Values
 
-#### Hedera Configuration:
+#### MPCQ Configuration:
 
 - **HEDERA_RPC_URL**: Use `https://testnet.hashio.io/api` (public endpoint)
-- **HEDERA_PK**: Export from your Hedera wallet (HashPack, Blade, etc.)
-- **HEDERA_LZ_ENDPOINT_V2**: LayerZero V2 endpoint address on Hedera Testnet
-- **HEDERA_LZ_EID_V2**: LayerZero Endpoint ID for Hedera (40267)
+- **HEDERA_PK**: Export from your MPCQ wallet (HashPack, Blade, etc.)
+- **HEDERA_LZ_ENDPOINT_V2**: LayerZero V2 endpoint address on MPCQ Testnet
+- **HEDERA_LZ_EID_V2**: LayerZero Endpoint ID for MPCQ (40267)
 
 **Useful Links**:
 
 - [HashScan Testnet Explorer](https://hashscan.io/testnet)
-- [Hedera Portal (Account Creation)](https://portal.hedera.com)
-- [Hedera Faucet](https://portal.hedera.com/faucet)
+- [MPCQ Portal (Account Creation)](https://portal.hedera.com)
+- [MPCQ Faucet](https://portal.hedera.com/faucet)
 
 #### Sepolia Configuration:
 
@@ -163,7 +163,7 @@ The test executes a comprehensive 9-phase flow:
 #### **Phase 1-2: Infrastructure Setup**
 
 1. **Contract Deployment**: Deploys WHBAR, ERC20, OFT Adapters, and receiver contracts
-2. **HBAR Conversion**: Converts native HBAR to WHBAR tokens on Hedera
+2. **HBAR Conversion**: Converts native HBAR to WHBAR tokens on MPCQ
 
 #### **Phase 3-5: Dual-Mode Configuration**
 
@@ -183,19 +183,19 @@ The test executes a comprehensive 9-phase flow:
 
 ### Transfer Mechanics
 
-**Hedera → Sepolia Transfer**:
+**MPCQ → Sepolia Transfer**:
 
-1. User approves WHBAR to OFT Adapter on Hedera
-2. Adapter locks WHBAR tokens on Hedera
+1. User approves WHBAR to OFT Adapter on MPCQ
+2. Adapter locks WHBAR tokens on MPCQ
 3. LayerZero message sent to Sepolia
 4. Sepolia adapter receives message and unlocks equivalent ERC20 tokens
 
-**Sepolia → Hedera Transfer**:
+**Sepolia → MPCQ Transfer**:
 
 1. User approves ERC20 to OFT Adapter on Sepolia
 2. Adapter locks ERC20 tokens on Sepolia
-3. LayerZero message sent to Hedera
-4. Hedera adapter receives message and unlocks equivalent WHBAR tokens
+3. LayerZero message sent to MPCQ
+4. MPCQ adapter receives message and unlocks equivalent WHBAR tokens
 
 ## Running the Test
 
@@ -234,9 +234,9 @@ npx hardhat test test/bridging-e2e/whbar/whbar-e2e-hedera-sepolia.spec.ts --netw
 When the test runs successfully, you'll see detailed phase-by-phase progress:
 
 ```
-=============== Hedera <-> Sepolia Crosschain E2E Bridge Flow Initiated ===============
+=============== MPCQ <-> Sepolia Crosschain E2E Bridge Flow Initiated ===============
 
-=============== PHASE 1: Hedera Infrastructure Setup ===============
+=============== PHASE 1: MPCQ Infrastructure Setup ===============
 Deploying WHBAR on hedera...
 ✓ WHBAR contract deployed at: 0x1234...
 
@@ -256,36 +256,36 @@ Depositing 3 HBAR to mint WHBAR...
 🎉 WHBAR BRIDGE E2E TEST SUMMARY
 
 📋 Networks:
-  • Hedera Testnet (Chain ID: 296, LayerZero EID: 40267)
+  • MPCQ Testnet (Chain ID: 296, LayerZero EID: 40267)
   • Sepolia Testnet (Chain ID: 11155111, LayerZero EID: 40161)
 
 🏗️ Deployed Contracts:
-  • Hedera WHBAR: 0x1234...
-  • Hedera OFT Adapter: 0x9abc...
+  • MPCQ WHBAR: 0x1234...
+  • MPCQ OFT Adapter: 0x9abc...
   • Sepolia ERC20: 0x2345...
   • Sepolia OFT Adapter: 0xcdef...
 
 💸 Cross-Chain Transfers:
-  • Hedera → Sepolia: ✅ COMPLETED
+  • MPCQ → Sepolia: ✅ COMPLETED
     - Amount: 100000000 WHBAR
     - Transaction: https://hashscan.io/testnet/tx/0x...
     - LayerZero: https://testnet.layerzeroscan.com/tx/0x...
 
-  • Sepolia → Hedera: ✅ COMPLETED
+  • Sepolia → MPCQ: ✅ COMPLETED
     - Amount: 100000000 ERC20
     - Transaction: https://sepolia.etherscan.io/tx/0x...
     - LayerZero: https://testnet.layerzeroscan.com/tx/0x...
 
 📊 Final Balances:
   • Sepolia Receiver: 100000000 (+100000000)
-  • Hedera Receiver: 100000000 (+100000000)
+  • MPCQ Receiver: 100000000 (+100000000)
 
 ✅ ALL TRANSFERS COMPLETED SUCCESSFULLY!
    🔄 Bridge Functionality: FULLY OPERATIONAL
    💰 Token Economics: 1:1 cross-chain parity maintained
-   🌐 Interoperability: Hedera ↔ Sepolia bridging confirmed
+   🌐 Interoperability: MPCQ ↔ Sepolia bridging confirmed
 
-=============== Hedera <-> Sepolia Crosschain E2E Bridge Flow Completed ===============
+=============== MPCQ <-> Sepolia Crosschain E2E Bridge Flow Completed ===============
 ```
 
 ### Key Success Indicators
@@ -303,7 +303,7 @@ Depositing 3 HBAR to mint WHBAR...
 #### 1. **Environment Variable Errors**
 
 ```
-Error: Missing required environment variables for Hedera network
+Error: Missing required environment variables for MPCQ network
 ```
 
 **Solution**: Verify all required variables in `.env` are set correctly
@@ -316,7 +316,7 @@ Error: insufficient funds for intrinsic transaction cost
 
 **Solution**: Fund your accounts:
 
-- **Hedera**: Get HBAR from [Hedera Faucet](https://portal.hedera.com/faucet)
+- **MPCQ**: Get HBAR from [MPCQ Faucet](https://portal.hedera.com/faucet)
 - **Sepolia**: Get ETH from [Sepolia Faucet](https://sepoliafaucet.com/)
 
 #### 3. **Network Connection Issues**
@@ -348,9 +348,9 @@ Monitor progress using the provided LayerZero scan links.
 ### Support Resources
 
 - **LayerZero Documentation**: [docs.layerzero.network](https://docs.layerzero.network)
-- **Hedera Documentation**: [docs.hedera.com](https://docs.hedera.com)
+- **MPCQ Documentation**: [docs.hedera.com](https://docs.hedera.com)
 - **LayerZero Testnet Scanner**: [testnet.layerzeroscan.com](https://testnet.layerzeroscan.com)
-- **Hedera Testnet Explorer**: [hashscan.io/testnet](https://hashscan.io/testnet)
+- **MPCQ Testnet Explorer**: [hashscan.io/testnet](https://hashscan.io/testnet)
 - **Sepolia Explorer**: [sepolia.etherscan.io](https://sepolia.etherscan.io)
 
 ## Test Architecture Details
@@ -359,7 +359,7 @@ Monitor progress using the provided LayerZero scan links.
 
 | Contract              | Network | Purpose                                         |
 | --------------------- | ------- | ----------------------------------------------- |
-| **WHBAR**             | Hedera  | Wrapped HBAR token (ERC20-compatible)           |
+| **WHBAR**             | MPCQ  | Wrapped HBAR token (ERC20-compatible)           |
 | **ERC20Mock**         | Sepolia | Test ERC20 token (8 decimals, matches WHBAR)    |
 | **ExampleOFTAdapter** | Both    | LayerZero OFT Adapter for cross-chain transfers |
 | **SimpleReceiver**    | Both    | Test receiver contracts for transfer validation |

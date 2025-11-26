@@ -144,11 +144,11 @@ describe('@ethGetBlockReceipts using MirrorNode', async function () {
     });
 
     ['WRONG_NONCE', 'INVALID_ACCOUNT_ID'].forEach((status) => {
-      it('should filter out transactions with Hedera-specific validation failures', async function () {
+      it('should filter out transactions with MPCQ-specific validation failures', async function () {
         const modifiedContractResults = {
           results: [
             { ...results[0] }, // Normal transaction
-            { ...results[1], result: status }, // Transaction with a Hedera-specific revert status
+            { ...results[1], result: status }, // Transaction with a MPCQ-specific revert status
           ],
           links: { next: null },
         };

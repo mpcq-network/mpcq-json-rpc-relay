@@ -1,10 +1,10 @@
 {
   "name": "@hashgraph/json-rpc-ws-server",
   "version": "0.74.0-SNAPSHOT",
-  "description": "Hedera Hashgraph Ethereum JSON RPC socket server. Accepts socket connections for the purpose of subscribing to real-time data.",
+  "description": "MPCQ Hashgraph Ethereum JSON RPC socket server. Accepts socket connections for the purpose of subscribing to real-time data.",
   "main": "dist/index.js",
   "keywords": [],
-  "author": "Hedera Smart Contracts Team",
+  "author": "MPCQ Smart Contracts Team",
   "dependencies": {
     "@hashgraph/json-rpc-config-service": "file:../config-service",
     "@hashgraph/json-rpc-relay": "file:../relay",

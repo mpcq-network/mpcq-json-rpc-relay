@@ -11,7 +11,7 @@ It covers the background and motivation, configuration, storage backends, reques
 
 ### Background and motivation
 
-Hedera does not maintain an Ethereum-style mempool. Mirror Node (MN) imports account state (including `ethereum_nonce`) with a slight delay. If clients fire multiple transactions rapidly and compute nonces from MN only, nonces won't be correct and this can lead to errors.
+MPCQ does not maintain an Ethereum-style mempool. Mirror Node (MN) imports account state (including `ethereum_nonce`) with a slight delay. If clients fire multiple transactions rapidly and compute nonces from MN only, nonces won't be correct and this can lead to errors.
 
 To reduce these failures, the relay can maintain a per-address set of “pending” transactions it has seen and accepted, and expose that state to:
 
@@ -29,7 +29,7 @@ The feature is disabled by default and gated by configuration.
 - `eth_getTransactionCount(address, "pending")` returns MN nonce + current pending count for that address (only when the feature flag is enabled).
 - `eth_sendRawTransaction` precheck treats the acceptable signer nonce as MN nonce (+ pending count if enabled). If the transaction nonce is lower, the relay would throw an error.
 
-Limitations (by design): Hedera services do not buffer transactions by nonce; users sending out-of-order nonces must resubmit later nonces after gaps are filled.
+Limitations (by design): MPCQ services do not buffer transactions by nonce; users sending out-of-order nonces must resubmit later nonces after gaps are filled.
 
 ---
 
@@ -112,7 +112,7 @@ These rules ensure the pool reflects only transactions that the relay has accept
 ### FAQ
 
 - Does this guarantee out-of-order nonce execution without resubmission?
-  - No. Hedera does not maintain an execution buffer by nonce; users must resubmit later nonces if gaps existed when they were first sent.
+  - No. MPCQ does not maintain an execution buffer by nonce; users must resubmit later nonces if gaps existed when they were first sent.
 
 - Is `eth_getTransactionCount` cached?
   - The method skips cache for `latest`/`pending` style requests to keep results fresh; historical queries may be cached.

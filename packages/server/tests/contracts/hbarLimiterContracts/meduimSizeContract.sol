@@ -18,21 +18,21 @@ contract BaseHTS is FeeHelper {
     function createToken(
         address treasury
     ) public payable {
-        IHederaTokenService.TokenKey[] memory keys = new IHederaTokenService.TokenKey[](1);
+        IMPCQTokenService.TokenKey[] memory keys = new IMPCQTokenService.TokenKey[](1);
         keys[0] = getSingleKey(0, 0, 1, bytes(""));
 
-        IHederaTokenService.Expiry memory expiry = IHederaTokenService.Expiry(
+        IMPCQTokenService.Expiry memory expiry = IMPCQTokenService.Expiry(
             0, treasury, 8000000
         );
 
-        IHederaTokenService.HederaToken memory token = IHederaTokenService.HederaToken(
+        IMPCQTokenService.MPCQToken memory token = IMPCQTokenService.MPCQToken(
             name, symbol, treasury, memo, true, maxSupply, false, keys, expiry
         );
 
         (int responseCode, address tokenAddress) =
-        HederaTokenService.createFungibleToken(token, initialTotalSupply, decimals);
+        MPCQTokenService.createFungibleToken(token, initialTotalSupply, decimals);
 
-        if (responseCode != HederaResponseCodes.SUCCESS) {
+        if (responseCode != MPCQResponseCodes.SUCCESS) {
             revert ();
         }
 
@@ -40,52 +40,52 @@ contract BaseHTS is FeeHelper {
     }
 
     function associateTokenTo(address account, address token) public returns (int responseCode) {
-        responseCode = HederaTokenService.associateToken(account, token);
-        if (responseCode != HederaResponseCodes.SUCCESS) {
+        responseCode = MPCQTokenService.associateToken(account, token);
+        if (responseCode != MPCQResponseCodes.SUCCESS) {
             revert();
         }
     }
 
     function transferTokenTo(address account, address token, int64 amount) public returns (int responseCode) {
-        IHederaTokenService.NftTransfer[] memory nftTransfers = new IHederaTokenService.NftTransfer[](0);
+        IMPCQTokenService.NftTransfer[] memory nftTransfers = new IMPCQTokenService.NftTransfer[](0);
 
-        IHederaTokenService.AccountAmount memory accountAmountNegative =
-        IHederaTokenService.AccountAmount(msg.sender, - amount);
-        IHederaTokenService.AccountAmount memory accountAmountPositive =
-        IHederaTokenService.AccountAmount(account, amount);
-        IHederaTokenService.AccountAmount[] memory transfers = new IHederaTokenService.AccountAmount[](2);
+        IMPCQTokenService.AccountAmount memory accountAmountNegative =
+        IMPCQTokenService.AccountAmount(msg.sender, - amount);
+        IMPCQTokenService.AccountAmount memory accountAmountPositive =
+        IMPCQTokenService.AccountAmount(account, amount);
+        IMPCQTokenService.AccountAmount[] memory transfers = new IMPCQTokenService.AccountAmount[](2);
         transfers[0] = accountAmountNegative;
         transfers[1] = accountAmountPositive;
 
-        IHederaTokenService.TokenTransferList memory tokenTransfer =
-        IHederaTokenService.TokenTransferList(token, transfers, nftTransfers);
-        IHederaTokenService.TokenTransferList[] memory tokenTransferList = new IHederaTokenService.TokenTransferList[](1);
+        IMPCQTokenService.TokenTransferList memory tokenTransfer =
+        IMPCQTokenService.TokenTransferList(token, transfers, nftTransfers);
+        IMPCQTokenService.TokenTransferList[] memory tokenTransferList = new IMPCQTokenService.TokenTransferList[](1);
         tokenTransferList[0] = tokenTransfer;
 
-        responseCode = HederaTokenService.cryptoTransfer(tokenTransferList);
-        if (responseCode != HederaResponseCodes.SUCCESS) {
+        responseCode = MPCQTokenService.cryptoTransfer(tokenTransferList);
+        if (responseCode != MPCQResponseCodes.SUCCESS) {
             revert();
         }
     }
 
     function transferTokenFrom(address account, address token, int64 amount) public returns (int responseCode) {
-        IHederaTokenService.NftTransfer[] memory nftTransfers = new IHederaTokenService.NftTransfer[](0);
+        IMPCQTokenService.NftTransfer[] memory nftTransfers = new IMPCQTokenService.NftTransfer[](0);
 
-        IHederaTokenService.AccountAmount memory accountAmountNegative =
-        IHederaTokenService.AccountAmount(msg.sender, - amount);
-        IHederaTokenService.AccountAmount memory accountAmountPositive =
-        IHederaTokenService.AccountAmount(account, amount);
-        IHederaTokenService.AccountAmount[] memory transfers = new IHederaTokenService.AccountAmount[](2);
+        IMPCQTokenService.AccountAmount memory accountAmountNegative =
+        IMPCQTokenService.AccountAmount(msg.sender, - amount);
+        IMPCQTokenService.AccountAmount memory accountAmountPositive =
+        IMPCQTokenService.AccountAmount(account, amount);
+        IMPCQTokenService.AccountAmount[] memory transfers = new IMPCQTokenService.AccountAmount[](2);
         transfers[0] = accountAmountNegative;
         transfers[1] = accountAmountPositive;
 
-        IHederaTokenService.TokenTransferList memory tokenTransfer =
-        IHederaTokenService.TokenTransferList(token, transfers, nftTransfers);
-        IHederaTokenService.TokenTransferList[] memory tokenTransferList = new IHederaTokenService.TokenTransferList[](1);
+        IMPCQTokenService.TokenTransferList memory tokenTransfer =
+        IMPCQTokenService.TokenTransferList(token, transfers, nftTransfers);
+        IMPCQTokenService.TokenTransferList[] memory tokenTransferList = new IMPCQTokenService.TokenTransferList[](1);
         tokenTransferList[0] = tokenTransfer;
 
-        responseCode = HederaTokenService.cryptoTransfer(tokenTransferList);
-        if (responseCode != HederaResponseCodes.SUCCESS) {
+        responseCode = MPCQTokenService.cryptoTransfer(tokenTransferList);
+        if (responseCode != MPCQResponseCodes.SUCCESS) {
             revert();
         }
     }

@@ -17,30 +17,30 @@ abstract contract TokenCreate is FeeHelper {
     event CreatedToken(address tokenAddress);
     event ResponseCode(int responseCode);
     event MintedToken(uint64 newTotalSupply, int64[] serialNumbers);
-    event NonFungibleTokenInfo(IHederaTokenService.NonFungibleTokenInfo tokenInfo);
-    event TokenInfo(IHederaTokenService.TokenInfo tokenInfo);
+    event NonFungibleTokenInfo(IMPCQTokenService.NonFungibleTokenInfo tokenInfo);
+    event TokenInfo(IMPCQTokenService.TokenInfo tokenInfo);
 
     function createFungibleTokenPublic(
         address treasury
     ) public payable {
-        IHederaTokenService.TokenKey[] memory keys = new IHederaTokenService.TokenKey[](4);
+        IMPCQTokenService.TokenKey[] memory keys = new IMPCQTokenService.TokenKey[](4);
         keys[0] = getSingleKey(0, 6, 1, bytes(""));
         keys[1] = getSingleKey(1, 1, bytes(""));
         keys[2] = getSingleKey(2, 1, bytes(""));
         keys[3] = getSingleKey(3, 1, bytes(""));
 
-        IHederaTokenService.Expiry memory expiry = IHederaTokenService.Expiry(
+        IMPCQTokenService.Expiry memory expiry = IMPCQTokenService.Expiry(
             0, treasury, 8000000
         );
 
-        IHederaTokenService.HederaToken memory token = IHederaTokenService.HederaToken(
+        IMPCQTokenService.MPCQToken memory token = IMPCQTokenService.MPCQToken(
             name, symbol, treasury, memo, true, maxSupply, freezeDefaultStatus, keys, expiry
         );
 
         (int responseCode, address tokenAddress) =
-        HederaTokenService.createFungibleToken(token, initialTotalSupply, decimals);
+        MPCQTokenService.createFungibleToken(token, initialTotalSupply, decimals);
 
-        if (responseCode != HederaResponseCodes.SUCCESS) {
+        if (responseCode != MPCQResponseCodes.SUCCESS) {
             revert ();
         }
 
@@ -50,25 +50,25 @@ abstract contract TokenCreate is FeeHelper {
     function createNonFungibleTokenPublic(
         address treasury
     ) public payable {
-        IHederaTokenService.TokenKey[] memory keys = new IHederaTokenService.TokenKey[](5);
+        IMPCQTokenService.TokenKey[] memory keys = new IMPCQTokenService.TokenKey[](5);
         keys[0] = getSingleKey(0, 6, 1, bytes(""));
         keys[1] = getSingleKey(1, 1, bytes(""));
         keys[2] = getSingleKey(2, 1, bytes(""));
         keys[3] = getSingleKey(4, 1, bytes(""));
         keys[4] = getSingleKey(3, 1, bytes(""));
 
-        IHederaTokenService.Expiry memory expiry = IHederaTokenService.Expiry(
+        IMPCQTokenService.Expiry memory expiry = IMPCQTokenService.Expiry(
             0, treasury, 8000000
         );
 
-        IHederaTokenService.HederaToken memory token = IHederaTokenService.HederaToken(
+        IMPCQTokenService.MPCQToken memory token = IMPCQTokenService.MPCQToken(
             name, symbol, treasury, memo, true, maxSupply, freezeDefaultStatus, keys, expiry
         );
 
         (int responseCode, address tokenAddress) =
-        HederaTokenService.createNonFungibleToken(token);
+        MPCQTokenService.createNonFungibleToken(token);
 
-        if (responseCode != HederaResponseCodes.SUCCESS) {
+        if (responseCode != MPCQResponseCodes.SUCCESS) {
             revert ();
         }
 
@@ -76,33 +76,33 @@ abstract contract TokenCreate is FeeHelper {
     }
 
     function cryptoTransferTokenPublic(address account, address token, int64 amount) public returns (int responseCode) {
-        IHederaTokenService.NftTransfer[] memory nftTransfers = new IHederaTokenService.NftTransfer[](0);
+        IMPCQTokenService.NftTransfer[] memory nftTransfers = new IMPCQTokenService.NftTransfer[](0);
 
-        IHederaTokenService.AccountAmount memory accountAmountNegative =
-        IHederaTokenService.AccountAmount(msg.sender, - amount);
-        IHederaTokenService.AccountAmount memory accountAmountPositive =
-        IHederaTokenService.AccountAmount(account, amount);
-        IHederaTokenService.AccountAmount[] memory transfers = new IHederaTokenService.AccountAmount[](2);
+        IMPCQTokenService.AccountAmount memory accountAmountNegative =
+        IMPCQTokenService.AccountAmount(msg.sender, - amount);
+        IMPCQTokenService.AccountAmount memory accountAmountPositive =
+        IMPCQTokenService.AccountAmount(account, amount);
+        IMPCQTokenService.AccountAmount[] memory transfers = new IMPCQTokenService.AccountAmount[](2);
         transfers[0] = accountAmountNegative;
         transfers[1] = accountAmountPositive;
 
-        IHederaTokenService.TokenTransferList memory tokenTransfer =
-        IHederaTokenService.TokenTransferList(token, transfers, nftTransfers);
-        IHederaTokenService.TokenTransferList[] memory tokenTransferList = new IHederaTokenService.TokenTransferList[](1);
+        IMPCQTokenService.TokenTransferList memory tokenTransfer =
+        IMPCQTokenService.TokenTransferList(token, transfers, nftTransfers);
+        IMPCQTokenService.TokenTransferList[] memory tokenTransferList = new IMPCQTokenService.TokenTransferList[](1);
         tokenTransferList[0] = tokenTransfer;
 
-        responseCode = HederaTokenService.cryptoTransfer(tokenTransferList);
-        if (responseCode != HederaResponseCodes.SUCCESS) {
+        responseCode = MPCQTokenService.cryptoTransfer(tokenTransferList);
+        if (responseCode != MPCQResponseCodes.SUCCESS) {
             revert();
         }
     }
 
     function mintTokenPublic(address token, uint64 amount, bytes[] memory metadata) public
     returns (int responseCode, uint64 newTotalSupply, int64[] memory serialNumbers) {
-        (responseCode, newTotalSupply, serialNumbers) = HederaTokenService.mintToken(token, amount, metadata);
+        (responseCode, newTotalSupply, serialNumbers) = MPCQTokenService.mintToken(token, amount, metadata);
         emit ResponseCode(responseCode);
 
-        if (responseCode != HederaResponseCodes.SUCCESS) {
+        if (responseCode != MPCQResponseCodes.SUCCESS) {
             revert();
         }
 
@@ -112,17 +112,17 @@ abstract contract TokenCreate is FeeHelper {
     function transferNFTPublic(address token, address sender, address receiver, int64 serialNumber) public
     returns (int responseCode)
     {
-        responseCode = HederaTokenService.transferNFT(token, sender, receiver, serialNumber);
+        responseCode = MPCQTokenService.transferNFT(token, sender, receiver, serialNumber);
         emit ResponseCode(responseCode);
-        if (responseCode != HederaResponseCodes.SUCCESS) {
+        if (responseCode != MPCQResponseCodes.SUCCESS) {
             revert ();
         }
     }
 
     function associateTokenPublic(address account, address token) public returns (int responseCode) {
-        responseCode = HederaTokenService.associateToken(account, token);
+        responseCode = MPCQTokenService.associateToken(account, token);
         emit ResponseCode(responseCode);
-        if (responseCode != HederaResponseCodes.SUCCESS) {
+        if (responseCode != MPCQResponseCodes.SUCCESS) {
             revert ();
         }
     }
@@ -132,29 +132,29 @@ abstract contract TokenCreate is FeeHelper {
 
         emit ResponseCode(responseCode);
 
-        if (responseCode != HederaResponseCodes.SUCCESS) {
+        if (responseCode != MPCQResponseCodes.SUCCESS) {
             revert();
         }
     }
 
-    function getNonFungibleTokenInfoPublic(address token, int64 serialNumber) public returns (int responseCode, IHederaTokenService.NonFungibleTokenInfo memory tokenInfo) {
-        (responseCode, tokenInfo) = HederaTokenService.getNonFungibleTokenInfo(token, serialNumber);
+    function getNonFungibleTokenInfoPublic(address token, int64 serialNumber) public returns (int responseCode, IMPCQTokenService.NonFungibleTokenInfo memory tokenInfo) {
+        (responseCode, tokenInfo) = MPCQTokenService.getNonFungibleTokenInfo(token, serialNumber);
 
         emit ResponseCode(responseCode);
 
-        if (responseCode != HederaResponseCodes.SUCCESS) {
+        if (responseCode != MPCQResponseCodes.SUCCESS) {
             revert();
         }
 
         emit NonFungibleTokenInfo(tokenInfo);
     }
 
-    function getTokenInfoPublic(address token) public returns (int responseCode, IHederaTokenService.TokenInfo memory tokenInfo) {
-        (responseCode, tokenInfo) = HederaTokenService.getTokenInfo(token);
+    function getTokenInfoPublic(address token) public returns (int responseCode, IMPCQTokenService.TokenInfo memory tokenInfo) {
+        (responseCode, tokenInfo) = MPCQTokenService.getTokenInfo(token);
 
         emit ResponseCode(responseCode);
 
-        if (responseCode != HederaResponseCodes.SUCCESS) {
+        if (responseCode != MPCQResponseCodes.SUCCESS) {
             revert();
         }
 

@@ -1,4 +1,4 @@
-##### The JSON RPC relay serves as an interface to the Hedera network for ethereum developer tools that utilize the implemented JSON RPC APIs. The following development tools have been tested and the extent of their coverage is noted below.
+##### The JSON RPC relay serves as an interface to the MPCQ network for ethereum developer tools that utilize the implemented JSON RPC APIs. The following development tools have been tested and the extent of their coverage is noted below.
 
 ### TheGraph integration
 

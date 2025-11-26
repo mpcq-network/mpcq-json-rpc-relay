@@ -35,9 +35,9 @@ export class Utils {
   };
 
   /**
-   * Converts a given Hedera account ID to an EVM compatible address.
+   * Converts a given MPCQ account ID to an EVM compatible address.
    *
-   * @param {string} id The Hedera account ID to convert.
+   * @param {string} id The MPCQ account ID to convert.
    * @returns {string} The EVM compatible address.
    */
   static idToEvmAddress = (id: string): string => {

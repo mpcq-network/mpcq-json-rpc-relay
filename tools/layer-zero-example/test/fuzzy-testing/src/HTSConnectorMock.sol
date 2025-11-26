@@ -2,11 +2,11 @@
 pragma solidity ^0.8.20;
 
 import {OFTCore} from "@layerzerolabs/lz-evm-oapp-v2/contracts/oft/OFTCore.sol";
-import "./hts/HederaTokenServiceMock.sol";
+import "./hts/MPCQTokenServiceMock.sol";
 import "./hts/KeyHelper.sol";
 
 /// Mocks HTSConnectorMock
-abstract contract HTSConnectorMock is OFTCore, KeyHelper, HederaTokenServiceMock {
+abstract contract HTSConnectorMock is OFTCore, KeyHelper, MPCQTokenServiceMock {
     address public htsTokenAddress;
 
      /// @dev Constructor for the HTS Connector contract.
@@ -45,11 +45,11 @@ abstract contract HTSConnectorMock is OFTCore, KeyHelper, HederaTokenServiceMock
     ) internal virtual override returns (uint256) {
         require(_amountLD <= uint64(type(int64).max), "HTSConnector: amount exceeds int64 safe range");
 
-        (int256 response, ,) = HederaTokenServiceMock.mintToken(htsTokenAddress, int64(uint64(_amountLD)), new bytes[](0));
-        require(response == HederaTokenServiceMock.SUCCESS_CODE, "HTS: Mint failed");
+        (int256 response, ,) = MPCQTokenServiceMock.mintToken(htsTokenAddress, int64(uint64(_amountLD)), new bytes[](0));
+        require(response == MPCQTokenServiceMock.SUCCESS_CODE, "HTS: Mint failed");
 
-        int256 transferResponse = HederaTokenServiceMock.transferToken(htsTokenAddress, address(this), _to, int64(uint64(_amountLD)));
-        require(transferResponse == HederaTokenServiceMock.SUCCESS_CODE, "HTS: Transfer failed");
+        int256 transferResponse = MPCQTokenServiceMock.transferToken(htsTokenAddress, address(this), _to, int64(uint64(_amountLD)));
+        require(transferResponse == MPCQTokenServiceMock.SUCCESS_CODE, "HTS: Transfer failed");
 
         return _amountLD;
     }
@@ -71,10 +71,10 @@ abstract contract HTSConnectorMock is OFTCore, KeyHelper, HederaTokenServiceMock
 
         (amountSentLD, amountReceivedLD) = _debitView(_amountLD, _minAmountLD, _dstEid);
 
-        int256 transferResponse = HederaTokenServiceMock.transferToken(htsTokenAddress, _from, address(this), int64(uint64(_amountLD)));
-        require(transferResponse == HederaTokenServiceMock.SUCCESS_CODE, "HTS: Transfer failed");
+        int256 transferResponse = MPCQTokenServiceMock.transferToken(htsTokenAddress, _from, address(this), int64(uint64(_amountLD)));
+        require(transferResponse == MPCQTokenServiceMock.SUCCESS_CODE, "HTS: Transfer failed");
 
-        (int256 response,) = HederaTokenServiceMock.burnToken(htsTokenAddress, int64(uint64(amountSentLD)), new int64[](0));
-        require(response == HederaTokenServiceMock.SUCCESS_CODE, "HTS: Burn failed");
+        (int256 response,) = MPCQTokenServiceMock.burnToken(htsTokenAddress, int64(uint64(amountSentLD)), new int64[](0));
+        require(response == MPCQTokenServiceMock.SUCCESS_CODE, "HTS: Burn failed");
     }
 }

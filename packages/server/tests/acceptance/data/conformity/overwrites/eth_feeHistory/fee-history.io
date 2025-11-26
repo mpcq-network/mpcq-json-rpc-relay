@@ -1,7 +1,7 @@
 // gets fee history information
 //
 // Reason for override:
-// Hedera does not currently support blob-related fields (`baseFeePerBlobGas`, `blobGasUsedRatio`),
+// MPCQ does not currently support blob-related fields (`baseFeePerBlobGas`, `blobGasUsedRatio`),
 // so those fields have been omitted from the response.
 
 ## wildcard: result.baseFeePerBlobGas, result.blobGasUsedRatio, result.gasUsedRatio, result.baseFeePerGas

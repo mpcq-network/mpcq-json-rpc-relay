@@ -20,24 +20,24 @@ contract BaseHTS is FeeHelper {
     function createFungibleTokenPublic(
         address treasury
     ) public payable {
-        IHederaTokenService.TokenKey[] memory keys = new IHederaTokenService.TokenKey[](4);
+        IMPCQTokenService.TokenKey[] memory keys = new IMPCQTokenService.TokenKey[](4);
         keys[0] = getSingleKey(0, 6, 1, bytes(""));
         keys[1] = getSingleKey(1, 1, bytes(""));
         keys[2] = getSingleKey(2, 1, bytes(""));
         keys[3] = getSingleKey(3, 1, bytes(""));
 
-        IHederaTokenService.Expiry memory expiry = IHederaTokenService.Expiry(
+        IMPCQTokenService.Expiry memory expiry = IMPCQTokenService.Expiry(
             0, treasury, 8000000
         );
 
-        IHederaTokenService.HederaToken memory token = IHederaTokenService.HederaToken(
+        IMPCQTokenService.MPCQToken memory token = IMPCQTokenService.MPCQToken(
             name, symbol, treasury, memo, true, maxSupply, freezeDefaultStatus, keys, expiry
         );
 
         (int responseCode, address tokenAddress) =
-        HederaTokenService.createFungibleToken(token, initialTotalSupply, decimals);
+        MPCQTokenService.createFungibleToken(token, initialTotalSupply, decimals);
 
-        if (responseCode != HederaResponseCodes.SUCCESS) {
+        if (responseCode != MPCQResponseCodes.SUCCESS) {
             revert ();
         }
 
@@ -47,25 +47,25 @@ contract BaseHTS is FeeHelper {
     function createNonFungibleTokenPublic(
         address treasury
     ) public payable {
-        IHederaTokenService.TokenKey[] memory keys = new IHederaTokenService.TokenKey[](5);
+        IMPCQTokenService.TokenKey[] memory keys = new IMPCQTokenService.TokenKey[](5);
         keys[0] = getSingleKey(0, 6, 1, bytes(""));
         keys[1] = getSingleKey(1, 1, bytes(""));
         keys[2] = getSingleKey(2, 1, bytes(""));
         keys[3] = getSingleKey(4, 1, bytes(""));
         keys[4] = getSingleKey(3, 1, bytes(""));
 
-        IHederaTokenService.Expiry memory expiry = IHederaTokenService.Expiry(
+        IMPCQTokenService.Expiry memory expiry = IMPCQTokenService.Expiry(
             0, treasury, 8000000
         );
 
-        IHederaTokenService.HederaToken memory token = IHederaTokenService.HederaToken(
+        IMPCQTokenService.MPCQToken memory token = IMPCQTokenService.MPCQToken(
             name, symbol, treasury, memo, true, maxSupply, freezeDefaultStatus, keys, expiry
         );
 
         (int responseCode, address tokenAddress) =
-        HederaTokenService.createNonFungibleToken(token);
+        MPCQTokenService.createNonFungibleToken(token);
 
-        if (responseCode != HederaResponseCodes.SUCCESS) {
+        if (responseCode != MPCQResponseCodes.SUCCESS) {
             revert ();
         }
 
@@ -73,9 +73,9 @@ contract BaseHTS is FeeHelper {
     }
 
     function associateTokenPublic(address account, address token) public returns (int responseCode) {
-        responseCode = HederaTokenService.associateToken(account, token);
+        responseCode = MPCQTokenService.associateToken(account, token);
         emit ResponseCode(responseCode);
-        if (responseCode != HederaResponseCodes.SUCCESS) {
+        if (responseCode != MPCQResponseCodes.SUCCESS) {
             revert ();
         }
     }
@@ -84,28 +84,28 @@ contract BaseHTS is FeeHelper {
         address treasury,
         address fixedFeeTokenAddress
     ) public payable {
-        IHederaTokenService.TokenKey[] memory keys = new IHederaTokenService.TokenKey[](1);
+        IMPCQTokenService.TokenKey[] memory keys = new IMPCQTokenService.TokenKey[](1);
         keys[0] = getSingleKey(0, 0, 1, bytes(""));
 
-        IHederaTokenService.Expiry memory expiry = IHederaTokenService.Expiry(
+        IMPCQTokenService.Expiry memory expiry = IMPCQTokenService.Expiry(
             0, treasury, 8000000
         );
 
-        IHederaTokenService.HederaToken memory token = IHederaTokenService.HederaToken(
+        IMPCQTokenService.MPCQToken memory token = IMPCQTokenService.MPCQToken(
             name, symbol, treasury, memo, true, maxSupply, false, keys, expiry
         );
 
-        IHederaTokenService.FixedFee[] memory fixedFees = new IHederaTokenService.FixedFee[](1);
-        fixedFees[0] = IHederaTokenService.FixedFee(1, fixedFeeTokenAddress, false, false, treasury);
+        IMPCQTokenService.FixedFee[] memory fixedFees = new IMPCQTokenService.FixedFee[](1);
+        fixedFees[0] = IMPCQTokenService.FixedFee(1, fixedFeeTokenAddress, false, false, treasury);
 
-        IHederaTokenService.FractionalFee[] memory fractionalFees = new IHederaTokenService.FractionalFee[](1);
-        fractionalFees[0] = IHederaTokenService.FractionalFee(4, 5, 10, 30, false, treasury);
+        IMPCQTokenService.FractionalFee[] memory fractionalFees = new IMPCQTokenService.FractionalFee[](1);
+        fractionalFees[0] = IMPCQTokenService.FractionalFee(4, 5, 10, 30, false, treasury);
 
         (int responseCode, address tokenAddress) =
-        HederaTokenService.createFungibleTokenWithCustomFees(token, initialTotalSupply, decimals, fixedFees, fractionalFees);
+        MPCQTokenService.createFungibleTokenWithCustomFees(token, initialTotalSupply, decimals, fixedFees, fractionalFees);
         emit ResponseCode(responseCode);
 
-        if (responseCode != HederaResponseCodes.SUCCESS) {
+        if (responseCode != MPCQResponseCodes.SUCCESS) {
             revert ();
         }
 

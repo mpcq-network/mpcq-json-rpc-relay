@@ -18,7 +18,7 @@ class MergeDocuments {
   /**
    * Merges two OpenRPC documents
    * @param {Object} originalJson - The original OpenRPC document
-   * @param {Object} modifiedJson - The modified Hedera OpenRPC document
+   * @param {Object} modifiedJson - The modified MPCQ OpenRPC document
    * @returns {Object} - The merged OpenRPC document
    */
   mergeDocuments(originalJson, modifiedJson) {

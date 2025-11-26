@@ -1,6 +1,6 @@
 # K6 Performance Tests
 
-This module covers the [k6](https://k6.io/) based performance tests for the Hedera JSON RPC Relay.
+This module covers the [k6](https://k6.io/) based performance tests for the MPCQ JSON RPC Relay.
 
 ## Install k6
 

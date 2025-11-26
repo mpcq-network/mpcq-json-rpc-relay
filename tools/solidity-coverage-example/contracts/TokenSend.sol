@@ -3,10 +3,10 @@ pragma solidity ^0.8.9;
 
 // Uncomment this line to use console.log
 // import "hardhat/console.sol";
-import "./HederaTokenService.sol";
-import { IHederaTokenService } from "./IHederaTokenService.sol";
+import "./MPCQTokenService.sol";
+import { IMPCQTokenService } from "./IMPCQTokenService.sol";
 
-contract TokenSend is HederaTokenService {
+contract TokenSend is MPCQTokenService {
     address public tokenId;
     address payable public recipient;
     int64 internal storedAmount;
@@ -16,18 +16,18 @@ contract TokenSend is HederaTokenService {
     }
 
     function loadFunds(int64 _amount) public payable{
-        IHederaTokenService.TokenTransferList[] memory tokenTransferList = createTransferList(_amount);
+        IMPCQTokenService.TokenTransferList[] memory tokenTransferList = createTransferList(_amount);
         cryptoTransfer(tokenTransferList);
     }
 
     function createTransferList(int64 _amount) private view
-    returns (IHederaTokenService.TokenTransferList[] memory)
+    returns (IMPCQTokenService.TokenTransferList[] memory)
     {
-        IHederaTokenService.TokenTransferList[] memory tokenTransferListCollection = new IHederaTokenService.TokenTransferList[](1);
-        IHederaTokenService.NftTransfer[] memory nftTransferList = new IHederaTokenService.NftTransfer[](0);
-        IHederaTokenService.AccountAmount[] memory amountAccountList = new IHederaTokenService.AccountAmount[](1);
-        amountAccountList[0] = IHederaTokenService.AccountAmount(recipient,  _amount != 0 ? _amount : storedAmount);
-        tokenTransferListCollection[0] = IHederaTokenService.TokenTransferList(tokenId, amountAccountList, nftTransferList);
+        IMPCQTokenService.TokenTransferList[] memory tokenTransferListCollection = new IMPCQTokenService.TokenTransferList[](1);
+        IMPCQTokenService.NftTransfer[] memory nftTransferList = new IMPCQTokenService.NftTransfer[](0);
+        IMPCQTokenService.AccountAmount[] memory amountAccountList = new IMPCQTokenService.AccountAmount[](1);
+        amountAccountList[0] = IMPCQTokenService.AccountAmount(recipient,  _amount != 0 ? _amount : storedAmount);
+        tokenTransferListCollection[0] = IMPCQTokenService.TokenTransferList(tokenId, amountAccountList, nftTransferList);
 
         return tokenTransferListCollection;
     }

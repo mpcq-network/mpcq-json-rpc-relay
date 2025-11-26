@@ -7,7 +7,7 @@ import { runHardhatScript } from '../utils/helpers';
 describe('@deployment-test Deploy WHBAR Script Integration Tests', function () {
   this.timeout(120000);
 
-  describe('Hedera Network Deployment', function () {
+  describe('MPCQ Network Deployment', function () {
     it('should deploy WHBAR contract successfully', async function () {
       const output = await runHardhatScript('hedera', 'scripts/deployments/deploy-whbar.ts');
 

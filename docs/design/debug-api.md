@@ -7,8 +7,8 @@ The Debug API gives you access to several non-standard RPC methods, which will a
 ## Goals
 
 1. **Debugging Capabilities**: Enable developers to retrieve detailed information about transactions, execution traces, and other debugging-related data.
-2. **Enhanced Insights**: Provide deeper insights into the behavior of smart contracts, transaction execution, and state changes on the Hedera network.
-3. **Ethereum Equivalent**: Makes the Hedera JSON-RPC Relay more equivalent to other providers used in the ethereum ecosystem, by providing the needed endpoints for easier debugging by developers.
+2. **Enhanced Insights**: Provide deeper insights into the behavior of smart contracts, transaction execution, and state changes on the MPCQ network.
+3. **Ethereum Equivalent**: Makes the MPCQ JSON-RPC Relay more equivalent to other providers used in the ethereum ecosystem, by providing the needed endpoints for easier debugging by developers.
 
 ## Architecture
 

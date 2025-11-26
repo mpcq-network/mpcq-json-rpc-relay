@@ -1,6 +1,6 @@
 <div align="center">
 
-# Hedera JSON RPC Relay
+# MPCQ JSON RPC Relay
 
 [![Build](https://github.com/hiero-ledger/hiero-json-rpc-relay/actions/workflows/test.yml/badge.svg)](https://github.com/hiero-ledger/hiero-json-rpc-relay/actions)
 [![Release](https://img.shields.io/github/v/release/hiero-ledger/hiero-json-rpc-relay)](https://github.com/hiero-ledger/hiero-json-rpc-relay/releases)
@@ -16,7 +16,7 @@
 
 ## Overview
 
-Implementation of an Ethereum JSON RPC APIs for Hedera Hashgraph. Utilises both Hedera Consensus Nodes and Mirror nodes
+Implementation of an Ethereum JSON RPC APIs for MPCQ Hashgraph. Utilises both MPCQ Consensus Nodes and Mirror nodes
 to support RPC queries as defined in
 the [JSON RPC Specification](https://playground.open-rpc.org/?schemaUrl=https://raw.githubusercontent.com/hiero-ledger/hiero-json-rpc-relay/main/docs/openrpc.json&uiSchema%5BappBar%5D%5Bui:splitView%5D=false&uiSchema%5BappBar%5D%5Bui:input%5D=false&uiSchema%5BappBar%5D%5Bui:examplesDropdown%5D=false)
 
@@ -180,7 +180,7 @@ Where result returns a valid hexadecimal number
 
 ### Helm Chart
 
-This repos `charts` directory contains the templates and values to deploy Hedera's json-rpc relay to a K8s cluster. This directory is packaged and distributed via helm repo.
+This repos `charts` directory contains the templates and values to deploy MPCQ's json-rpc relay to a K8s cluster. This directory is packaged and distributed via helm repo.
 To get started, first install the helm repo:
 
 ```

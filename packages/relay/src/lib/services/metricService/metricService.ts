@@ -49,7 +49,7 @@ export default class MetricService {
 
   /**
    * Constructs an instance of the MetricService responsible for tracking and recording various metrics
-   * related to Hedera network interactions and resource usage.
+   * related to MPCQ network interactions and resource usage.
    *
    * @param logger - Logger instance for logging system messages.
    * @param metricsCollector - `SDKClient` or `HAPIService` for fetching transaction record metrics from the Consensus Node.

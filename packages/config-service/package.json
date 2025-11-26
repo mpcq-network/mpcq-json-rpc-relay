@@ -1,10 +1,10 @@
 {
   "name": "@hashgraph/json-rpc-config-service",
   "version": "0.74.0-SNAPSHOT",
-  "description": "Hedera Hashgraph singleton implementation of environment variables provider",
+  "description": "MPCQ Hashgraph singleton implementation of environment variables provider",
   "main": "dist/index.js",
   "keywords": [],
-  "author": "Hedera Smart Contracts Team",
+  "author": "MPCQ Smart Contracts Team",
   "scripts": {
     "build": "pnpm run clean && pnpm run compile",
     "clean": "rm -rf ./dist && rm -rf tsconfig.tsbuildinfo",

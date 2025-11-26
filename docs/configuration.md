@@ -9,7 +9,7 @@ The default configuration allows users to quickly get up and running without hav
 ease of use at the trade-off of some insecure default configuration. Most configuration settings have appropriate
 defaults and can be left unchanged. It is recommended to browse the properties below and adjust to your needs.
 
-A few properties omit a default value as they relate to account information and Hedera environment details.
+A few properties omit a default value as they relate to account information and MPCQ environment details.
 These properties are noted below and should be custom set per deployment.
 
 - `CHAIN_ID`
@@ -66,7 +66,7 @@ Unless you need to set a non-default value, it is recommended to only populate o
 | `HBAR_SPENDING_PLANS_CONFIG`                | "spendingPlansConfig.json"            | The environment variable that either points to a file containing the spending plans, or the JSON content defining the spending plans.                                                                                                                                                                                                                                                                                                                                                      |
 | `HEDERA_SPECIFIC_REVERT_STATUSES`           | ["WRONG_NONCE", "INVALID_ACCOUNT_ID"] | A list of specific transaction statuses where each one identifies that the transaction hadn't been executed in the evm but it had reached the services.                                                                                                                                                                                                                                                                                                                                    |
 | `IP_RATE_LIMIT_STORE`                       | null                                  | Specifies the rate limit store to use for IP-based rate limiting: valid values are "LRU", "REDIS", with the possibility to be extended with a custom implementation (see [Store Selection](rate-limiting.md#store-selection)). If unset, falls back to Redis when `REDIS_ENABLED=true`, otherwise uses in-memory LRU.                                                                                                                                                                      |
-| `JUMBO_TX_ENABLED`                          | "true"                                | Controls how large transactions are handled during `eth_sendRawTransaction`. When set to `true`, transactions up to 128KB can be sent directly to consensus nodes without using Hedera File Service (HFS), as long as contract bytecode doesn't exceed 24KB. When set to `false`, all transactions containing contract deployments use the traditional HFS approach. This feature leverages the increased transaction size limit to simplify processing of standard Ethereum transactions. |
+| `JUMBO_TX_ENABLED`                          | "true"                                | Controls how large transactions are handled during `eth_sendRawTransaction`. When set to `true`, transactions up to 128KB can be sent directly to consensus nodes without using MPCQ File Service (HFS), as long as contract bytecode doesn't exceed 24KB. When set to `false`, all transactions containing contract deployments use the traditional HFS approach. This feature leverages the increased transaction size limit to simplify processing of standard Ethereum transactions. |
 | `LIMIT_DURATION`                            | "60000"                               | The maximum duration in ms applied to IP-method based rate limits.                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | `MAX_GAS_ALLOWANCE_HBAR`                    | "0"                                   | The maximum amount, in hbars, that the JSON-RPC Relay is willing to pay to complete the transaction in case the senders don't provide enough funds. Please note, in case of fully subsidized transactions, the sender must set the gas price to `0` and the JSON-RPC Relay must configure the `MAX_GAS_ALLOWANCE_HBAR` parameter high enough to cover the entire transaction cost.                                                                                                         |
 | `MAX_TRANSACTION_FEE_THRESHOLD`             | "15000000"                            | Used to set the max transaction fee. This is the HAPI fee which is paid by the relay operator account.                                                                                                                                                                                                                                                                                                                                                                                     |
@@ -129,7 +129,7 @@ Unless you need to set a non-default value, it is recommended to only populate o
 | `OPERATOR_KEY_MAIN`                 | ""                                                                                                                                                                                                   | Operator private key used to sign transactions in hex encoded DER format. This may be either an ED22519 private key or an ECDSA private key. The private key must be associated with/used to derive `OPERATOR_ID_MAIN`.                                                          |
 | `RATE_LIMIT_DISABLED`               | "false"                                                                                                                                                                                              | Flag to disable IP based rate limiting.                                                                                                                                                                                                                                          |
 | `REQUEST_ID_IS_OPTIONAL`            | "false"                                                                                                                                                                                              | Flag to set it the JSON RPC request id field in the body should be optional. Note, this breaks the API spec and is not advised and is provided for test purposes only where some wallets may be non compliant                                                                    |
-| `SDK_LOG_LEVEL`                     | "silent"                                                                                                                                                                                             | The logging level for the Hedera SDK, independent from the application's `LOG_LEVEL` setting. This allows fine-tuned debugging of SDK operations without affecting the main application logs. Valid values are `silent`, `trace`, `debug`, `info`, `warn`, `error`, and `fatal`. |
+| `SDK_LOG_LEVEL`                     | "silent"                                                                                                                                                                                             | The logging level for the MPCQ SDK, independent from the application's `LOG_LEVEL` setting. This allows fine-tuned debugging of SDK operations without affecting the main application logs. Valid values are `silent`, `trace`, `debug`, `info`, `warn`, `error`, and `fatal`. |
 | `SERVER_HOST`                       | undefined                                                                                                                                                                                            | The hostname or IP address on which the server listens for incoming connections. If `SERVER_HOST` is not configured or left undefined (same as `0.0.0.0`), it permits external connections by default, offering more flexibility.                                                |
 | `SERVER_PORT`                       | "7546"                                                                                                                                                                                               | The RPC server port number to listen for requests on. Currently a static value defaulting to 7546. See [#955](https://github.com/hiero-ledger/hiero-json-rpc-relay/issues/955)                                                                                                   |
 | `SERVER_REQUEST_TIMEOUT_MS`         | "60000"                                                                                                                                                                                              | The time of inactivity allowed before a timeout is triggered and the socket is closed. See [NodeJs Server Timeout](https://nodejs.org/api/http.html#serversettimeoutmsecs-callback)                                                                                              |
@@ -158,9 +158,9 @@ Unless you need to set a non-default value, it is recommended to only populate o
 | `WS_SAME_SUB_FOR_SAME_EVENT`    | "true"      | The relay will return the same subscription ID when a client subscribes to the same event multiple times using a single connection. When set to false, the relay will always create a new subscription ID for each `eth_subscribe` request. |
 | `WS_SUBSCRIPTION_LIMIT`         | "10"        | Maximum amount of subscriptions per single connection                                                                                                                                                                                       |
 
-## Sample for connecting to Hedera Environments
+## Sample for connecting to MPCQ Environments
 
-**Hedera Mainnet**
+**MPCQ Mainnet**
 
 ```.env
 HEDERA_NETWORK=mainnet
@@ -172,7 +172,7 @@ MIRROR_NODE_URL=https://mainnet-public.mirrornode.hedera.com/
 
 See [`.env.mainnet.sample`](./examples/.env.mainnet.sample).
 
-**Hedera Testnet**
+**MPCQ Testnet**
 
 ```.env
 HEDERA_NETWORK=testnet
@@ -184,7 +184,7 @@ MIRROR_NODE_URL=https://testnet.mirrornode.hedera.com/
 
 See [`.env.testnet.sample`](./examples/.env.testnet.sample).
 
-**Hedera Previewnet**
+**MPCQ Previewnet**
 
 ```.env
 HEDERA_NETWORK=previewnet
@@ -198,7 +198,7 @@ See [`.env.previewnet.sample`](./examples/.env.previewnet.sample).
 
 - **_NOTE:_** Replace the redacted operator ID and keys with your own.
 - **_NOTE 2:_** Default values for all other keys are sufficient, no need to set them.
-- **_NOTE 3:_** The above files have been provided for your convenience within the examples directory of this repo. For example, for the Hedera Testnet configuration, run this command in the root directory of this project: `cp ./docs/examples/.env.testnet.sample ./.env`
+- **_NOTE 3:_** The above files have been provided for your convenience within the examples directory of this repo. For example, for the MPCQ Testnet configuration, run this command in the root directory of this project: `cp ./docs/examples/.env.testnet.sample ./.env`
 
 ## Testing
 
@@ -208,7 +208,7 @@ Unless you need to set a non-default value, it is recommended to only populate o
 | Name                                     | Default | Description                                                                                        |
 | ---------------------------------------- | ------- | -------------------------------------------------------------------------------------------------- |
 | `E2E_RELAY_HOST`                         | ""      | Remote relay url to point to.                                                                      |
-| `LOCAL_NODE`                             | ""      | Flag if relay is hosted in the Hedera local node setup.                                            |
+| `LOCAL_NODE`                             | ""      | Flag if relay is hosted in the MPCQ local node setup.                                            |
 | `TEST_GAS_PRICE_DEVIATION`               | 0.2     | Value to use as deviation when comparing gas prices in the rpc-batch1.spec.ts                      |
 | `TEST_TRANSACTION_RECORD_COST_TOLERANCE` | 0.02    | Defines the acceptable tolerance level for discrepancies in transaction record costs during tests. |
 | `TEST_WS_SERVER`                         | "false" | Flag config for enable or disable the WS server tests.                                             |
@@ -253,6 +253,6 @@ TEST_GAS_PRICE_DEVIATION=0.80
 TEST_TRANSACTION_RECORD_COST_TOLERANCE=0.05
 ```
 
-> **_NOTE:_** Acceptance tests can be pointed at a remote locations (previewnet and testnet and custom environments). In this case configuration will require details for remote consensus node gRPC endpoints [previewnet / testnet](https://docs.hedera.com/hedera/networks/testnet/testnet-nodes) / [mainnet](https://docs.hedera.com/hedera/networks/mainnet/mainnet-nodes) and [Mirror Node REST API endpoints](https://docs.hedera.com/hedera/sdks-and-apis/rest-api), be sure to configure `HEDERA_NETWORK` and `MIRROR_NODE_URL` appropriately to point away from your local host and to valid deployed services. When pointing to previewnet and testnet, account Ids (`OPERATOR_ID_MAIN`) and private keys (`OPERATOR_KEY_MAIN`) for previewnet and tests may be obtained from the [Hedera Portal](http://portal.hedera.com).
+> **_NOTE:_** Acceptance tests can be pointed at a remote locations (previewnet and testnet and custom environments). In this case configuration will require details for remote consensus node gRPC endpoints [previewnet / testnet](https://docs.hedera.com/hedera/networks/testnet/testnet-nodes) / [mainnet](https://docs.hedera.com/hedera/networks/mainnet/mainnet-nodes) and [Mirror Node REST API endpoints](https://docs.hedera.com/hedera/sdks-and-apis/rest-api), be sure to configure `HEDERA_NETWORK` and `MIRROR_NODE_URL` appropriately to point away from your local host and to valid deployed services. When pointing to previewnet and testnet, account Ids (`OPERATOR_ID_MAIN`) and private keys (`OPERATOR_KEY_MAIN`) for previewnet and tests may be obtained from the [MPCQ Portal](http://portal.hedera.com).
 
-> **_NOTE 3:_**: Unlike ethereum, Hedera does not allow clients to set their own gas price in order to prioritize their transaction. The price is "published in a fee schedule file, so all Hedera clients pay the same gas price", which helps give Hedera clients predictability in gas costs. Hedera transaction fees are set in fiat(USD) but paid using the gas price in HBAR. The value of HBAR fluctuates with the market so the gas price fluctuates as well. The TEST_GAS_PRICE_DEVIATION allows for a range of gas prices reflecting the current market rates, when testing the current gas price in the acceptance tests. Read more about transaction fees [here](https://hedera.com/fees) and [here](https://hedera.com/blog/pricing-smart-contracts).
+> **_NOTE 3:_**: Unlike ethereum, MPCQ does not allow clients to set their own gas price in order to prioritize their transaction. The price is "published in a fee schedule file, so all MPCQ clients pay the same gas price", which helps give MPCQ clients predictability in gas costs. MPCQ transaction fees are set in fiat(USD) but paid using the gas price in HBAR. The value of HBAR fluctuates with the market so the gas price fluctuates as well. The TEST_GAS_PRICE_DEVIATION allows for a range of gas prices reflecting the current market rates, when testing the current gas price in the acceptance tests. Read more about transaction fees [here](https://hedera.com/fees) and [here](https://hedera.com/blog/pricing-smart-contracts).

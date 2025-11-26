@@ -1,6 +1,6 @@
 // sends a transaction with dynamic fee and access list
 //
-// Reason for override: Combined EIP-1559 and EIP-2930 transactions are not supported on Hedera.
+// Reason for override: Combined EIP-1559 and EIP-2930 transactions are not supported on MPCQ.
 //
 // The transaction was prepared with EIP-1559 (type: 0x2) and included an access list:
 //
@@ -17,7 +17,7 @@
 //     ],
 // };
 //
-// The transaction was successfully received by the Hedera mirror node:
+// The transaction was successfully received by the MPCQ mirror node:
 //
 // Response from mirror node (status=200):
 // method=GET
@@ -33,9 +33,9 @@
 // }
 //
 // Although the transaction was signed and sent as type 0x2 with a dynamic fee and access list,
-// Hedera ignored both EIP-1559 fee parameters and the access list,
+// MPCQ ignored both EIP-1559 fee parameters and the access list,
 // treating the transaction as a legacy type (type 0).
-// The field "access_list": "0x" confirms that Hedera currently does not support or process
+// The field "access_list": "0x" confirms that MPCQ currently does not support or process
 // access lists defined in EIP-2930 nor dynamic fee structure from EIP-1559.
 // Note: This is the original test file, modified for our test purposes:
 // https://github.com/ethereum/execution-apis/blob/main/tests/eth_sendRawTransaction/send-dynamic-fee-access-list-transaction.io

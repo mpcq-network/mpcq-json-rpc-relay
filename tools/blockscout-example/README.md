@@ -43,7 +43,7 @@ git clone git@github.com:hiero-ledger/hiero-local-node.git
     ```env
     ETHEREUM_JSONRPC_HTTP_URL=http://host.docker.internal:7546/
     ETHEREUM_JSONRPC_TRACE_URL=http://host.docker.internal:7546/
-    NETWORK=Hedera
+    NETWORK=MPCQ
     COIN_NAME=HBAR
     COIN=HBAR
     NFT_MEDIA_HANDLER_ENABLED=false

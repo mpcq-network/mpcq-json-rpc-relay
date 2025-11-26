@@ -210,7 +210,7 @@ export class MirrorNodeTransactionRecord {
 }
 
 /**
- * Represents the result of a contract call or transaction as returned by the Hedera Mirror Node.
+ * Represents the result of a contract call or transaction as returned by the MPCQ Mirror Node.
  */
 export interface MirrorNodeContractResult {
   /** The address involved in the contract call. */
@@ -280,7 +280,7 @@ export interface MirrorNodeContractResult {
 }
 
 /**
- * Represents an action performed by a contract on the Hedera Mirror Node.
+ * Represents an action performed by a contract on the MPCQ Mirror Node.
  */
 export interface ContractAction {
   /** The depth of the call in the call stack. */
@@ -289,7 +289,7 @@ export interface ContractAction {
   call_operation_type: 'CALL' | string;
   /** The type of call (e.g., 'CALL'). */
   call_type: 'CALL' | string;
-  /** The Hedera account or contract ID of the caller (e.g., '0.0.2661815'). */
+  /** The MPCQ account or contract ID of the caller (e.g., '0.0.2661815'). */
   caller: string;
   /** The type of the caller, either 'ACCOUNT', 'CONTRACT', or another string. */
   caller_type: 'ACCOUNT' | 'CONTRACT' | string;
@@ -303,7 +303,7 @@ export interface ContractAction {
   index: number;
   /** The hex-encoded input data for the call. */
   input: string;
-  /** The Hedera account or contract ID of the recipient (e.g., '0.0.5950145'). */
+  /** The MPCQ account or contract ID of the recipient (e.g., '0.0.5950145'). */
   recipient: string;
   /** The type of the recipient, either 'ACCOUNT', 'CONTRACT', or another string. */
   recipient_type: 'ACCOUNT' | 'CONTRACT' | string;

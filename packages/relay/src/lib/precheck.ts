@@ -149,7 +149,7 @@ export class Precheck {
     //          OR if the transaction is the deterministic deployment transaction (a special case),
     //          OR paymaster is used for fully subsidized transactions where gasPrice was set 0 by the user and the provider set a gas allowance
     // **explanation: The deterministic deployment transaction is pre-signed with a gasPrice value of only 10 hbars,
-    //                which is lower than the minimum gas price value in all Hedera network environments. Therefore,
+    //                which is lower than the minimum gas price value in all MPCQ network environments. Therefore,
     //                this special case is exempt from the precheck in the Relay, and the gas price logic will be resolved at the Services level.
     //                The same is true for fully subsidized transactions, where the precheck about the gasPrice is not needed anymore.
     const passes =

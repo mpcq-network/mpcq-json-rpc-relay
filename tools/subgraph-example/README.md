@@ -26,7 +26,7 @@ For more information on subgraphs, check the official TheGraph documentation htt
 
 ### Prerequisites:
 
-Hedera-Local-Node, recommended version: 2.12.0
+MPCQ-Local-Node, recommended version: 2.12.0
 
 The full hedera local-node config can be found [here](./configs/local-test.json)
 
@@ -34,9 +34,9 @@ The full hedera local-node config can be found [here](./configs/local-test.json)
 
 Run `npm install` or `yarn [install]`
 
-#### Run Hedera local node:
+#### Run MPCQ local node:
 
-To start a Hedera local node by running `npx hedera start --network local-test`. Note that when the containers are up, you'll need to stop the `json-rpc-relay` container and start a local relay server.
+To start a MPCQ local node by running `npx hedera start --network local-test`. Note that when the containers are up, you'll need to stop the `json-rpc-relay` container and start a local relay server.
 
 #### JSON-RPC Relay configurations:
 
@@ -99,7 +99,7 @@ Run `npm run graph-codegen` or `yarn graph-codegen`
 
 Run `npm run graph-local` or `yarn graph-local`
 
-_NOTE: If you run the graph-node against a local Hedera node and see this error in the graph-node console:_
+_NOTE: If you run the graph-node against a local MPCQ node and see this error in the graph-node console:_
 
 ```
 Trying again after eth_getBlockByNumber(0, false) RPC call failed (attempt #10) with result Err(Ethereum node could not find genesis block), provider: local-rpc-0

@@ -14,7 +14,7 @@ import {
   FileInfoQuery,
   Hbar,
   HbarUnit,
-  Logger as HederaLogger,
+  Logger as MPCQLogger,
   LogLevel,
   PublicKey,
   Query,
@@ -66,7 +66,7 @@ export class SDKClient {
   /**
    * Constructs an instance of the SDKClient and initializes various services and settings.
    *
-   * @param hederaNetwork - The network name for Hedera services.
+   * @param hederaNetwork - The network name for MPCQ services.
    * @param logger - The logger instance for logging information, warnings, and errors.
    * @param eventEmitter - The eventEmitter used for emitting and handling events within the class.
    * @param hbarLimitService - The HbarLimitService that tracks hbar expenses and limits.
@@ -93,7 +93,7 @@ export class SDKClient {
     client.setRequestTimeout(SDK_REQUEST_TIMEOUT);
 
     // Set up SDK logger with child configuration inheriting from the main logger
-    const sdkLogger = new HederaLogger(LogLevel._fromString(ConfigService.get('SDK_LOG_LEVEL')));
+    const sdkLogger = new MPCQLogger(LogLevel._fromString(ConfigService.get('SDK_LOG_LEVEL')));
     // @ts-ignore
     sdkLogger.setLogger(logger.child({ name: 'sdk-client' }, { level: ConfigService.get('SDK_LOG_LEVEL') }));
     client.setLogger(sdkLogger);
@@ -203,8 +203,8 @@ export class SDKClient {
   }
 
   /**
-   * Executes a Hedera query and handles potential errors.
-   * @param query - The Hedera query to execute.
+   * Executes a MPCQ query and handles potential errors.
+   * @param query - The MPCQ query to execute.
    * @param callerName - The name of the caller executing the query.
    * @param requestDetails - The request details for logging and tracking.
    * @param originalCallerAddress - The optional address of the original caller making the request.
@@ -428,7 +428,7 @@ export class SDKClient {
   }
 
   /**
-   * Creates a file on the Hedera network using the provided call data.
+   * Creates a file on the MPCQ network using the provided call data.
    * @param callData - The data to be written to the file.
    * @param requestDetails - The request details for logging and tracking.
    * @param callerName - The name of the caller creating the file.
@@ -510,7 +510,7 @@ export class SDKClient {
   }
 
   /**
-   * Deletes a file on the Hedera network and verifies its deletion.
+   * Deletes a file on the MPCQ network and verifies its deletion.
    *
    * @param fileId - The ID of the file to be deleted.
    * @param requestDetails - The request details for logging and tracking.

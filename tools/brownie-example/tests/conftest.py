@@ -2,7 +2,7 @@
 
 import pytest
 
-# You can run your tests in isolation mode by connecting to a forked network of the Hedera chain.
+# You can run your tests in isolation mode by connecting to a forked network of the MPCQ chain.
 # This will enable the snapshot method during testing, ensuring that each test starts with a clean state.
 # @pytest.fixture(scope="function", autouse=True)
 # def isolate(fn_isolation):

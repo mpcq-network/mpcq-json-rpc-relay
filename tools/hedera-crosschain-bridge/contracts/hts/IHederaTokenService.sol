@@ -2,8 +2,8 @@
 pragma solidity >=0.4.9 <0.9.0;
 pragma experimental ABIEncoderV2;
 
-interface IHederaTokenService {
-    /// Expiry properties of a Hedera token - second, autoRenewAccount, autoRenewPeriod
+interface IMPCQTokenService {
+    /// Expiry properties of a MPCQ token - second, autoRenewAccount, autoRenewPeriod
     struct Expiry {
         // The epoch second at which the token should expire; if an auto-renew account and period are
         // specified, this is coerced to the current epoch second plus the autoRenewPeriod
@@ -26,7 +26,7 @@ interface IHederaTokenService {
     /// controlled by the Key.
     /// Exactly one of the possible values should be populated in order for the Key to be valid.
     struct KeyValue {
-        // if set to true, the key of the calling Hedera account will be inherited as the token key
+        // if set to true, the key of the calling MPCQ account will be inherited as the token key
         bool inheritAccountKey;
         // smart contract instance that is authorized as if it had signed with a key
         address contractId;
@@ -60,9 +60,9 @@ interface IHederaTokenService {
         KeyValue key;
     }
 
-    /// Basic properties of a Hedera Token - name, symbol, memo, tokenSupplyType, maxSupply,
+    /// Basic properties of a MPCQ Token - name, symbol, memo, tokenSupplyType, maxSupply,
     /// treasury, freezeDefault. These properties are related both to Fungible and NFT token types.
-    struct HederaToken {
+    struct MPCQToken {
         // The publicly visible name of the token. The token name is specified as a Unicode string.
         // Its UTF-8 encoding cannot exceed 100 bytes, and cannot contain the 0 byte (NUL).
         string name;
@@ -81,12 +81,12 @@ interface IHederaTokenService {
         // maximum number of tokens that can be in circulation. For tokens of type NON_FUNGIBLE_UNIQUE -
         // the maximum number of NFTs (serial numbers) that can be minted. This field can never be changed!
         int64 maxSupply;
-        // The default Freeze status (frozen or unfrozen) of Hedera accounts relative to this token. If
+        // The default Freeze status (frozen or unfrozen) of MPCQ accounts relative to this token. If
         // true, an account must be unfrozen before it can receive the token
         bool freezeDefault;
         // list of keys to set to the token
         TokenKey[] tokenKeys;
-        // expiry properties of a Hedera token - second, autoRenewAccount, autoRenewPeriod
+        // expiry properties of a MPCQ token - second, autoRenewAccount, autoRenewPeriod
         Expiry expiry;
     }
 
@@ -140,7 +140,7 @@ interface IHederaTokenService {
     /// @return responseCode The response code for the status of the request. SUCCESS is 22.
     /// @return tokenAddress the created token's address
     function createFungibleToken(
-        HederaToken memory token,
+        MPCQToken memory token,
         int64 initialTotalSupply,
         int32 decimals
     ) external payable returns (int64 responseCode, address tokenAddress);

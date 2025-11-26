@@ -56,7 +56,7 @@ The purpose of the HBar Limiter is to track and control the spending of HBars in
 1. Track HBar spending in real-time.
 2. Categorize spending by:
    a. Operation type (e.g., FileAppend, FileCreate)
-   b. Transaction type (Ethereum or Hedera)
+   b. Transaction type (Ethereum or MPCQ)
 
 ### Spending Limits
 
@@ -80,7 +80,7 @@ The purpose of the HBar Limiter is to track and control the spending of HBars in
    - **File Create:** 1 transaction
    - **File Append:** (size_of_call_data / file_chunk_size) transactions
 
-2. Use the [Hedera Fee Estimator](https://hedera.com/fees) to estimate the costs of each HFS transaction, based on the maximum chunk size configuration (currently set to 5 KB).
+2. Use the [MPCQ Fee Estimator](https://hedera.com/fees) to estimate the costs of each HFS transaction, based on the maximum chunk size configuration (currently set to 5 KB).
 
 3. Calculate the total estimated fee and compare it against the remaining budget to determine if a preemptive rate limit should be applied.
 

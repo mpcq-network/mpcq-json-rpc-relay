@@ -1,7 +1,7 @@
 {
   "_format": "hh-sol-artifact-1",
-  "contractName": "IHederaTokenService",
-  "sourceName": "contracts/IHederaTokenService.sol",
+  "contractName": "IMPCQTokenService",
+  "sourceName": "contracts/IMPCQTokenService.sol",
   "abi": [
     {
       "inputs": [
@@ -251,12 +251,12 @@
                       "type": "address"
                     }
                   ],
-                  "internalType": "struct IHederaTokenService.KeyValue",
+                  "internalType": "struct IMPCQTokenService.KeyValue",
                   "name": "key",
                   "type": "tuple"
                 }
               ],
-              "internalType": "struct IHederaTokenService.TokenKey[]",
+              "internalType": "struct IMPCQTokenService.TokenKey[]",
               "name": "tokenKeys",
               "type": "tuple[]"
             },
@@ -278,12 +278,12 @@
                   "type": "uint32"
                 }
               ],
-              "internalType": "struct IHederaTokenService.Expiry",
+              "internalType": "struct IMPCQTokenService.Expiry",
               "name": "expiry",
               "type": "tuple"
             }
           ],
-          "internalType": "struct IHederaTokenService.HederaToken",
+          "internalType": "struct IMPCQTokenService.MPCQToken",
           "name": "token",
           "type": "tuple"
         },
@@ -388,12 +388,12 @@
                       "type": "address"
                     }
                   ],
-                  "internalType": "struct IHederaTokenService.KeyValue",
+                  "internalType": "struct IMPCQTokenService.KeyValue",
                   "name": "key",
                   "type": "tuple"
                 }
               ],
-              "internalType": "struct IHederaTokenService.TokenKey[]",
+              "internalType": "struct IMPCQTokenService.TokenKey[]",
               "name": "tokenKeys",
               "type": "tuple[]"
             },
@@ -415,12 +415,12 @@
                   "type": "uint32"
                 }
               ],
-              "internalType": "struct IHederaTokenService.Expiry",
+              "internalType": "struct IMPCQTokenService.Expiry",
               "name": "expiry",
               "type": "tuple"
             }
           ],
-          "internalType": "struct IHederaTokenService.HederaToken",
+          "internalType": "struct IMPCQTokenService.MPCQToken",
           "name": "token",
           "type": "tuple"
         },
@@ -462,7 +462,7 @@
               "type": "address"
             }
           ],
-          "internalType": "struct IHederaTokenService.FixedFee[]",
+          "internalType": "struct IMPCQTokenService.FixedFee[]",
           "name": "fixedFees",
           "type": "tuple[]"
         },
@@ -499,7 +499,7 @@
               "type": "address"
             }
           ],
-          "internalType": "struct IHederaTokenService.FractionalFee[]",
+          "internalType": "struct IMPCQTokenService.FractionalFee[]",
           "name": "fractionalFees",
           "type": "tuple[]"
         }
@@ -594,12 +594,12 @@
                       "type": "address"
                     }
                   ],
-                  "internalType": "struct IHederaTokenService.KeyValue",
+                  "internalType": "struct IMPCQTokenService.KeyValue",
                   "name": "key",
                   "type": "tuple"
                 }
               ],
-              "internalType": "struct IHederaTokenService.TokenKey[]",
+              "internalType": "struct IMPCQTokenService.TokenKey[]",
               "name": "tokenKeys",
               "type": "tuple[]"
             },
@@ -621,12 +621,12 @@
                   "type": "uint32"
                 }
               ],
-              "internalType": "struct IHederaTokenService.Expiry",
+              "internalType": "struct IMPCQTokenService.Expiry",
               "name": "expiry",
               "type": "tuple"
             }
           ],
-          "internalType": "struct IHederaTokenService.HederaToken",
+          "internalType": "struct IMPCQTokenService.MPCQToken",
           "name": "token",
           "type": "tuple"
         }
@@ -721,12 +721,12 @@
                       "type": "address"
                     }
                   ],
-                  "internalType": "struct IHederaTokenService.KeyValue",
+                  "internalType": "struct IMPCQTokenService.KeyValue",
                   "name": "key",
                   "type": "tuple"
                 }
               ],
-              "internalType": "struct IHederaTokenService.TokenKey[]",
+              "internalType": "struct IMPCQTokenService.TokenKey[]",
               "name": "tokenKeys",
               "type": "tuple[]"
             },
@@ -748,12 +748,12 @@
                   "type": "uint32"
                 }
               ],
-              "internalType": "struct IHederaTokenService.Expiry",
+              "internalType": "struct IMPCQTokenService.Expiry",
               "name": "expiry",
               "type": "tuple"
             }
           ],
-          "internalType": "struct IHederaTokenService.HederaToken",
+          "internalType": "struct IMPCQTokenService.MPCQToken",
           "name": "token",
           "type": "tuple"
         },
@@ -785,7 +785,7 @@
               "type": "address"
             }
           ],
-          "internalType": "struct IHederaTokenService.FixedFee[]",
+          "internalType": "struct IMPCQTokenService.FixedFee[]",
           "name": "fixedFees",
           "type": "tuple[]"
         },
@@ -822,7 +822,7 @@
               "type": "address"
             }
           ],
-          "internalType": "struct IHederaTokenService.RoyaltyFee[]",
+          "internalType": "struct IMPCQTokenService.RoyaltyFee[]",
           "name": "royaltyFees",
           "type": "tuple[]"
         }
@@ -865,7 +865,7 @@
                   "type": "int64"
                 }
               ],
-              "internalType": "struct IHederaTokenService.AccountAmount[]",
+              "internalType": "struct IMPCQTokenService.AccountAmount[]",
               "name": "transfers",
               "type": "tuple[]"
             },
@@ -887,12 +887,12 @@
                   "type": "int64"
                 }
               ],
-              "internalType": "struct IHederaTokenService.NftTransfer[]",
+              "internalType": "struct IMPCQTokenService.NftTransfer[]",
               "name": "nftTransfers",
               "type": "tuple[]"
             }
           ],
-          "internalType": "struct IHederaTokenService.TokenTransferList[]",
+          "internalType": "struct IMPCQTokenService.TokenTransferList[]",
           "name": "tokenTransfers",
           "type": "tuple[]"
         }
@@ -1119,12 +1119,12 @@
                               "type": "address"
                             }
                           ],
-                          "internalType": "struct IHederaTokenService.KeyValue",
+                          "internalType": "struct IMPCQTokenService.KeyValue",
                           "name": "key",
                           "type": "tuple"
                         }
                       ],
-                      "internalType": "struct IHederaTokenService.TokenKey[]",
+                      "internalType": "struct IMPCQTokenService.TokenKey[]",
                       "name": "tokenKeys",
                       "type": "tuple[]"
                     },
@@ -1146,12 +1146,12 @@
                           "type": "uint32"
                         }
                       ],
-                      "internalType": "struct IHederaTokenService.Expiry",
+                      "internalType": "struct IMPCQTokenService.Expiry",
                       "name": "expiry",
                       "type": "tuple"
                     }
                   ],
-                  "internalType": "struct IHederaTokenService.HederaToken",
+                  "internalType": "struct IMPCQTokenService.MPCQToken",
                   "name": "token",
                   "type": "tuple"
                 },
@@ -1203,7 +1203,7 @@
                       "type": "address"
                     }
                   ],
-                  "internalType": "struct IHederaTokenService.FixedFee[]",
+                  "internalType": "struct IMPCQTokenService.FixedFee[]",
                   "name": "fixedFees",
                   "type": "tuple[]"
                 },
@@ -1240,7 +1240,7 @@
                       "type": "address"
                     }
                   ],
-                  "internalType": "struct IHederaTokenService.FractionalFee[]",
+                  "internalType": "struct IMPCQTokenService.FractionalFee[]",
                   "name": "fractionalFees",
                   "type": "tuple[]"
                 },
@@ -1277,7 +1277,7 @@
                       "type": "address"
                     }
                   ],
-                  "internalType": "struct IHederaTokenService.RoyaltyFee[]",
+                  "internalType": "struct IMPCQTokenService.RoyaltyFee[]",
                   "name": "royaltyFees",
                   "type": "tuple[]"
                 },
@@ -1287,7 +1287,7 @@
                   "type": "string"
                 }
               ],
-              "internalType": "struct IHederaTokenService.TokenInfo",
+              "internalType": "struct IMPCQTokenService.TokenInfo",
               "name": "tokenInfo",
               "type": "tuple"
             },
@@ -1297,7 +1297,7 @@
               "type": "uint32"
             }
           ],
-          "internalType": "struct IHederaTokenService.FungibleTokenInfo",
+          "internalType": "struct IMPCQTokenService.FungibleTokenInfo",
           "name": "tokenInfo",
           "type": "tuple"
         }
@@ -1401,12 +1401,12 @@
                               "type": "address"
                             }
                           ],
-                          "internalType": "struct IHederaTokenService.KeyValue",
+                          "internalType": "struct IMPCQTokenService.KeyValue",
                           "name": "key",
                           "type": "tuple"
                         }
                       ],
-                      "internalType": "struct IHederaTokenService.TokenKey[]",
+                      "internalType": "struct IMPCQTokenService.TokenKey[]",
                       "name": "tokenKeys",
                       "type": "tuple[]"
                     },
@@ -1428,12 +1428,12 @@
                           "type": "uint32"
                         }
                       ],
-                      "internalType": "struct IHederaTokenService.Expiry",
+                      "internalType": "struct IMPCQTokenService.Expiry",
                       "name": "expiry",
                       "type": "tuple"
                     }
                   ],
-                  "internalType": "struct IHederaTokenService.HederaToken",
+                  "internalType": "struct IMPCQTokenService.MPCQToken",
                   "name": "token",
                   "type": "tuple"
                 },
@@ -1485,7 +1485,7 @@
                       "type": "address"
                     }
                   ],
-                  "internalType": "struct IHederaTokenService.FixedFee[]",
+                  "internalType": "struct IMPCQTokenService.FixedFee[]",
                   "name": "fixedFees",
                   "type": "tuple[]"
                 },
@@ -1522,7 +1522,7 @@
                       "type": "address"
                     }
                   ],
-                  "internalType": "struct IHederaTokenService.FractionalFee[]",
+                  "internalType": "struct IMPCQTokenService.FractionalFee[]",
                   "name": "fractionalFees",
                   "type": "tuple[]"
                 },
@@ -1559,7 +1559,7 @@
                       "type": "address"
                     }
                   ],
-                  "internalType": "struct IHederaTokenService.RoyaltyFee[]",
+                  "internalType": "struct IMPCQTokenService.RoyaltyFee[]",
                   "name": "royaltyFees",
                   "type": "tuple[]"
                 },
@@ -1569,7 +1569,7 @@
                   "type": "string"
                 }
               ],
-              "internalType": "struct IHederaTokenService.TokenInfo",
+              "internalType": "struct IMPCQTokenService.TokenInfo",
               "name": "tokenInfo",
               "type": "tuple"
             },
@@ -1599,7 +1599,7 @@
               "type": "address"
             }
           ],
-          "internalType": "struct IHederaTokenService.NonFungibleTokenInfo",
+          "internalType": "struct IMPCQTokenService.NonFungibleTokenInfo",
           "name": "tokenInfo",
           "type": "tuple"
         }
@@ -1650,7 +1650,7 @@
               "type": "address"
             }
           ],
-          "internalType": "struct IHederaTokenService.FixedFee[]",
+          "internalType": "struct IMPCQTokenService.FixedFee[]",
           "name": "fixedFees",
           "type": "tuple[]"
         },
@@ -1687,7 +1687,7 @@
               "type": "address"
             }
           ],
-          "internalType": "struct IHederaTokenService.FractionalFee[]",
+          "internalType": "struct IMPCQTokenService.FractionalFee[]",
           "name": "fractionalFees",
           "type": "tuple[]"
         },
@@ -1724,7 +1724,7 @@
               "type": "address"
             }
           ],
-          "internalType": "struct IHederaTokenService.RoyaltyFee[]",
+          "internalType": "struct IMPCQTokenService.RoyaltyFee[]",
           "name": "royaltyFees",
           "type": "tuple[]"
         }
@@ -1813,7 +1813,7 @@
               "type": "uint32"
             }
           ],
-          "internalType": "struct IHederaTokenService.Expiry",
+          "internalType": "struct IMPCQTokenService.Expiry",
           "name": "expiryInfo",
           "type": "tuple"
         }
@@ -1910,12 +1910,12 @@
                           "type": "address"
                         }
                       ],
-                      "internalType": "struct IHederaTokenService.KeyValue",
+                      "internalType": "struct IMPCQTokenService.KeyValue",
                       "name": "key",
                       "type": "tuple"
                     }
                   ],
-                  "internalType": "struct IHederaTokenService.TokenKey[]",
+                  "internalType": "struct IMPCQTokenService.TokenKey[]",
                   "name": "tokenKeys",
                   "type": "tuple[]"
                 },
@@ -1937,12 +1937,12 @@
                       "type": "uint32"
                     }
                   ],
-                  "internalType": "struct IHederaTokenService.Expiry",
+                  "internalType": "struct IMPCQTokenService.Expiry",
                   "name": "expiry",
                   "type": "tuple"
                 }
               ],
-              "internalType": "struct IHederaTokenService.HederaToken",
+              "internalType": "struct IMPCQTokenService.MPCQToken",
               "name": "token",
               "type": "tuple"
             },
@@ -1994,7 +1994,7 @@
                   "type": "address"
                 }
               ],
-              "internalType": "struct IHederaTokenService.FixedFee[]",
+              "internalType": "struct IMPCQTokenService.FixedFee[]",
               "name": "fixedFees",
               "type": "tuple[]"
             },
@@ -2031,7 +2031,7 @@
                   "type": "address"
                 }
               ],
-              "internalType": "struct IHederaTokenService.FractionalFee[]",
+              "internalType": "struct IMPCQTokenService.FractionalFee[]",
               "name": "fractionalFees",
               "type": "tuple[]"
             },
@@ -2068,7 +2068,7 @@
                   "type": "address"
                 }
               ],
-              "internalType": "struct IHederaTokenService.RoyaltyFee[]",
+              "internalType": "struct IMPCQTokenService.RoyaltyFee[]",
               "name": "royaltyFees",
               "type": "tuple[]"
             },
@@ -2078,7 +2078,7 @@
               "type": "string"
             }
           ],
-          "internalType": "struct IHederaTokenService.TokenInfo",
+          "internalType": "struct IMPCQTokenService.TokenInfo",
           "name": "tokenInfo",
           "type": "tuple"
         }
@@ -2512,7 +2512,7 @@
               "type": "uint32"
             }
           ],
-          "internalType": "struct IHederaTokenService.Expiry",
+          "internalType": "struct IMPCQTokenService.Expiry",
           "name": "expiryInfo",
           "type": "tuple"
         }

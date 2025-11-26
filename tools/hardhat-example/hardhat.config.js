@@ -70,7 +70,7 @@ module.exports = {
 
   // https://hardhat.org/hardhat-runner/plugins/nomicfoundation-hardhat-verify#verifying-on-sourcify
   sourcify: {
-    // Enable it to support verification in Hedera's custom Sourcify instance
+    // Enable it to support verification in MPCQ's custom Sourcify instance
     enabled: true,
     // Needed to specify a different Sourcify server
     apiUrl: 'https://server-verify.hashscan.io',

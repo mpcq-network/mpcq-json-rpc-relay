@@ -27,7 +27,7 @@ describe('@web-socket-batch-2 eth_sendRawTransaction', async function () {
     [false],
     ['abc'],
     ['0xhbar'],
-    ['0xHedera'],
+    ['0xMPCQ'],
     [WsTestConstant.FAKE_TX_HASH, 'hbar'],
     [WsTestConstant.FAKE_TX_HASH, 'rpc', 'invalid'],
   ];

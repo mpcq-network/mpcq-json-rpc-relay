@@ -10,8 +10,8 @@ import { ethers } from 'ethers';
 import MirrorClient from '../../clients/mirrorClient';
 import RelayClient from '../../clients/relayClient';
 import ServicesClient from '../../clients/servicesClient';
-import HederaTokenServiceImplJson from '../../contracts/HederaTokenServiceImpl.json';
-import IHederaTokenServiceJson from '../../contracts/IHederaTokenService.json';
+import MPCQTokenServiceImplJson from '../../contracts/MPCQTokenServiceImpl.json';
+import IMPCQTokenServiceJson from '../../contracts/IMPCQTokenService.json';
 import IERC20Json from '../../contracts/openzeppelin/IERC20.json';
 import IERC20MetadataJson from '../../contracts/openzeppelin/IERC20Metadata.json';
 import IERC721Json from '../../contracts/openzeppelin/IERC721.json';
@@ -62,7 +62,7 @@ describe('@precompile-calls Tests for eth_call with HTS', async function () {
     IERC721,
     TokenManager,
     TokenManagementSigner,
-    IHederaTokenService;
+    IMPCQTokenService;
   let nftSerial,
     tokenAddress,
     nftAddress,
@@ -89,10 +89,10 @@ describe('@precompile-calls Tests for eth_call with HTS', async function () {
     const initialAccount: AliasAccount = global.accounts[0];
     const contractDeployer = await Utils.createAliasAccount(mirrorNode, initialAccount);
 
-    // Deploy a contract implementing HederaTokenService
+    // Deploy a contract implementing MPCQTokenService
     htsImpl = await Utils.deployContract(
-      HederaTokenServiceImplJson.abi,
-      HederaTokenServiceImplJson.bytecode,
+      MPCQTokenServiceImplJson.abi,
+      MPCQTokenServiceImplJson.bytecode,
       contractDeployer.wallet,
     );
     htsImplAddress = htsImpl.target;
@@ -226,7 +226,7 @@ describe('@precompile-calls Tests for eth_call with HTS', async function () {
 
     IERC20Metadata = getContract(tokenAddress, IERC20MetadataJson.abi, accounts[0].wallet);
     IERC20 = getContract(tokenAddress, IERC20Json.abi, accounts[0].wallet);
-    IHederaTokenService = getContract(tokenAddress, IHederaTokenServiceJson.abi, accounts[0].wallet);
+    IMPCQTokenService = getContract(tokenAddress, IMPCQTokenServiceJson.abi, accounts[0].wallet);
 
     nftSerial = mintResult0.receipt.serials[0].low;
     IERC721Metadata = getContract(nftAddress, IERC721MetadataJson.abi, accounts[0].wallet);
@@ -324,9 +324,9 @@ describe('@precompile-calls Tests for eth_call with HTS', async function () {
   });
 
   //According to this ticket the following describe should be deleted after adaptations are applied -> https://github.com/hiero-ledger/hiero-json-rpc-relay/issues/1131
-  describe('Calling HTS token through HederaTokenService', async () => {
+  describe('Calling HTS token through MPCQTokenService', async () => {
     //TODO remove this it when should be able to freeze and unfreeze token2 is implemented -> https://github.com/hiero-ledger/hiero-json-rpc-relay/issues/1131
-    it('Function with HederaTokenService.isFrozen(token, account) - using long zero address', async () => {
+    it('Function with MPCQTokenService.isFrozen(token, account) - using long zero address', async () => {
       // freeze token
       const freezeTx = await TokenManagementSigner.freezeTokenPublic(
         tokenAddress,
@@ -355,12 +355,12 @@ describe('@precompile-calls Tests for eth_call with HTS', async function () {
     });
 
     //Todo delete when should query isKyc2 is implemented -> https://github.com/hiero-ledger/hiero-json-rpc-relay/issues/1131
-    it('Function with HederaTokenService.isKyc(token, account) - using long zero account address', async () => {
+    it('Function with MPCQTokenService.isKyc(token, account) - using long zero account address', async () => {
       const isKyc1 = await htsImpl.isKycGranted.staticCall(tokenAddress, account1LongZero);
       expect(isKyc1).to.eq(true);
     });
 
-    describe('Function with HederaTokenService.getTokenCustomFees(token)', async () => {
+    describe('Function with MPCQTokenService.getTokenCustomFees(token)', async () => {
       it('token with no custom fees', async () => {
         const customFees = await htsImpl.getCustomFeesForToken.staticCall(tokenAddressNoFees);
         expect(customFees).to.exist;
@@ -515,7 +515,7 @@ describe('@precompile-calls Tests for eth_call with HTS', async function () {
       ];
     });
 
-    describe('Function with HederaTokenService.getTokenKey(token, keyType)', async () => {
+    describe('Function with MPCQTokenService.getTokenKey(token, keyType)', async () => {
       const keyTypes = {
         ADMIN: 1,
         KYC: 2,
@@ -572,7 +572,7 @@ describe('@precompile-calls Tests for eth_call with HTS', async function () {
     });
   });
 
-  describe('Create HTS token via direct call to Hedera Token service', async () => {
+  describe('Create HTS token via direct call to MPCQ Token service', async () => {
     let myNFT, myImmutableFungibleToken, fixedFee;
 
     before(async () => {
@@ -637,7 +637,7 @@ describe('@precompile-calls Tests for eth_call with HTS', async function () {
     }
 
     it('calls createFungibleToken', async () => {
-      const contract = new ethers.Contract(HTS_SYTEM_CONTRACT_ADDRESS, IHederaTokenServiceJson.abi, accounts[0].wallet);
+      const contract = new ethers.Contract(HTS_SYTEM_CONTRACT_ADDRESS, IMPCQTokenServiceJson.abi, accounts[0].wallet);
       const tx = await contract.createFungibleToken(myImmutableFungibleToken, 100, 18, {
         value: BigInt(createTokenCost),
         gasLimit: 10_000_000,
@@ -653,7 +653,7 @@ describe('@precompile-calls Tests for eth_call with HTS', async function () {
 
     it('calls createFungibleToken with custom fees', async () => {
       const fractionalFee = [];
-      const contract = new ethers.Contract(HTS_SYTEM_CONTRACT_ADDRESS, IHederaTokenServiceJson.abi, accounts[0].wallet);
+      const contract = new ethers.Contract(HTS_SYTEM_CONTRACT_ADDRESS, IMPCQTokenServiceJson.abi, accounts[0].wallet);
       const tx = await contract.createFungibleTokenWithCustomFees(
         myImmutableFungibleToken,
         100,
@@ -675,7 +675,7 @@ describe('@precompile-calls Tests for eth_call with HTS', async function () {
     });
 
     it('calls createNonFungibleToken', async () => {
-      const contract = new ethers.Contract(HTS_SYTEM_CONTRACT_ADDRESS, IHederaTokenServiceJson.abi, accounts[0].wallet);
+      const contract = new ethers.Contract(HTS_SYTEM_CONTRACT_ADDRESS, IMPCQTokenServiceJson.abi, accounts[0].wallet);
       const tx = await contract.createNonFungibleToken(myNFT, {
         value: BigInt(createTokenCost),
         gasLimit: 10_000_000,
@@ -700,7 +700,7 @@ describe('@precompile-calls Tests for eth_call with HTS', async function () {
           feeCollector: accounts[1].wallet.address,
         },
       ];
-      const contract = new ethers.Contract(HTS_SYTEM_CONTRACT_ADDRESS, IHederaTokenServiceJson.abi, accounts[0].wallet);
+      const contract = new ethers.Contract(HTS_SYTEM_CONTRACT_ADDRESS, IMPCQTokenServiceJson.abi, accounts[0].wallet);
       const tx = await contract.createNonFungibleTokenWithCustomFees(myNFT, fixedFee, royaltyFee, {
         value: BigInt(createTokenCost),
         gasLimit: 10_000_000,

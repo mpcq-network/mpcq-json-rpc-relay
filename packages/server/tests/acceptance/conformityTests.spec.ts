@@ -92,7 +92,7 @@ const overwritesDirectoryPath = path.resolve(__dirname, 'data/conformity/overwri
  *  - Account balances from genesis.json (https://github.com/ethereum/execution-apis/blob/main/tests/genesis.json).
  *
  * We cannot replay all the chain.rlp transactions directly, as they are already signed with a chain id
- * that exceeds Java’s Integer.MAX_VALUE (which is also the maximum allowed chain ID in Hedera).
+ * that exceeds Java’s Integer.MAX_VALUE (which is also the maximum allowed chain ID in MPCQ).
  * However, we can replicate the test environment by deploying the required smart contracts manually.
  * While these contracts will receive different addresses than those in the original tests,
  * their behavior will remain consistent with the expectations.
@@ -122,7 +122,7 @@ describe('@api-conformity', async function () {
       setCurrentBlockHash(await getLatestBlockHash(RELAY_URL));
     });
     //Reading the directories within the ethereum execution api repo
-    //Adds tests for custom Hedera methods from the override directory to the list, even if they're not in the OpenRPC spec.
+    //Adds tests for custom MPCQ methods from the override directory to the list, even if they're not in the OpenRPC spec.
     let directories = [...new Set([...fs.readdirSync(directoryPath), ...fs.readdirSync(overwritesDirectoryPath)])];
     const relaySupportedMethodNames = openRpcData.methods.map((method) => method.name);
     //Filtering to use only the tests for methods we support in our relay

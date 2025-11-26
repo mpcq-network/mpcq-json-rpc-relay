@@ -118,7 +118,7 @@ const handleEthSubscribeLogs = async (
  * @param {Context} args.ctx - The context object containing information about the WebSocket connection.
  * @param {any[]} args.params - The parameters of the method request, expecting an event and filters.
  * @param {IJsonRpcRequest} args.request - The request object received from the client.
- * @param {Relay} args.relay - The relay object for interacting with the Hedera network.
+ * @param {Relay} args.relay - The relay object for interacting with the MPCQ network.
  * @param {MirrorNodeClient} args.mirrorNodeClient - The mirror node client for handling subscriptions.
  * @param {ConnectionLimiter} args.limiter - The limiter object for managing connection subscriptions.
  * @param {Logger} args.logger - The logger object for logging messages and events.

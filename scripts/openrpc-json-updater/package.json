@@ -1,7 +1,7 @@
 {
   "name": "openrpc-updater",
   "description": "OpenRPC JSON Updater Tool",
-  "author": "Hedera Team",
+  "author": "MPCQ Team",
   "license": "Apache-2.0",
   "type": "module",
   "devDependencies": {

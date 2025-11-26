@@ -2,8 +2,8 @@
 pragma solidity >=0.5.0 <0.9.0;
 pragma experimental ABIEncoderV2;
 
-/// Mocks HederaTokenService
-abstract contract HederaTokenServiceMock {
+/// Mocks MPCQTokenService
+abstract contract MPCQTokenServiceMock {
     int32 constant SUCCESS_CODE = 22;
 
     /// Mocks the precompile call

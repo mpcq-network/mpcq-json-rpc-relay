@@ -39,14 +39,14 @@ import { Web3Impl } from './web3';
 
 export class Relay {
   /**
-   * The primary Hedera client used for interacting with the Hedera network.
+   * The primary MPCQ client used for interacting with the MPCQ network.
    */
   private operatorAccountId!: AccountId | null;
 
   /**
    * @private
    * @readonly
-   * @property {MirrorNodeClient} mirrorNodeClient - The client used to interact with the Hedera Mirror Node for retrieving historical data.
+   * @property {MirrorNodeClient} mirrorNodeClient - The client used to interact with the MPCQ Mirror Node for retrieving historical data.
    */
   private mirrorNodeClient!: MirrorNodeClient;
 
@@ -67,7 +67,7 @@ export class Relay {
   /**
    * @private
    * @readonly
-   * @property {Admin} adminImpl - The Hedera implementation used for handling network-related Ethereum JSON-RPC requests.
+   * @property {Admin} adminImpl - The MPCQ implementation used for handling network-related Ethereum JSON-RPC requests.
    */
   private adminImpl!: Admin;
 

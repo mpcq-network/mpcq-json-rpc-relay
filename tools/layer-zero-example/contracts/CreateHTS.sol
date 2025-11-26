@@ -2,15 +2,15 @@
 pragma solidity ^0.8.20;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "./hts/HederaTokenService.sol";
-import "./hts/IHederaTokenService.sol";
+import "./hts/MPCQTokenService.sol";
+import "./hts/IMPCQTokenService.sol";
 import "./hts/KeyHelper.sol";
 
-contract CreateHTS is Ownable, KeyHelper, HederaTokenService {
+contract CreateHTS is Ownable, KeyHelper, MPCQTokenService {
     address public htsTokenAddress;
 
     constructor(string memory _name, string memory _symbol, address _delegate) payable Ownable(_delegate) {
-        IHederaTokenService.TokenKey[] memory keys = new IHederaTokenService.TokenKey[](2);
+        IMPCQTokenService.TokenKey[] memory keys = new IMPCQTokenService.TokenKey[](2);
         keys[0] = getSingleKey(
             KeyType.ADMIN,
             KeyValueType.INHERIT_ACCOUNT_KEY,
@@ -22,25 +22,25 @@ contract CreateHTS is Ownable, KeyHelper, HederaTokenService {
             bytes("")
         );
 
-        IHederaTokenService.Expiry memory expiry = IHederaTokenService.Expiry(0, address(this), 8000000);
-        IHederaTokenService.HederaToken memory token = IHederaTokenService.HederaToken(
+        IMPCQTokenService.Expiry memory expiry = IMPCQTokenService.Expiry(0, address(this), 8000000);
+        IMPCQTokenService.MPCQToken memory token = IMPCQTokenService.MPCQToken(
             _name, _symbol, address(this), "memo", true, 5000, false, keys, expiry
         );
 
-        (int responseCode, address tokenAddress) = HederaTokenService.createFungibleToken(
+        (int responseCode, address tokenAddress) = MPCQTokenService.createFungibleToken(
             token, 1000, int32(int256(uint256(8)))
         );
-        require(responseCode == HederaTokenService.SUCCESS_CODE, "Failed to create HTS token");
+        require(responseCode == MPCQTokenService.SUCCESS_CODE, "Failed to create HTS token");
 
-        int256 transferResponse = HederaTokenService.transferToken(tokenAddress, address(this), msg.sender, 1000);
-        require(transferResponse == HederaTokenService.SUCCESS_CODE, "HTS: Transfer failed");
+        int256 transferResponse = MPCQTokenService.transferToken(tokenAddress, address(this), msg.sender, 1000);
+        require(transferResponse == MPCQTokenService.SUCCESS_CODE, "HTS: Transfer failed");
 
         htsTokenAddress = tokenAddress;
     }
 
-    function updateTokenKeysPublic(IHederaTokenService.TokenKey[] memory keys) public returns (int64 responseCode) {
-        (responseCode) = HederaTokenService.updateTokenKeys(htsTokenAddress, keys);
+    function updateTokenKeysPublic(IMPCQTokenService.TokenKey[] memory keys) public returns (int64 responseCode) {
+        (responseCode) = MPCQTokenService.updateTokenKeys(htsTokenAddress, keys);
 
-        require(responseCode == HederaTokenService.SUCCESS_CODE, "HTS: Update keys reverted");
+        require(responseCode == MPCQTokenService.SUCCESS_CODE, "HTS: Update keys reverted");
     }
 }

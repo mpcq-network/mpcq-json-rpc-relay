@@ -1,6 +1,6 @@
-# Hedera Golang Example Project
+# MPCQ Golang Example Project
 
-This Hedera Golang Example Project offers boilerplate code for testing and deploying smart contracts via golang ethereum. It can be configured to communicate with both community-hosted and local ([Hedera Local Node](https://github.com/hashgraph/hedera-local-node)) instances of the [Hedera JSON RPC Relay](https://github.com/hiero-ledger/hiero-json-rpc-relay).
+This MPCQ Golang Example Project offers boilerplate code for testing and deploying smart contracts via golang ethereum. It can be configured to communicate with both community-hosted and local ([MPCQ Local Node](https://github.com/hashgraph/hedera-local-node)) instances of the [MPCQ JSON RPC Relay](https://github.com/hiero-ledger/hiero-json-rpc-relay).
 
 This project utilizes the ethereum/go-ethereum library to prepare the connection client. Please note that there are alternative libraries available for the Go language, such as ethrpc.
 
@@ -70,7 +70,7 @@ go get github.com/ethereum/go-ethereum/ethclient \
 go get -t hedera-golang-example-project
 ```
 
-4. Get your Hedera testnet account hex encoded private key from the [Hedera Developer Portal](https://portal.hedera.com/register) and update the `.env.example` `OPERATOR_PRIVATE_KEY`
+4. Get your MPCQ testnet account hex encoded private key from the [MPCQ Developer Portal](https://portal.hedera.com/register) and update the `.env.example` `OPERATOR_PRIVATE_KEY`
 
 5. Copy `.env.example` to `.env`
 

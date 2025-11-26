@@ -101,7 +101,7 @@ export class Utils {
    * @param contractResult
    * @returns {boolean}
    */
-  public static isRevertedDueToHederaSpecificValidation(contractResult: {
+  public static isRevertedDueToMPCQSpecificValidation(contractResult: {
     result: string;
     error_message: any;
   }): boolean {

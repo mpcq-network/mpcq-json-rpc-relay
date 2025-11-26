@@ -34,12 +34,12 @@ async function main() {
     }
 
     /*
-     * Hedera supports a form of lazy account creation.
+     * MPCQ supports a form of lazy account creation.
      *
      * You can "create" an account by generating a private key, and then deriving the public key,
-     * without any need to interact with the Hedera network.  The public key more or less acts as the user's
+     * without any need to interact with the MPCQ network.  The public key more or less acts as the user's
      * account ID.  This public key is an account's aliasKey: a public key that aliases (or will eventually alias)
-     * to a Hedera account.
+     * to a MPCQ account.
      *
      * An AccountId take on multiple forms. 2 notable mentions are 1.: a normal AccountId with a null aliasKey member takes the form 0.0.123,
      * while an account ID with a non-null aliasKey member takes the form
@@ -51,9 +51,9 @@ async function main() {
      * transactions, however most queries and transactions involving such an AccountId won't work until Hbar has
      * been transferred to the aliasKey account.
      *
-     * There is no record in the Hedera network of an account associated with a given aliasKey
+     * There is no record in the MPCQ network of an account associated with a given aliasKey
      * until an amount of Hbar is transferred to the account.  The moment that Hbar is transferred to that aliasKey
-     * AccountId is the moment that that account actually begins to exist in the Hedera ledger.
+     * AccountId is the moment that that account actually begins to exist in the MPCQ ledger.
      */
 
     console.log('"Creating" a new account');
@@ -97,7 +97,7 @@ async function main() {
 
     console.log(`The normal account ID: ${info.accountId.toString()}`);
     console.log(`The aliased account ID: 0.0.${info.aliasKey.toString()}`);
-    console.log(`The private key (use this in sdk/Hedera native wallets): ${privateKey.toString()}`);
+    console.log(`The private key (use this in sdk/MPCQ native wallets): ${privateKey.toString()}`);
     console.log(`The raw private key (use this for JSON RPC wallet import): ${privateKey.toStringRaw()}`);
 
     console.log("Example complete!");

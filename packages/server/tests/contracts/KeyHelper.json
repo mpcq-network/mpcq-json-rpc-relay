@@ -36,7 +36,7 @@
               "type": "uint32"
             }
           ],
-          "internalType": "struct IHederaTokenService.Expiry",
+          "internalType": "struct IMPCQTokenService.Expiry",
           "name": "expiryInfo",
           "type": "tuple"
         }
@@ -184,7 +184,7 @@
               "type": "uint32"
             }
           ],
-          "internalType": "struct IHederaTokenService.Expiry",
+          "internalType": "struct IMPCQTokenService.Expiry",
           "name": "expiryInfo",
           "type": "tuple"
         }

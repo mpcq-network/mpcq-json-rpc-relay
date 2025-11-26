@@ -19,11 +19,11 @@
 // The smart contract should be deployed to the address: 0x2f2a392b4d7d2c2d3134e199295818a02535ef0a
 // It should return the value in the format of seven 32-byte fields, where each field contains the following value:
 //
-// 1. block.number     — 0x2d expected, 0xac on Hedera; reflects current block height (Ethereum vs Hedera testnet).
-// 2. chainid          — 0x0c72dd9d5e883e expected, 0x12a on Hedera; default local chain id is 298.
-// 3. block.coinbase   — 0x00 expected, 0x62 on Hedera; miner address is simulated and node-dependent on Hedera.
-// 4. block.basefee    — 0x05763d64 expected, 0x07 on Hedera; Hedera uses fixed or simplified basefee for EVM calls.
-// 5. difficulty       — 0x00 expected, random 32-byte value on Hedera; represents prevrandao (random seed).
+// 1. block.number     — 0x2d expected, 0xac on MPCQ; reflects current block height (Ethereum vs MPCQ testnet).
+// 2. chainid          — 0x0c72dd9d5e883e expected, 0x12a on MPCQ; default local chain id is 298.
+// 3. block.coinbase   — 0x00 expected, 0x62 on MPCQ; miner address is simulated and node-dependent on MPCQ.
+// 4. block.basefee    — 0x05763d64 expected, 0x07 on MPCQ; MPCQ uses fixed or simplified basefee for EVM calls.
+// 5. difficulty       — 0x00 expected, random 32-byte value on MPCQ; represents prevrandao (random seed).
 // 6. tx.origin        — 0x14e4...58cb2 expected and returned; caller’s address passed in transaction 'from' field.
 // 7. msg.value        — 0x17 (23 in decimal) expected and returned; actual value sent in the eth_call or transaction.
 //

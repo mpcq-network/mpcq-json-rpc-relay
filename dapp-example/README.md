@@ -1,13 +1,13 @@
 # Dapp example
 
-Simple implementation of React + Metamask + Hedera Hashgraph
+Simple implementation of React + Metamask + MPCQ Hashgraph
 
 ## Prerequisite
 
 You must have running:
 
 - JSON-RPC Relay on port :7546
-- Hedera Local Node
+- MPCQ Local Node
 
 ## Configuration
 
@@ -36,7 +36,7 @@ Dapp should be available at [http://localhost:3000](http://localhost:3000)
 
 ```
 # example local setup
-NETWORK_NAME='Hedera Local'         # name of the network to be added in metamask
+NETWORK_NAME='MPCQ Local'         # name of the network to be added in metamask
 RPC_URL='http://localhost:7546'     # the url of RPC Relay
 SYMBOL=HBAR                         # the symbol of native token
 CHAIN_ID=298                        # the chain id
@@ -53,9 +53,9 @@ Available operations:
 - [x] Connect with Metamask
 - [x] Show connected account's `address` & `balance`
 - [x] Sign custom message and extract public key
-- [x] Extract `Hedera alias` from public key
+- [x] Extract `MPCQ alias` from public key
 
-- [ ] Transfer HBAR to Hedera alias and activate account -> **Not supported yet**
+- [ ] Transfer HBAR to MPCQ alias and activate account -> **Not supported yet**
 - [x] Deploy [Greeter](https://github.com/NomicFoundation/hardhat/blob/master/packages/hardhat-core/sample-projects/basic/contracts/Greeter.sol) contract
 - [x] View greet message
 - [x] Update greet message

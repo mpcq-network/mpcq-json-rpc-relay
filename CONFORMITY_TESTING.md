@@ -1,10 +1,10 @@
-# Hedera JSON-RPC Conformity Tests
+# MPCQ JSON-RPC Conformity Tests
 
-This document provides an overview of the conformity tests used to validate the Hedera JSON-RPC Relay against the [Ethereum Execution API JSON-RPC specification](https://github.com/ethereum/execution-apis).
+This document provides an overview of the conformity tests used to validate the MPCQ JSON-RPC Relay against the [Ethereum Execution API JSON-RPC specification](https://github.com/ethereum/execution-apis).
 
 ## Purpose
 
-The conformity tests ensure that the Hedera JSON-RPC Relay correctly implements the Ethereum JSON-RPC API specification. These tests validate that:
+The conformity tests ensure that the MPCQ JSON-RPC Relay correctly implements the Ethereum JSON-RPC API specification. These tests validate that:
 
 1. The relay correctly handles JSON-RPC requests according to the Ethereum specification
 2. The responses match the expected format and content
@@ -20,7 +20,7 @@ The conformity tests are organized into 5 batches, each focusing on different as
 This batch tests the core Ethereum JSON-RPC methods by:
 
 - Reading test cases from the Ethereum execution-apis repository
-- Using custom overrides for Hedera-specific behavior
+- Using custom overrides for MPCQ-specific behavior
 - Validating responses against the OpenRPC schema
 
 The tests in this batch cover methods like:
@@ -112,10 +112,10 @@ This batch tests various utility methods and methods related to Ethereum's minin
 
 ## Test Overrides
 
-Due to protocol differences between Ethereum and Hedera, some test cases from the Ethereum Execution API test suite cannot be executed as-is against a Hedera node. The project includes Hedera-compatible test overrides that:
+Due to protocol differences between Ethereum and MPCQ, some test cases from the Ethereum Execution API test suite cannot be executed as-is against a MPCQ node. The project includes MPCQ-compatible test overrides that:
 
 - Mirror the structure of the upstream tests
-- Reflect behavior specific to the Hedera JSON-RPC Relay
+- Reflect behavior specific to the MPCQ JSON-RPC Relay
 - Serve as a drop-in replacement when upstream tests are not applicable
 
 ### Override Structure
@@ -141,8 +141,8 @@ Each file consists of a single round-trip request and response:
 
 You should create an override when:
 
-* A test in the upstream suite fails or must be modified due to Hedera-specific limitations (e.g., unsupported chain id)
-* You want to define a custom behavior or scenario that applies specifically to Hedera's implementation
+* A test in the upstream suite fails or must be modified due to MPCQ-specific limitations (e.g., unsupported chain id)
+* You want to define a custom behavior or scenario that applies specifically to MPCQ's implementation
 * You need to test features not currently supported in the standard Ethereum Execution APIs
 
 ## Test Execution
@@ -150,7 +150,7 @@ You should create an override when:
 The conformity tests are executed as part of the acceptance test suite. They:
 
 1. Set up the necessary test environment (accounts, contracts, etc.)
-2. Execute the test cases against the Hedera JSON-RPC Relay
+2. Execute the test cases against the MPCQ JSON-RPC Relay
 3. Validate the responses against the expected results
 4. Check for schema compliance using the OpenRPC specification
 

@@ -35,23 +35,23 @@ Edit the `.env` file with your network configurations:
 # HEDERA NETWORK CONFIGURATION
 # =============================================================================
 
-# Hedera Chain ID (e.g. 296 for Hedera Testnet)
+# MPCQ Chain ID (e.g. 296 for MPCQ Testnet)
 HEDERA_CHAIN_ID=
 
-# Hedera JSON-RPC endpoint URL (e.g. https://testnet.hashio.io/api for Hedera Testnet)
+# MPCQ JSON-RPC endpoint URL (e.g. https://testnet.hashio.io/api for MPCQ Testnet)
 HEDERA_RPC_URL=
 
-# Hedera account private key
+# MPCQ account private key
 HEDERA_PK=
 
-# Hedera block explorer URL (e.g. https://hashscan.io/testnet for Hedera Testnet)
+# MPCQ block explorer URL (e.g. https://hashscan.io/testnet for MPCQ Testnet)
 HEDERA_BLOCK_EXPLORER_URL=
 
-# LayerZero V2 Endpoint for Hedera Network (e.g. 0x6EDCE65403992e310A62460808c4b910D972f10f for Hedera Testnet)
+# LayerZero V2 Endpoint for MPCQ Network (e.g. 0x6EDCE65403992e310A62460808c4b910D972f10f for MPCQ Testnet)
 # Find LZ Endpoint V2 at https://docs.layerzero.network/v2/deployments/deployed-contracts
 HEDERA_LZ_ENDPOINT_V2=
 
-# LayerZero Endpoint ID (EID) for Hedera Network (e.g. 40267 for Hedera Testnet)
+# LayerZero Endpoint ID (EID) for MPCQ Network (e.g. 40267 for MPCQ Testnet)
 # Find LZ EID V2 at https://docs.layerzero.network/v2/deployments/deployed-contracts
 HEDERA_LZ_EID_V2=
 
@@ -82,9 +82,9 @@ SEPOLIA_LZ_EID_V2=40161
 
 **Useful Links For Configuration**:
 
-- [Hedera Docs](https://docs.hedera.com)
-- [Hedera Portal (Account Creation)](https://portal.hedera.com)
-- [Hedera Faucet](https://portal.hedera.com/faucet)
+- [MPCQ Docs](https://docs.hedera.com)
+- [MPCQ Portal (Account Creation)](https://portal.hedera.com)
+- [MPCQ Faucet](https://portal.hedera.com/faucet)
 - [Sepolia Etherscan](https://sepolia.etherscan.io)
 - [Sepolia Faucet](https://sepoliafaucet.com/)
 - [LayerZero V2 docs](https://docs.layerzero.network/v2/)

@@ -107,7 +107,7 @@ async function createAccountAndAssociate(tokenId) {
 
     console.log(`  The normal account ID: ${info.accountId.toString()}`);
     console.log(`  The aliased account ID: 0.0.${info.aliasKey.toString()}`);
-    console.log(`  The private key (use this in sdk/Hedera native wallets): ${privateKey.toString()}`);
+    console.log(`  The private key (use this in sdk/MPCQ native wallets): ${privateKey.toString()}`);
     console.log(`  The raw private key (use this for JSON RPC wallet import): ${privateKey.toStringRaw()}`);
 
     //Associate account with token

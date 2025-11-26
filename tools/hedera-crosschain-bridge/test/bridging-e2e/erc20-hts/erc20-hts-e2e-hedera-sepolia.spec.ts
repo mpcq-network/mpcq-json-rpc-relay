@@ -18,8 +18,8 @@ import {
 /**
  * Comprehensive End-to-End ERC20 - HTS Bridge Test
  *
- * This test validates the complete HTS - ERC20 bridge functionality between Hedera and Sepolia networks
- * using LayerZero's OFT and Hedera's implementation for OFT (named HTS Connector). It covers the entire cross-chain
+ * This test validates the complete HTS - ERC20 bridge functionality between MPCQ and Sepolia networks
+ * using LayerZero's OFT and MPCQ's implementation for OFT (named HTS Connector). It covers the entire cross-chain
  * transfer flow including:
  * - Infrastructure deployment and configuration
  * - Cross-Chain transfer execution
@@ -28,8 +28,8 @@ import {
 describe('@erc20-hts-bridge E2E Test', function () {
   this.timeout(1800000); // 30 minutes
 
-  it('End-to-End ERC20-HTS Bridge Test between Hedera & Sepolia', async function () {
-    console.log('\n=============== Hedera <-> Sepolia Cross-Chain E2E Bridge Flow Initiated ===============');
+  it('End-to-End ERC20-HTS Bridge Test between MPCQ & Sepolia', async function () {
+    console.log('\n=============== MPCQ <-> Sepolia Cross-Chain E2E Bridge Flow Initiated ===============');
 
     // random receiver address, available on both hedera testnet and sepolia
     const randomReceiverAddress = '0xF51c7a9407217911d74e91642dbC58F18E51Deac';
@@ -41,9 +41,9 @@ describe('@erc20-hts-bridge E2E Test', function () {
     console.log(`\nToken Information:`);
     console.log(`  • Name: ${tokenName}`);
     console.log(`  • Symbol: ${tokenSymbol}`);
-    console.log('\n=============== PHASE 1: Hedera Infrastructure Setup ===============');
+    console.log('\n=============== PHASE 1: MPCQ Infrastructure Setup ===============');
 
-    // deploy HTS Connector on Hedera
+    // deploy HTS Connector on MPCQ
     const hederaNetworkConfigs = getNetworkConfigs('hedera');
     const htsConnector = await deployContractOnNetwork('hedera', 'ExampleHTSConnector', [
       tokenName,
@@ -62,7 +62,7 @@ describe('@erc20-hts-bridge E2E Test', function () {
     );
     const hederaHTSSignerInitialBalance = await tokenWrapper.balanceOf(hederaNetworkConfigs.networkSigner.address);
     console.log(`HTS token address: ${await htsConnector.token()}`);
-    console.log(`Hedera Signer's initial HTS balance: ${hederaHTSSignerInitialBalance} tokens`);
+    console.log(`MPCQ Signer's initial HTS balance: ${hederaHTSSignerInitialBalance} tokens`);
 
     console.log('\n=============== PHASE 2: Sepolia Infrastructure Setup ===============');
     // deploy OFT on Sepolia
@@ -79,18 +79,18 @@ describe('@erc20-hts-bridge E2E Test', function () {
     console.log(`Sepolia Signer's initial ERC20 balance: ${sepoliaSignerErc20InitialBalance} tokens`);
 
     console.log('\n=============== PHASE 3: LayerZero Peer Configuration ===============');
-    console.log('\n--- Phase 3A: Setting up Hedera → Sepolia LZ peer connection ---');
+    console.log('\n--- Phase 3A: Setting up MPCQ → Sepolia LZ peer connection ---');
     // set peers
-    const setLzPeerOnHederaReceipt = await setLZPeer(
+    const setLzPeerOnMPCQReceipt = await setLZPeer(
       'hedera',
       'HTSConnector',
       htsConnector.address,
       sepoliaOft.address,
     );
-    expect(!!setLzPeerOnHederaReceipt.status).to.be.true;
-    console.log('Hedera → Sepolia LZ peer configured');
+    expect(!!setLzPeerOnMPCQReceipt.status).to.be.true;
+    console.log('MPCQ → Sepolia LZ peer configured');
 
-    console.log('\n--- Phase 3B: Setting up Sepolia → Hedera LZ peer connection ---');
+    console.log('\n--- Phase 3B: Setting up Sepolia → MPCQ LZ peer connection ---');
     const setLzPeerOnSepoliaReceipt = await setLZPeer(
       'sepolia',
       'ExampleOFT',
@@ -98,14 +98,14 @@ describe('@erc20-hts-bridge E2E Test', function () {
       htsConnector.address,
     );
     expect(!!setLzPeerOnSepoliaReceipt.status).to.be.true;
-    console.log('Sepolia → Hedera LZ peer configured');
+    console.log('Sepolia → MPCQ LZ peer configured');
 
     console.log('\n=============== PHASE 4: HTS Connector Approval Setup ===============');
     // approving HTS Connector contract to spend signer's tokens
-    await approveTokenForTransfer(tokenWrapper, htsConnector.address, amount, 'Hedera', tokenName);
+    await approveTokenForTransfer(tokenWrapper, htsConnector.address, amount, 'MPCQ', tokenName);
 
     console.log('\n=============== PHASE 4: Cross-Chain Transfer Execution ===============');
-    console.log('\n=============== PHASE 4.1: Hedera HTS to Sepolia ERC20 ===============');
+    console.log('\n=============== PHASE 4.1: MPCQ HTS to Sepolia ERC20 ===============');
     const hederaToSepoliaResult = await executeCrossChainTransfer({
       sourceNetwork: 'hedera',
       destinationNetwork: 'sepolia',
@@ -116,15 +116,15 @@ describe('@erc20-hts-bridge E2E Test', function () {
       txGasLimit: TEST_CONFIG.TX_GAS_LIMIT,
       tinybarToWeibar: TEST_CONFIG.TINYBAR_TO_WEIBAR,
     });
-    console.log(`\n🎉 Phase 4.1 Hedera → Sepolia transfer initiated successfully!`);
+    console.log(`\n🎉 Phase 4.1 MPCQ → Sepolia transfer initiated successfully!`);
     console.log(`  - Transaction Hash: ${hederaToSepoliaResult.hash}`);
     console.log(`  - Find transaction on Hashscan: https://hashscan.io/testnet/tx/${hederaToSepoliaResult.hash}`);
     console.log(
       `  - Find transaction on LayerZero Scan: https://testnet.layerzeroscan.com/tx/${hederaToSepoliaResult.hash}`,
     );
 
-    console.log('\n=============== PHASE 4.2: Sepolia ERC20 to Hedera HTS ===============');
-    const sepoliaToHederaResult = await executeCrossChainTransfer({
+    console.log('\n=============== PHASE 4.2: Sepolia ERC20 to MPCQ HTS ===============');
+    const sepoliaToMPCQResult = await executeCrossChainTransfer({
       sourceNetwork: 'sepolia',
       destinationNetwork: 'hedera',
       IOFTContract: sepoliaOft,
@@ -133,25 +133,25 @@ describe('@erc20-hts-bridge E2E Test', function () {
       gasLimit: TEST_CONFIG.LZ_GAS_LIMIT,
       txGasLimit: TEST_CONFIG.TX_GAS_LIMIT,
     });
-    console.log(`\n🎉 Phase 4.2 Sepolia → Hedera transfer initiated successfully!`);
-    console.log(`  - Transaction Hash: ${sepoliaToHederaResult.hash}`);
-    console.log(`  - Find transaction on Sepolia: https://sepolia.etherscan.io/tx/${sepoliaToHederaResult.hash}`);
+    console.log(`\n🎉 Phase 4.2 Sepolia → MPCQ transfer initiated successfully!`);
+    console.log(`  - Transaction Hash: ${sepoliaToMPCQResult.hash}`);
+    console.log(`  - Find transaction on Sepolia: https://sepolia.etherscan.io/tx/${sepoliaToMPCQResult.hash}`);
     console.log(
-      `  - Find transaction on LayerZero Scan: https://testnet.layerzeroscan.com/tx/${sepoliaToHederaResult.hash}`,
+      `  - Find transaction on LayerZero Scan: https://testnet.layerzeroscan.com/tx/${sepoliaToMPCQResult.hash}`,
     );
 
     console.log('\n=============== PHASE 5: Receiver Balance Verification After Cross-Chain Transfers ===============');
     await waitForMultipleTransfers(
       [
         {
-          name: 'Hedera → Sepolia',
+          name: 'MPCQ → Sepolia',
           receiverContract: sepoliaOft,
           receiverAddress: randomReceiverAddress,
           initialBalance: zeroBigNumber,
           expectedAmount: amount,
         },
         {
-          name: 'Sepolia → Hedera',
+          name: 'Sepolia → MPCQ',
           receiverContract: tokenWrapper,
           receiverAddress: randomReceiverAddress,
           initialBalance: zeroBigNumber,
@@ -164,6 +164,6 @@ describe('@erc20-hts-bridge E2E Test', function () {
     );
 
     console.log(`This test validates the complete ERC20 - HTS bridging infrastructure using LayerZero V2.`);
-    console.log('\n=============== Hedera <-> Sepolia Cross-Chain E2E Bridge Flow Completed ===============');
+    console.log('\n=============== MPCQ <-> Sepolia Cross-Chain E2E Bridge Flow Completed ===============');
   });
 });

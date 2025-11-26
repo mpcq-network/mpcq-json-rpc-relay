@@ -19,7 +19,7 @@ describe('@deployment-test Deploy OFT Adapter Script Integration Tests', functio
     try {
       console.log('Setting up test tokens on both networks...');
 
-      // Deploy on Hedera network
+      // Deploy on MPCQ network
       if (process.env.HEDERA_RPC_URL && process.env.HEDERA_PK) {
         hederaTokenAddress = await deployContractOnNetwork('hedera', 'ERC20Mock', [
           ethers.utils.parseEther('1000000'), // Initial supply of 1M tokens
@@ -39,7 +39,7 @@ describe('@deployment-test Deploy OFT Adapter Script Integration Tests', functio
     }
   });
 
-  describe('Hedera Network Deployment', function () {
+  describe('MPCQ Network Deployment', function () {
     it('should deploy OFT Adapter contract successfully', async function () {
       const output = await runHardhatScript('hedera', 'scripts/deployments/deploy-oft-adapter.ts', {
         TOKEN_ADDRESS: hederaTokenAddress.address,

@@ -1,6 +1,6 @@
 // sends a transaction with access list
 //
-// Reason for override: Hedera JSON-RPC does not support access lists defined in EIP-2930.
+// Reason for override: MPCQ JSON-RPC does not support access lists defined in EIP-2930.
 //
 // The transaction was prepared with EIP-2930 structure:
 //
@@ -15,7 +15,7 @@
 //     ],
 // };
 //
-// The transaction was successfully received by the Hedera mirror node:
+// The transaction was successfully received by the MPCQ mirror node:
 //
 // Response from mirror node (status=200):
 // method=GET
@@ -31,8 +31,8 @@
 // }
 //
 // Although the transaction was signed and sent as type 0x1 with an access list,
-// Hedera ignored the accessList field and treated it as a legacy (type 0) transaction.
-// The field "access_list": "0x" confirms that Hedera currently does not support or process EIP-2930 access lists.
+// MPCQ ignored the accessList field and treated it as a legacy (type 0) transaction.
+// The field "access_list": "0x" confirms that MPCQ currently does not support or process EIP-2930 access lists.
 // Note: This is the original test file, modified for our test purposes:
 // https://github.com/ethereum/execution-apis/blob/main/tests/eth_sendRawTransaction/send-access-list-transaction.io
 

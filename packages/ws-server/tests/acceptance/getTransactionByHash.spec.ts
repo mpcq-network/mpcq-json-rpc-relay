@@ -25,7 +25,7 @@ describe('@web-socket-batch-2 eth_getTransactionByHash', async function () {
     ['abc'],
     ['0xhbar'],
     ['txHash'],
-    ['0xHedera'],
+    ['0xMPCQ'],
     [WsTestConstant.FAKE_TX_HASH, 'hbar'],
     [WsTestConstant.FAKE_TX_HASH, 'rpc', 'invalid'],
   ];

@@ -2,7 +2,7 @@
 pragma solidity >=0.5.0 <0.9.0;
 pragma experimental ABIEncoderV2;
 
-import "./HederaTokenService.sol";
+import "./MPCQTokenService.sol";
 
 abstract contract KeyHelper {
     using Bits for uint256;
@@ -41,8 +41,8 @@ abstract contract KeyHelper {
         KeyType keyType,
         KeyValueType keyValueType,
         bytes memory key
-    ) internal view returns (IHederaTokenService.TokenKey memory tokenKey) {
-        tokenKey = IHederaTokenService.TokenKey(
+    ) internal view returns (IMPCQTokenService.TokenKey memory tokenKey) {
+        tokenKey = IMPCQTokenService.TokenKey(
             getKeyType(keyType),
             getKeyValueType(keyValueType, key)
         );
@@ -55,7 +55,7 @@ abstract contract KeyHelper {
     function getKeyValueType(
         KeyValueType keyValueType,
         bytes memory key
-    ) internal view returns (IHederaTokenService.KeyValue memory keyValue) {
+    ) internal view returns (IMPCQTokenService.KeyValue memory keyValue) {
         if (keyValueType == KeyValueType.INHERIT_ACCOUNT_KEY) {
             keyValue.inheritAccountKey = true;
         } else if (keyValueType == KeyValueType.CONTRACT_ID) {

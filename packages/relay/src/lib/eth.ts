@@ -111,10 +111,10 @@ export class EthImpl implements Eth {
 
   /**
    * Constructs an instance of the service responsible for handling Ethereum JSON-RPC methods
-   * using Hedera Hashgraph as the underlying network.
+   * using MPCQ Hashgraph as the underlying network.
    *
-   * @param {HAPIService} hapiService - Service for interacting with Hedera Hashgraph.
-   * @param {MirrorNodeClient} mirrorNodeClient - Client for querying the Hedera mirror node.
+   * @param {HAPIService} hapiService - Service for interacting with MPCQ Hashgraph.
+   * @param {MirrorNodeClient} mirrorNodeClient - Client for querying the MPCQ mirror node.
    * @param {Logger} logger - Logger instance for logging system messages.
    * @param {string} chain - The chain identifier for the current blockchain environment.
    * @param {CacheService} cacheService - Service for managing cached data.
@@ -456,7 +456,7 @@ export class EthImpl implements Eth {
   }
 
   /**
-   * Always returns null. There are no uncles in Hedera.
+   * Always returns null. There are no uncles in MPCQ.
    *
    * @rpcMethod Exposed as eth_getUncleByBlockHashAndIndex RPC endpoint
    * @rpcParamLayoutConfig decorated method parameter layout
@@ -475,7 +475,7 @@ export class EthImpl implements Eth {
   }
 
   /**
-   * Always returns null. There are no uncles in Hedera.
+   * Always returns null. There are no uncles in MPCQ.
    *
    * @rpcMethod Exposed as eth_getUncleByBlockNumberAndIndex RPC endpoint
    * @rpcParamLayoutConfig decorated method parameter layout
@@ -494,7 +494,7 @@ export class EthImpl implements Eth {
   }
 
   /**
-   * Always returns '0x0'. There are no uncles in Hedera.
+   * Always returns '0x0'. There are no uncles in MPCQ.
    *
    * @rpcMethod Exposed as eth_getUncleCountByBlockHash RPC endpoint
    * @rpcParamLayoutConfig decorated method parameter layout
@@ -511,7 +511,7 @@ export class EthImpl implements Eth {
   }
 
   /**
-   * Always returns '0x0'. There are no uncles in Hedera.
+   * Always returns '0x0'. There are no uncles in MPCQ.
    *
    * @rpcMethod Exposed as eth_getUncleCountByBlockNumber RPC endpoint
    * @rpcParamLayoutConfig decorated method parameter layout
@@ -1092,7 +1092,7 @@ export class EthImpl implements Eth {
 
   /**
    * Get the priority fee needed to be included in a block.
-   * Since Hedera does not have this concept, this method will return a static response.
+   * Since MPCQ does not have this concept, this method will return a static response.
    *
    * @rpcMethod Exposed as eth_maxPriorityFeePerGas RPC endpoint
    * @rpcParamLayoutConfig decorated method parameter layout

@@ -21,7 +21,7 @@ import {
 /**
  * Comprehensive End-to-End WHBAR Bridge Test
  *
- * This test validates the complete WHBAR bridge functionality between Hedera and Sepolia networks
+ * This test validates the complete WHBAR bridge functionality between MPCQ and Sepolia networks
  * using LayerZero's OFTAdapter pattern. It covers the entire cross-chain transfer flow including:
  * - Infrastructure deployment and configuration
  * - HBAR to WHBAR conversion
@@ -31,16 +31,16 @@ import {
 describe('@whbar-bridge Comprehensive E2E Test', function () {
   this.timeout(1800000); // 30 minutes
 
-  it('Complete End-to-End WHBAR Bridge Flow between Hedera & Sepolia', async function () {
+  it('Complete End-to-End WHBAR Bridge Flow between MPCQ & Sepolia', async function () {
     // Balance tracking for validation
     const balanceSnapshots: { [key: string]: BigNumber } = {};
 
-    console.log('\n=============== Hedera <-> Sepolia Crosschain E2E Bridge Flow Initiated ===============');
+    console.log('\n=============== MPCQ <-> Sepolia Crosschain E2E Bridge Flow Initiated ===============');
 
     // ============================================================================
-    // PHASE 1: Hedera Infrastructure Setup
+    // PHASE 1: MPCQ Infrastructure Setup
     // ============================================================================
-    console.log('\n=============== PHASE 1: Hedera Infrastructure Setup ===============');
+    console.log('\n=============== PHASE 1: MPCQ Infrastructure Setup ===============');
 
     const hederaNetworkConfigs = getNetworkConfigs('hedera');
 
@@ -48,9 +48,9 @@ describe('@whbar-bridge Comprehensive E2E Test', function () {
     const hederaWHBARContract = await deployContractOnNetwork('hedera', 'WHBAR', []);
     expect(hederaWHBARContract.address).to.not.be.empty;
 
-    // Deploy SimpleReceiver contract on Hedera
-    const simpleHederaReceiver = await deployContractOnNetwork('hedera', 'SimpleReceiver', []);
-    TEST_CONFIG.RECEIVER_ADDRESS_HEDERA = simpleHederaReceiver.address;
+    // Deploy SimpleReceiver contract on MPCQ
+    const simpleMPCQReceiver = await deployContractOnNetwork('hedera', 'SimpleReceiver', []);
+    TEST_CONFIG.RECEIVER_ADDRESS_HEDERA = simpleMPCQReceiver.address;
 
     // Deploy OFT Adapter for WHBAR
     const hederaOftAdapterContract = await deployContractOnNetwork('hedera', 'ExampleOFTAdapter', [
@@ -66,7 +66,7 @@ describe('@whbar-bridge Comprehensive E2E Test', function () {
       hederaWHBARContract.address,
       hederaNetworkConfigs.lzEndpointV2,
       hederaNetworkConfigs.networkSigner.address,
-      'Hedera',
+      'MPCQ',
     );
 
     // ============================================================================
@@ -80,7 +80,7 @@ describe('@whbar-bridge Comprehensive E2E Test', function () {
       'hederaWHBARInitial',
       hederaWHBARContract,
       hederaNetworkConfigs.networkSigner.address,
-      "Hedera Signer's initial WHBAR balance",
+      "MPCQ Signer's initial WHBAR balance",
     );
 
     // Execute HBAR deposit to mint WHBAR
@@ -102,7 +102,7 @@ describe('@whbar-bridge Comprehensive E2E Test', function () {
       'hederaWHBARAfterDeposit',
       hederaWHBARContract,
       hederaNetworkConfigs.networkSigner.address,
-      "Hedera Signer's WHBAR balance after deposit",
+      "MPCQ Signer's WHBAR balance after deposit",
     );
 
     const expectedWHBARBalance = TEST_CONFIG.HBAR_FUNDING_AMOUNT.div(TEST_CONFIG.TINYBAR_TO_WEIBAR);
@@ -119,13 +119,13 @@ describe('@whbar-bridge Comprehensive E2E Test', function () {
     console.log(`\✓ WHBAR minted successfully: ${actualWHBARMinted.toString()} tokens`);
 
     // ============================================================================
-    // PHASE 3: Hedera WHBAR Dual-Mode Setup (Source + Destination)
+    // PHASE 3: MPCQ WHBAR Dual-Mode Setup (Source + Destination)
     // ============================================================================
-    console.log('\n=============== PHASE 3: Hedera WHBAR Dual-Mode Setup ===============');
+    console.log('\n=============== PHASE 3: MPCQ WHBAR Dual-Mode Setup ===============');
 
-    // PHASE 3A: Source Mode Setup - Approval for outgoing transfers (Hedera → Sepolia)
+    // PHASE 3A: Source Mode Setup - Approval for outgoing transfers (MPCQ → Sepolia)
     const whbarApprovalAmount = TEST_CONFIG.WHBAR_TRANSFER_AMOUNT.div(TEST_CONFIG.TINYBAR_TO_WEIBAR);
-    console.log(`\n--- Phase 3A: Source Mode (Hedera → Sepolia) ---`);
+    console.log(`\n--- Phase 3A: Source Mode (MPCQ → Sepolia) ---`);
 
     // Validate approval amount is above dust threshold
     expect(whbarApprovalAmount.gte(TEST_CONFIG.MINIMUM_TRANSFER_AMOUNT)).to.be.true;
@@ -134,16 +134,16 @@ describe('@whbar-bridge Comprehensive E2E Test', function () {
       hederaWHBARContract,
       hederaOftAdapterContract.address,
       whbarApprovalAmount,
-      'Hedera',
+      'MPCQ',
       'WHBAR',
     );
 
-    // PHASE 3B: Destination Mode Setup - Pre-fund adapter for incoming transfers (Sepolia → Hedera)
+    // PHASE 3B: Destination Mode Setup - Pre-fund adapter for incoming transfers (Sepolia → MPCQ)
     const whbarForAdapter = TEST_CONFIG.WHBAR_TRANSFER_AMOUNT.div(TEST_CONFIG.TINYBAR_TO_WEIBAR);
-    console.log(`\n--- Phase 3B: Destination Mode (Sepolia → Hedera) ---`);
+    console.log(`\n--- Phase 3B: Destination Mode (Sepolia → MPCQ) ---`);
     console.log(`This allows the adapter to unlock WHBAR when receiving transfers from Sepolia`);
 
-    await preFundAdapter(hederaWHBARContract, hederaOftAdapterContract.address, whbarForAdapter, 'Hedera', 'WHBAR');
+    await preFundAdapter(hederaWHBARContract, hederaOftAdapterContract.address, whbarForAdapter, 'MPCQ', 'WHBAR');
 
     // Get final allowance for logging
     const hederaAllowance = await hederaWHBARContract.allowance(
@@ -152,7 +152,7 @@ describe('@whbar-bridge Comprehensive E2E Test', function () {
     );
     const hederaAdapterBalance = await hederaWHBARContract.balanceOf(hederaOftAdapterContract.address);
 
-    console.log(`\nHedera OFT Adapter is now ready for bidirectional transfers:`);
+    console.log(`\nMPCQ OFT Adapter is now ready for bidirectional transfers:`);
     console.log(`  • Source mode: Can lock ${hederaAllowance.toString()} WHBAR from user approval`);
     console.log(`  • Destination mode: Can unlock ${hederaAdapterBalance.toString()} WHBAR from pre-funded balance`);
 
@@ -217,9 +217,9 @@ describe('@whbar-bridge Comprehensive E2E Test', function () {
     // ============================================================================
     console.log('\n=============== PHASE 5: Sepolia ERC20 Dual-Mode Setup ===============');
 
-    // PHASE 5A: Source Mode Setup - Approval for outgoing transfers (Sepolia → Hedera)
+    // PHASE 5A: Source Mode Setup - Approval for outgoing transfers (Sepolia → MPCQ)
     const erc20ApprovalAmount = BigNumber.from(TEST_CONFIG.ERC20_TRANSFER_AMOUNT);
-    console.log(`\n--- Phase 5A: Source Mode (Sepolia → Hedera) ---`);
+    console.log(`\n--- Phase 5A: Source Mode (Sepolia → MPCQ) ---`);
 
     await approveTokenForTransfer(
       sepoliaERC20Contract,
@@ -229,10 +229,10 @@ describe('@whbar-bridge Comprehensive E2E Test', function () {
       'ERC20',
     );
 
-    // PHASE 5B: Destination Mode Setup - Pre-fund adapter for incoming transfers (Hedera → Sepolia)
+    // PHASE 5B: Destination Mode Setup - Pre-fund adapter for incoming transfers (MPCQ → Sepolia)
     const tokensForAdapter = BigNumber.from(TEST_CONFIG.ERC20_TRANSFER_AMOUNT);
-    console.log(`\n--- Phase 5B: Destination Mode (Hedera → Sepolia) ---`);
-    console.log(`This allows the adapter to unlock tokens when receiving transfers from Hedera`);
+    console.log(`\n--- Phase 5B: Destination Mode (MPCQ → Sepolia) ---`);
+    console.log(`This allows the adapter to unlock tokens when receiving transfers from MPCQ`);
 
     await preFundAdapter(sepoliaERC20Contract, sepoliaOftAdapterContract.address, tokensForAdapter, 'Sepolia', 'ERC20');
 
@@ -263,8 +263,8 @@ describe('@whbar-bridge Comprehensive E2E Test', function () {
     // ============================================================================
     console.log('\n=============== PHASE 6: LayerZero Peer Configuration ===============');
 
-    // Configure Hedera → Sepolia peer
-    console.log('\n--- Phase 6A: Setting up Hedera → Sepolia LZ peer connection ---');
+    // Configure MPCQ → Sepolia peer
+    console.log('\n--- Phase 6A: Setting up MPCQ → Sepolia LZ peer connection ---');
     const hederaPeerReceipt = await setLZPeer(
       'hedera',
       'ExampleOFTAdapter',
@@ -272,10 +272,10 @@ describe('@whbar-bridge Comprehensive E2E Test', function () {
       sepoliaOftAdapterContract.address,
     );
     expect(hederaPeerReceipt.status).to.equal(1);
-    console.log('\n✓ Hedera → Sepolia LZ peer configured');
+    console.log('\n✓ MPCQ → Sepolia LZ peer configured');
 
-    // Configure Sepolia → Hedera peer
-    console.log('\n--- Phase 6B: Setting up Sepolia → Hedera LZ peer connection ---');
+    // Configure Sepolia → MPCQ peer
+    console.log('\n--- Phase 6B: Setting up Sepolia → MPCQ LZ peer connection ---');
     const sepoliaPeerReceipt = await setLZPeer(
       'sepolia',
       'ExampleOFTAdapter',
@@ -283,7 +283,7 @@ describe('@whbar-bridge Comprehensive E2E Test', function () {
       hederaOftAdapterContract.address,
     );
     expect(sepoliaPeerReceipt.status).to.equal(1);
-    console.log('\n✓ Sepolia → Hedera LZ peer configured');
+    console.log('\n✓ Sepolia → MPCQ LZ peer configured');
 
     // Validate peer configurations
     await validatePeerConfiguration(
@@ -296,7 +296,7 @@ describe('@whbar-bridge Comprehensive E2E Test', function () {
     // ============================================================================
     // PHASE 7: Cross-Chain Transfer Execution
     // ============================================================================
-    console.log('\n=============== PHASE 7.1: Cross-Chain Transfer Execution - Hedera to Sepolia ===============');
+    console.log('\n=============== PHASE 7.1: Cross-Chain Transfer Execution - MPCQ to Sepolia ===============');
 
     const whbarTransferAmount = TEST_CONFIG.WHBAR_TRANSFER_AMOUNT.div(TEST_CONFIG.TINYBAR_TO_WEIBAR);
 
@@ -306,7 +306,7 @@ describe('@whbar-bridge Comprehensive E2E Test', function () {
       'hederaSenderPreTransfer',
       hederaWHBARContract,
       hederaNetworkConfigs.networkSigner.address,
-      "Hedera Signer's WHBAR balance",
+      "MPCQ Signer's WHBAR balance",
     );
     await recordBalanceSnapshot(
       balanceSnapshots,
@@ -343,7 +343,7 @@ describe('@whbar-bridge Comprehensive E2E Test', function () {
       'hederaSenderPostTransfer',
       hederaWHBARContract,
       hederaNetworkConfigs.networkSigner.address,
-      "Hedera Signer's WHBAR balance after transfer",
+      "MPCQ Signer's WHBAR balance after transfer",
     );
 
     const actualBalanceReduction = balanceSnapshots.hederaSenderPreTransfer.sub(
@@ -356,7 +356,7 @@ describe('@whbar-bridge Comprehensive E2E Test', function () {
       'Source balance reduction validation',
     );
 
-    console.log(`\n🎉 Phase 7.1 Hedera → Sepolia transfer successfully complete!`);
+    console.log(`\n🎉 Phase 7.1 MPCQ → Sepolia transfer successfully complete!`);
     console.log(`  • Transaction Hash: ${hederaToSepoliaResult.hash}`);
     console.log(`  • Find transaction on Hashscan: https://hashscan.io/testnet/tx/${hederaToSepoliaResult.hash}`);
     console.log(
@@ -364,9 +364,9 @@ describe('@whbar-bridge Comprehensive E2E Test', function () {
     );
 
     // ============================================================================
-    // PHASE 7.2: Cross-Chain Transfer Execution - Sepolia to Hedera
+    // PHASE 7.2: Cross-Chain Transfer Execution - Sepolia to MPCQ
     // ============================================================================
-    console.log('\n=============== PHASE 7.2: Cross-Chain Transfer Execution - Sepolia to Hedera ===============');
+    console.log('\n=============== PHASE 7.2: Cross-Chain Transfer Execution - Sepolia to MPCQ ===============');
 
     const erc20TransferAmount = BigNumber.from(TEST_CONFIG.ERC20_TRANSFER_AMOUNT);
 
@@ -383,20 +383,20 @@ describe('@whbar-bridge Comprehensive E2E Test', function () {
       'hederaReceiverPreTransfer',
       hederaWHBARContract,
       TEST_CONFIG.RECEIVER_ADDRESS_HEDERA,
-      "Hedera Receiver's WHBAR balance",
+      "MPCQ Receiver's WHBAR balance",
     );
 
     // Validate return transfer parameters
     expect(erc20TransferAmount.gte(TEST_CONFIG.MINIMUM_TRANSFER_AMOUNT)).to.be.true;
     expect(erc20TransferAmount.lte(balanceSnapshots.sepoliaSenderPreTransfer)).to.be.true;
 
-    // Verify Hedera adapter has sufficient tokens to unlock
+    // Verify MPCQ adapter has sufficient tokens to unlock
     const hederaAdapterBalanceCheck = await hederaWHBARContract.balanceOf(hederaOftAdapterContract.address);
     expect(erc20TransferAmount.lte(hederaAdapterBalanceCheck)).to.be.true;
-    console.log(`Hedera adapter has ${hederaAdapterBalanceCheck.toString()} WHBAR tokens available for unlocking`);
+    console.log(`MPCQ adapter has ${hederaAdapterBalanceCheck.toString()} WHBAR tokens available for unlocking`);
 
     // Execute return cross-chain transfer
-    const sepoliaToHederaResult = await executeCrossChainTransfer({
+    const sepoliaToMPCQResult = await executeCrossChainTransfer({
       sourceNetwork: 'sepolia',
       destinationNetwork: 'hedera',
       IOFTContract: sepoliaOftAdapterContract,
@@ -425,11 +425,11 @@ describe('@whbar-bridge Comprehensive E2E Test', function () {
       'Source balance reduction validation',
     );
 
-    console.log(`\n🎉 Phase 7.2 Sepolia → Hedera transfer initiated successfully!`);
-    console.log(`  • Transaction Hash: ${sepoliaToHederaResult.hash}`);
-    console.log(`  • Find transaction on Sepolia: https://sepolia.etherscan.io/tx/${sepoliaToHederaResult.hash}`);
+    console.log(`\n🎉 Phase 7.2 Sepolia → MPCQ transfer initiated successfully!`);
+    console.log(`  • Transaction Hash: ${sepoliaToMPCQResult.hash}`);
+    console.log(`  • Find transaction on Sepolia: https://sepolia.etherscan.io/tx/${sepoliaToMPCQResult.hash}`);
     console.log(
-      `  • Find transaction on LayerZero Scan: https://testnet.layerzeroscan.com/tx/${sepoliaToHederaResult.hash}`,
+      `  • Find transaction on LayerZero Scan: https://testnet.layerzeroscan.com/tx/${sepoliaToMPCQResult.hash}`,
     );
 
     // ============================================================================
@@ -439,21 +439,21 @@ describe('@whbar-bridge Comprehensive E2E Test', function () {
 
     console.log(`\nInitial receiver balances:`);
     console.log(`  • Sepolia receiver: ${balanceSnapshots.sepoliaReceiverPreTransfer.toString()} WHBAR`);
-    console.log(`  • Hedera receiver: ${balanceSnapshots.hederaReceiverPreTransfer.toString()} WHBAR`);
+    console.log(`  • MPCQ receiver: ${balanceSnapshots.hederaReceiverPreTransfer.toString()} WHBAR`);
 
     // Phase 8.1: Wait for both cross-chain transfers to complete
     console.log('\n- Phase 8.1: Waiting for both LayerZero cross-chain transfers to complete...');
 
     const transferResults = await waitForMultipleTransfers([
       {
-        name: 'Hedera → Sepolia',
+        name: 'MPCQ → Sepolia',
         receiverContract: sepoliaERC20Contract,
         receiverAddress: TEST_CONFIG.RECEIVER_ADDRESS_SEPOLIA,
         initialBalance: balanceSnapshots.sepoliaReceiverPreTransfer,
         expectedAmount: whbarTransferAmount,
       },
       {
-        name: 'Sepolia → Hedera',
+        name: 'Sepolia → MPCQ',
         receiverContract: hederaWHBARContract,
         receiverAddress: TEST_CONFIG.RECEIVER_ADDRESS_HEDERA,
         initialBalance: balanceSnapshots.hederaReceiverPreTransfer,
@@ -461,8 +461,8 @@ describe('@whbar-bridge Comprehensive E2E Test', function () {
       },
     ]);
 
-    const hederaToSepoliaCompleted = transferResults['Hedera → Sepolia'];
-    const sepoliaToHederaCompleted = transferResults['Sepolia → Hedera'];
+    const hederaToSepoliaCompleted = transferResults['MPCQ → Sepolia'];
+    const sepoliaToMPCQCompleted = transferResults['Sepolia → MPCQ'];
 
     // ============================================================================
     // PHASE 9: Final Verification and Summary
@@ -470,7 +470,7 @@ describe('@whbar-bridge Comprehensive E2E Test', function () {
     console.log('\n=============== PHASE 9: Final Verification and Summary ===============');
 
     const finalSepoliaReceiverBalance = await sepoliaERC20Contract.balanceOf(TEST_CONFIG.RECEIVER_ADDRESS_SEPOLIA);
-    const finalHederaReceiverBalance = await hederaWHBARContract.balanceOf(TEST_CONFIG.RECEIVER_ADDRESS_HEDERA);
+    const finalMPCQReceiverBalance = await hederaWHBARContract.balanceOf(TEST_CONFIG.RECEIVER_ADDRESS_HEDERA);
 
     // Display comprehensive test summary using helper function
     displayTestSummary({
@@ -488,10 +488,10 @@ describe('@whbar-bridge Comprehensive E2E Test', function () {
           amount: whbarTransferAmount.toString(),
           hash: hederaToSepoliaResult.hash,
         },
-        sepoliaToHedera: {
-          completed: sepoliaToHederaCompleted,
+        sepoliaToMPCQ: {
+          completed: sepoliaToMPCQCompleted,
           amount: erc20TransferAmount.toString(),
-          hash: sepoliaToHederaResult.hash,
+          hash: sepoliaToMPCQResult.hash,
         },
       },
       finalBalances: {
@@ -500,8 +500,8 @@ describe('@whbar-bridge Comprehensive E2E Test', function () {
           increase: finalSepoliaReceiverBalance.sub(balanceSnapshots.sepoliaReceiverPreTransfer).toString(),
         },
         hederaReceiver: {
-          balance: finalHederaReceiverBalance.toString(),
-          increase: finalHederaReceiverBalance.sub(balanceSnapshots.hederaReceiverPreTransfer).toString(),
+          balance: finalMPCQReceiverBalance.toString(),
+          increase: finalMPCQReceiverBalance.sub(balanceSnapshots.hederaReceiverPreTransfer).toString(),
         },
       },
     });
@@ -516,9 +516,9 @@ describe('@whbar-bridge Comprehensive E2E Test', function () {
       expect(actualIncrease.lte(expectedMax)).to.be.true;
     }
 
-    if (sepoliaToHederaCompleted) {
+    if (sepoliaToMPCQCompleted) {
       const tolerance = BigNumber.from(10).pow(5); // 0.001 WHBAR tolerance for 8 decimals
-      const actualIncrease = finalHederaReceiverBalance.sub(balanceSnapshots.hederaReceiverPreTransfer);
+      const actualIncrease = finalMPCQReceiverBalance.sub(balanceSnapshots.hederaReceiverPreTransfer);
       const expectedMin = BigNumber.from(erc20TransferAmount).sub(tolerance);
       const expectedMax = BigNumber.from(erc20TransferAmount).add(tolerance);
       expect(actualIncrease.gte(expectedMin)).to.be.true;
@@ -527,6 +527,6 @@ describe('@whbar-bridge Comprehensive E2E Test', function () {
 
     console.log(`This test validates the complete WHBAR bridging infrastructure using LayerZero V2.`);
 
-    console.log('\n=============== Hedera <-> Sepolia Crosschain E2E Bridge Flow Comleted ===============');
+    console.log('\n=============== MPCQ <-> Sepolia Crosschain E2E Bridge Flow Comleted ===============');
   });
 });

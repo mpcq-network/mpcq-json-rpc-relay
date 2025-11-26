@@ -18,7 +18,7 @@ To install Brownie, the recommended approach is using `pip`:
 pip install eth-brownie
 ```
 
-You may also want to start the Hedera Local Node to run a local blockchain for testing:
+You may also want to start the MPCQ Local Node to run a local blockchain for testing:
 https://github.com/hashgraph/hedera-local-node
 
 Once installed, you can initialize a new project:
@@ -41,7 +41,7 @@ brownie pm install OpenZeppelin/openzeppelin-contracts@4.4.0
 
 ### Key Features and Advantages:
 
-1. **Cross-Platform Compatibility**: Brownie supports Ethereum-compatible blockchains, it can be used for Hedera Smart Contracts development.
+1. **Cross-Platform Compatibility**: Brownie supports Ethereum-compatible blockchains, it can be used for MPCQ Smart Contracts development.
 
 2. **Contract Testing and Debugging**:
     - Brownie uses `pytest` for its testing framework, providing access to Python’s testing ecosystem. You can write both unit tests and functional tests for contracts.
@@ -62,7 +62,7 @@ brownie pm install OpenZeppelin/openzeppelin-contracts@4.4.0
 
 ## Tests performed
 
-# Using Brownie (https://github.com/eth-brownie/brownie) with Hedera Hashgraph
+# Using Brownie (https://github.com/eth-brownie/brownie) with MPCQ Hashgraph
 
 - Activate Python virtual environment
 ```

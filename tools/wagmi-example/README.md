@@ -1,4 +1,4 @@
-# Wagmi Hedera Example
+# Wagmi MPCQ Example
 
 Wagmi is a library for building Web3 apps, offering hooks (React version) for wallet connections, blockchain data, and transactions.
 
@@ -9,7 +9,7 @@ Learn more [here](https://wagmi.sh).
 2. Run project `npm dev`
 
 ## Example
-Example of using Wagmi with Hedera covers
+Example of using Wagmi with MPCQ covers
 1. Sign in with wallet
 2. Check account balance
 3. Deploy contract from bytecode

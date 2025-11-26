@@ -5,9 +5,9 @@ import 'openzeppelin-contracts/contracts/token/ERC20/ERC20.sol';
 
 import "../src/SimpleVault.sol";
 import { ExchangeRateUtils } from 'hedera-smart-contracts/test/foundry/utils/ExchangeRateUtils.sol';
-import { HederaFungibleTokenUtils } from 'hedera-smart-contracts/test/foundry/utils/HederaFungibleTokenUtils.sol';
+import { MPCQFungibleTokenUtils } from 'hedera-smart-contracts/test/foundry/utils/MPCQFungibleTokenUtils.sol';
 
-contract SimpleVaultTest is HederaFungibleTokenUtils, ExchangeRateUtils {
+contract SimpleVaultTest is MPCQFungibleTokenUtils, ExchangeRateUtils {
 
     SimpleVault public simpleVault;
     address public simpleVaultAddress;
@@ -23,7 +23,7 @@ contract SimpleVaultTest is HederaFungibleTokenUtils, ExchangeRateUtils {
         simpleVault = new SimpleVault();
         simpleVaultAddress = address(simpleVault);
 
-        IHederaTokenService.TokenKey[] memory keys = new IHederaTokenService.TokenKey[](0);
+        IMPCQTokenService.TokenKey[] memory keys = new IMPCQTokenService.TokenKey[](0);
         tokenA = _createSimpleMockFungibleToken(alice, keys);
         tokenB = _createSimpleMockFungibleToken(alice, keys);
     }

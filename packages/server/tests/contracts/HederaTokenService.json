@@ -1,7 +1,7 @@
 {
   "_format": "hh-sol-artifact-1",
-  "contractName": "HederaTokenService",
-  "sourceName": "contracts/hts-precompile/HederaTokenService.sol",
+  "contractName": "MPCQTokenService",
+  "sourceName": "contracts/hts-precompile/MPCQTokenService.sol",
   "abi": [
     {
       "anonymous": false,

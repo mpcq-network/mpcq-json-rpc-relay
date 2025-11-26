@@ -309,12 +309,12 @@
                   "type": "bool"
                 }
               ],
-              "internalType": "struct IHederaTokenService.AccountAmount[]",
+              "internalType": "struct IMPCQTokenService.AccountAmount[]",
               "name": "transfers",
               "type": "tuple[]"
             }
           ],
-          "internalType": "struct IHederaTokenService.TransferList",
+          "internalType": "struct IMPCQTokenService.TransferList",
           "name": "transferList",
           "type": "tuple"
         },
@@ -343,7 +343,7 @@
                   "type": "bool"
                 }
               ],
-              "internalType": "struct IHederaTokenService.AccountAmount[]",
+              "internalType": "struct IMPCQTokenService.AccountAmount[]",
               "name": "transfers",
               "type": "tuple[]"
             },
@@ -370,12 +370,12 @@
                   "type": "bool"
                 }
               ],
-              "internalType": "struct IHederaTokenService.NftTransfer[]",
+              "internalType": "struct IMPCQTokenService.NftTransfer[]",
               "name": "nftTransfers",
               "type": "tuple[]"
             }
           ],
-          "internalType": "struct IHederaTokenService.TokenTransferList[]",
+          "internalType": "struct IMPCQTokenService.TokenTransferList[]",
           "name": "tokenTransfers",
           "type": "tuple[]"
         }

@@ -1,50 +1,50 @@
 {
   "openrpc": "1.0.0",
   "info": {
-    "title": "Hedera JSON-RPC Specification",
-    "description": "A specification of the implemented Ethereum JSON RPC APIs interface for Hedera clients and adheres to the Ethereum execution APIs schema.",
+    "title": "MPCQ JSON-RPC Specification",
+    "description": "A specification of the implemented Ethereum JSON RPC APIs interface for MPCQ clients and adheres to the Ethereum execution APIs schema.",
     "version": "0.74.0-SNAPSHOT"
   },
   "servers": [
     {
       "name": "Mainnet",
       "url": "https://mainnet.hashio.io/api",
-      "description": "Hedera Mainnet endpoint, hosted by [Hashio](https://swirldslabs.com/hashio/), a JSON-RPC Relay Community Service. Rate limited based [on IP address](https://github.com/hiero-ledger/hiero-json-rpc-relay/blob/main/docs/rate-limiting.md) and [on global HBAR spend](https://github.com/hiero-ledger/hiero-json-rpc-relay/blob/main/docs/hbar-limiting.md)."
+      "description": "MPCQ Mainnet endpoint, hosted by [Hashio](https://swirldslabs.com/hashio/), a JSON-RPC Relay Community Service. Rate limited based [on IP address](https://github.com/hiero-ledger/hiero-json-rpc-relay/blob/main/docs/rate-limiting.md) and [on global HBAR spend](https://github.com/hiero-ledger/hiero-json-rpc-relay/blob/main/docs/hbar-limiting.md)."
     },
     {
       "name": "Testnet",
       "url": "https://testnet.hashio.io/api",
-      "description": "Hedera Testnet endpoint, hosted by [Hashio](https://swirldslabs.com/hashio/), a JSON-RPC Relay Community Service. Rate limited based [on IP address](https://github.com/hiero-ledger/hiero-json-rpc-relay/blob/main/docs/rate-limiting.md) and [on global HBAR spend](https://github.com/hiero-ledger/hiero-json-rpc-relay/blob/main/docs/hbar-limiting.md)."
+      "description": "MPCQ Testnet endpoint, hosted by [Hashio](https://swirldslabs.com/hashio/), a JSON-RPC Relay Community Service. Rate limited based [on IP address](https://github.com/hiero-ledger/hiero-json-rpc-relay/blob/main/docs/rate-limiting.md) and [on global HBAR spend](https://github.com/hiero-ledger/hiero-json-rpc-relay/blob/main/docs/hbar-limiting.md)."
     },
     {
       "name": "Previewnet",
       "url": "https://previewnet.hashio.io/api",
-      "description": "Hedera Previewnet endpoint, hosted by [Hashio](https://swirldslabs.com/hashio/), a JSON-RPC Relay Community Service. Rate limited based [on IP address](https://github.com/hiero-ledger/hiero-json-rpc-relay/blob/main/docs/rate-limiting.md) and [on global HBAR spend](https://github.com/hiero-ledger/hiero-json-rpc-relay/blob/main/docs/hbar-limiting.md)."
+      "description": "MPCQ Previewnet endpoint, hosted by [Hashio](https://swirldslabs.com/hashio/), a JSON-RPC Relay Community Service. Rate limited based [on IP address](https://github.com/hiero-ledger/hiero-json-rpc-relay/blob/main/docs/rate-limiting.md) and [on global HBAR spend](https://github.com/hiero-ledger/hiero-json-rpc-relay/blob/main/docs/hbar-limiting.md)."
     },
     {
       "name": "localhost",
       "url": "http://localhost:7546",
-      "description": "Run your own instance of [`hiero-json-rpc-relay`](https://github.com/hiero-ledger/hiero-json-rpc-relay) on `localhost`, and configure it connect to your choice of Hedera networks. No rate limits apply."
+      "description": "Run your own instance of [`hiero-json-rpc-relay`](https://github.com/hiero-ledger/hiero-json-rpc-relay) on `localhost`, and configure it connect to your choice of MPCQ networks. No rate limits apply."
     },
     {
       "name": "WS Mainnet",
       "url": "wss://mainnet.hashio.io/ws",
-      "description": "Hedera Web Socket Mainnet endpoint, hosted by [Hashio](https://swirldslabs.com/hashio/), a JSON-RPC Relay Community Service. Rate limited based [on IP address](https://github.com/hiero-ledger/hiero-json-rpc-relay/blob/main/docs/rate-limiting.md) and [on global HBAR spend](https://github.com/hiero-ledger/hiero-json-rpc-relay/blob/main/docs/hbar-limiting.md)."
+      "description": "MPCQ Web Socket Mainnet endpoint, hosted by [Hashio](https://swirldslabs.com/hashio/), a JSON-RPC Relay Community Service. Rate limited based [on IP address](https://github.com/hiero-ledger/hiero-json-rpc-relay/blob/main/docs/rate-limiting.md) and [on global HBAR spend](https://github.com/hiero-ledger/hiero-json-rpc-relay/blob/main/docs/hbar-limiting.md)."
     },
     {
       "name": "WS Testnet",
       "url": "wss://testnet.hashio.io/ws",
-      "description": "Hedera Web Socket Testnet endpoint, hosted by [Hashio](https://swirldslabs.com/hashio/), a JSON-RPC Relay Community Service. Rate limited based [on IP address](https://github.com/hiero-ledger/hiero-json-rpc-relay/blob/main/docs/rate-limiting.md) and [on global HBAR spend](https://github.com/hiero-ledger/hiero-json-rpc-relay/blob/main/docs/hbar-limiting.md)."
+      "description": "MPCQ Web Socket Testnet endpoint, hosted by [Hashio](https://swirldslabs.com/hashio/), a JSON-RPC Relay Community Service. Rate limited based [on IP address](https://github.com/hiero-ledger/hiero-json-rpc-relay/blob/main/docs/rate-limiting.md) and [on global HBAR spend](https://github.com/hiero-ledger/hiero-json-rpc-relay/blob/main/docs/hbar-limiting.md)."
     },
     {
       "name": "WS Previewnet",
       "url": "wss://previewnet.hashio.io/ws",
-      "description": "Hedera Web Socket Previewnet endpoint, hosted by [Hashio](https://swirldslabs.com/hashio/), a JSON-RPC Relay Community Service. Rate limited based [on IP address](https://github.com/hiero-ledger/hiero-json-rpc-relay/blob/main/docs/rate-limiting.md) and [on global HBAR spend](https://github.com/hiero-ledger/hiero-json-rpc-relay/blob/main/docs/hbar-limiting.md)."
+      "description": "MPCQ Web Socket Previewnet endpoint, hosted by [Hashio](https://swirldslabs.com/hashio/), a JSON-RPC Relay Community Service. Rate limited based [on IP address](https://github.com/hiero-ledger/hiero-json-rpc-relay/blob/main/docs/rate-limiting.md) and [on global HBAR spend](https://github.com/hiero-ledger/hiero-json-rpc-relay/blob/main/docs/hbar-limiting.md)."
     },
     {
       "name": "WS localhost",
       "url": "ws://localhost:8546",
-      "description": "Run your own instance of Web Socket [`hiero-json-rpc-relay`](https://github.com/hiero-ledger/hiero-json-rpc-relay) on `localhost`, and configure it connect to your choice of Hedera networks. No rate limits apply."
+      "description": "Run your own instance of Web Socket [`hiero-json-rpc-relay`](https://github.com/hiero-ledger/hiero-json-rpc-relay) on `localhost`, and configure it connect to your choice of MPCQ networks. No rate limits apply."
     }
   ],
   "methods": [
@@ -638,7 +638,7 @@
       "result": {
         "name": "eth_getUncleByBlockHashAndIndex result",
         "schema": {
-          "description": "Always returns null. There are no uncles in Hedera.",
+          "description": "Always returns null. There are no uncles in MPCQ.",
           "$ref": "#/components/schemas/null"
         }
       }
@@ -666,7 +666,7 @@
       "result": {
         "name": "eth_getUncleByBlockNumberAndIndex result",
         "schema": {
-          "description": "Always returns null. There are no uncles in Hedera.",
+          "description": "Always returns null. There are no uncles in MPCQ.",
           "$ref": "#/components/schemas/null"
         }
       }
@@ -687,7 +687,7 @@
       "result": {
         "name": "eth_getUncleCountByBlockHash result",
         "schema": {
-          "description": "Always returns '0x0'. There are no uncles in Hedera.",
+          "description": "Always returns '0x0'. There are no uncles in MPCQ.",
           "title": "hex encoded unsigned integer",
           "type": "string",
           "pattern": "0x0"
@@ -710,7 +710,7 @@
       "result": {
         "name": "eth_getUncleCountByBlockNumber result",
         "schema": {
-          "description": "Always returns '0x0'. There are no uncles in Hedera.",
+          "description": "Always returns '0x0'. There are no uncles in MPCQ.",
           "title": "hex encoded unsigned integer",
           "type": "string",
           "pattern": "0x0"
@@ -743,7 +743,7 @@
     },
     {
       "name": "txpool_content",
-      "summary": "Returns all pending and queued transactions (queued are always an empty object {} due to Hedera specifics).",
+      "summary": "Returns all pending and queued transactions (queued are always an empty object {} due to MPCQ specifics).",
       "description": "![](https://raw.githubusercontent.com/hiero-ledger/hiero-json-rpc-relay/main/docs/images/http_label.png)",
       "params": [],
       "result": {
@@ -792,7 +792,7 @@
     },
     {
       "name": "txpool_contentFrom",
-      "summary": "Returns pending and queued transactions (queued are always an empty object {} due to Hedera specifics) of this address, grouped by nonce.",
+      "summary": "Returns pending and queued transactions (queued are always an empty object {} due to MPCQ specifics) of this address, grouped by nonce.",
       "description": "![](https://raw.githubusercontent.com/hiero-ledger/hiero-json-rpc-relay/main/docs/images/http_label.png)",
       "params": [],
       "result": {
@@ -829,7 +829,7 @@
     },
     {
       "name": "txpool_status",
-      "summary": "Returns the number of transactions in pending and queued states (queued are always 0x0 due to Hedera specifics).",
+      "summary": "Returns the number of transactions in pending and queued states (queued are always 0x0 due to MPCQ specifics).",
       "description": "![](https://raw.githubusercontent.com/hiero-ledger/hiero-json-rpc-relay/main/docs/images/http_label.png)",
       "params": [],
       "result": {
@@ -855,7 +855,7 @@
       "result": {
         "name": "eth_maxPriorityFeePerGas result",
         "schema": {
-          "description": "Always returns '0x0'. Hedera doesn't have a concept of tipping nodes to promote any behavior",
+          "description": "Always returns '0x0'. MPCQ doesn't have a concept of tipping nodes to promote any behavior",
           "title": "hex encoded unsigned integer",
           "type": "string",
           "pattern": "0x0"

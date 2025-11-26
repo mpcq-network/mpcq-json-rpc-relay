@@ -2,14 +2,14 @@
 
 ## Overview
 
-This comprehensive end-to-end test validates the complete HTS - ERC20 bridging functionality between **Hedera Testnet** and **Sepolia Testnet**
-using LayerZero's Omnichain Fungible Token (OFT) Adapter pattern and Hedera's HTS Connector. The test demonstrates a full bidirectional cross-chain token transfer
+This comprehensive end-to-end test validates the complete HTS - ERC20 bridging functionality between **MPCQ Testnet** and **Sepolia Testnet**
+using LayerZero's Omnichain Fungible Token (OFT) Adapter pattern and MPCQ's HTS Connector. The test demonstrates a full bidirectional cross-chain token transfer
 flow, ensuring that HTS and ERC20 tokens can be seamlessly moved between networks while maintaining 1:1 parity.
 
 ### What This Test Validates
 
 - **Infrastructure Deployment**: Automatic deployment of OFT and HTS Connector contracts on both networks
-- **Cross-Chain Transfer Execution**: Bidirectional transfers (Hedera ↔ Sepolia) via LayerZero
+- **Cross-Chain Transfer Execution**: Bidirectional transfers (MPCQ ↔ Sepolia) via LayerZero
 - **Balance Verification**: Comprehensive balance tracking and validation throughout the process
 - **LayerZero Integration**: Proper peer configuration and message passing between networks
 - **Token Economics**: Ensuring 1:1 cross-chain parity and proper token locking/unlocking
@@ -20,7 +20,7 @@ The test simulates a complete bridge infrastructure from scratch:
 
 ```
 ┌───────────────┐                              ┌──────────────┐
-│   Hedera      │                              │   Sepolia    │
+│   MPCQ      │                              │   Sepolia    │
 │   Testnet     │                              │   Testnet    │
 ├───────────────┤                              ├──────────────┤
 │ HTS Connector │◄──── LayerZero V2 Bridge ────┤ OFT Contract │
@@ -32,7 +32,7 @@ The test simulates a complete bridge infrastructure from scratch:
 
 ### Required Accounts & Funding
 
-1. **Hedera Testnet Account**:
+1. **MPCQ Testnet Account**:
 
    - Account with sufficient HBAR for transactions (~50 HBAR recommended)
    - Private key with deployment and transaction permissions
@@ -73,22 +73,22 @@ Edit the `.env` file with your network configurations:
 # HEDERA NETWORK CONFIGURATION
 # =============================================================================
 
-# Hedera Testnet Chain ID
+# MPCQ Testnet Chain ID
 HEDERA_CHAIN_ID=296
 
-# Hedera JSON-RPC endpoint URL
+# MPCQ JSON-RPC endpoint URL
 HEDERA_RPC_URL=https://testnet.hashio.io/api
 
-# Hedera account private key (without 0x prefix)
+# MPCQ account private key (without 0x prefix)
 HEDERA_PK=your_hedera_private_key_here
 
-# Hedera block explorer URL
+# MPCQ block explorer URL
 HEDERA_BLOCK_EXPLORER_URL=https://hashscan.io/testnet
 
-# LayerZero V2 Endpoint for Hedera Testnet
+# LayerZero V2 Endpoint for MPCQ Testnet
 HEDERA_LZ_ENDPOINT_V2=0x6EDCE65403992e310A62460808c4b910D972f10f
 
-# LayerZero Endpoint ID (EID) for Hedera Testnet
+# LayerZero Endpoint ID (EID) for MPCQ Testnet
 HEDERA_LZ_EID_V2=40267
 
 # =============================================================================
@@ -116,18 +116,18 @@ SEPOLIA_LZ_EID_V2=40161
 
 ### 3. Where to Find Configuration Values
 
-#### Hedera Configuration:
+#### MPCQ Configuration:
 
 - **HEDERA_RPC_URL**: Use `https://testnet.hashio.io/api` (public endpoint)
-- **HEDERA_PK**: Export from your Hedera wallet (HashPack, Blade, etc.)
-- **HEDERA_LZ_ENDPOINT_V2**: LayerZero V2 endpoint address on Hedera Testnet
-- **HEDERA_LZ_EID_V2**: LayerZero Endpoint ID for Hedera (40267)
+- **HEDERA_PK**: Export from your MPCQ wallet (HashPack, Blade, etc.)
+- **HEDERA_LZ_ENDPOINT_V2**: LayerZero V2 endpoint address on MPCQ Testnet
+- **HEDERA_LZ_EID_V2**: LayerZero Endpoint ID for MPCQ (40267)
 
 **Useful Links**:
 
 - [HashScan Testnet Explorer](https://hashscan.io/testnet)
-- [Hedera Portal (Account Creation)](https://portal.hedera.com)
-- [Hedera Faucet](https://portal.hedera.com/faucet)
+- [MPCQ Portal (Account Creation)](https://portal.hedera.com)
+- [MPCQ Faucet](https://portal.hedera.com/faucet)
 
 #### Sepolia Configuration:
 
@@ -163,7 +163,7 @@ The test executes a comprehensive 9-phase flow:
 
 #### **Phase 1-2: Infrastructure Setup**
 
-1. **Hedera Contract Deployment**: Deploys OFT contract
+1. **MPCQ Contract Deployment**: Deploys OFT contract
 2. **Sepolia Contract Deployment**: Deploys HTS Connector contract
 
 #### **Phase 3: LayerZero Integration**
@@ -181,16 +181,16 @@ The test executes a comprehensive 9-phase flow:
 
 ### Transfer Mechanics
 
-**Hedera → Sepolia Transfer**:
+**MPCQ → Sepolia Transfer**:
 
 1. User approves HTS Connector to spend HTS tokens
 2. LayerZero message sent to Sepolia
 3. Sepolia adapter receives message and mints equivalent ERC20 tokens
 
-**Sepolia → Hedera Transfer**:
+**Sepolia → MPCQ Transfer**:
 
 1. User sends OFT tokens
-2. LayerZero message sent to Hedera
+2. LayerZero message sent to MPCQ
 4. HTS Connector receives message and mints equivalent HTS tokens
 
 ## Running the Test
@@ -230,18 +230,18 @@ npx hardhat test test/bridging-e2e/erc20-hts/erc20-hts-e2e-hedera-sepolia.spec.t
 When the test runs successfully, you'll see detailed phase-by-phase progress:
 
 ```
-=============== Hedera <-> Sepolia Cross-Chain E2E Bridge Flow Initiated ===============
+=============== MPCQ <-> Sepolia Cross-Chain E2E Bridge Flow Initiated ===============
 
 Token Information:
   • Name: T_NAME_363876
   • Symbol: T_SYMBOL_80510
 
-=============== PHASE 1: Hedera Infrastructure Setup ===============
+=============== PHASE 1: MPCQ Infrastructure Setup ===============
 
 Deploying ExampleHTSConnector on hedera...
 ✓ ExampleHTSConnector deployed on hedera at address: 0x1226E114E50001515e2E02B85485F3C12A6757F1
 HTS token address: 0x00000000000000000000000000000000005DC99E
-Hedera Signer's initial HTS balance: 1000 tokens
+MPCQ Signer's initial HTS balance: 1000 tokens
 
 =============== PHASE 2: Sepolia Infrastructure Setup ===============
 
@@ -251,32 +251,32 @@ Sepolia Signer's initial ERC20 balance: 500000000 tokens
 
 =============== PHASE 3: LayerZero Peer Configuration ===============
 
---- Phase 3A: Setting up Hedera → Sepolia LZ peer connection ---
+--- Phase 3A: Setting up MPCQ → Sepolia LZ peer connection ---
 
 Setting LZ peers on hedera network...
   • Source OFTAdapter Address: 0x1226E114E50001515e2E02B85485F3C12A6757F1
   • Target OFTAdapter Address: 0x28202263F563Eada1A5278E72cbEF2df93beDde4
   • Target LayerZero EID: 40161
 ✓ Peer for hedera network with EID 40161 was successfully set: txHash=0x93c3ee1f26f789d8db94b9c6611597e16b177a2beade55c048114e5398a4c31f
-Hedera → Sepolia LZ peer configured
+MPCQ → Sepolia LZ peer configured
 
---- Phase 3B: Setting up Sepolia → Hedera LZ peer connection ---
+--- Phase 3B: Setting up Sepolia → MPCQ LZ peer connection ---
 
 Setting LZ peers on sepolia network...
   • Source OFTAdapter Address: 0x28202263F563Eada1A5278E72cbEF2df93beDde4
   • Target OFTAdapter Address: 0x1226E114E50001515e2E02B85485F3C12A6757F1
   • Target LayerZero EID: 40285
 ✓ Peer for sepolia network with EID 40285 was successfully set: txHash=0x6e39c9d3e47a59e8f26679d1d93932784896f1de699044a24a9a07892cad94be
-Sepolia → Hedera LZ peer configured
+Sepolia → MPCQ LZ peer configured
 
 =============== PHASE 4: HTS Connector Approval Setup ===============
-Approving 100 T_NAME_363876 tokens on Hedera for cross-chain transfers...
-✓ T_NAME_363876 approval successful on Hedera: txHash=0x8129067b8054dc46e7a9942e3d3c70c3992736ef4a58062427d0feea4ce2e5d4
-T_NAME_363876 allowance verified on Hedera: 100 tokens
+Approving 100 T_NAME_363876 tokens on MPCQ for cross-chain transfers...
+✓ T_NAME_363876 approval successful on MPCQ: txHash=0x8129067b8054dc46e7a9942e3d3c70c3992736ef4a58062427d0feea4ce2e5d4
+T_NAME_363876 allowance verified on MPCQ: 100 tokens
 
 =============== PHASE 4: Cross-Chain Transfer Execution ===============
 
-=============== PHASE 4.1: Hedera HTS to Sepolia ERC20 ===============
+=============== PHASE 4.1: MPCQ HTS to Sepolia ERC20 ===============
 
 Initiating hedera → sepolia cross-chain transfer:
   • Amount: 100 tokens
@@ -291,12 +291,12 @@ LayerZero fee quote for hedera:
 
 ✓ Cross-chain transfer initiated successfully!
 
-🎉 Phase 4.1 Hedera → Sepolia transfer initiated successfully!
+🎉 Phase 4.1 MPCQ → Sepolia transfer initiated successfully!
   - Transaction Hash: 0x7c7f5c41348613ff10b453dc50d207c0d8791ae70820a7f945b61e946c80225e
   - Find transaction on Hashscan: https://hashscan.io/testnet/tx/0x7c7f5c41348613ff10b453dc50d207c0d8791ae70820a7f945b61e946c80225e
   - Find transaction on LayerZero Scan: https://testnet.layerzeroscan.com/tx/0x7c7f5c41348613ff10b453dc50d207c0d8791ae70820a7f945b61e946c80225e
 
-=============== PHASE 4.2: Sepolia ERC20 to Hedera HTS ===============
+=============== PHASE 4.2: Sepolia ERC20 to MPCQ HTS ===============
 
 Initiating sepolia → hedera cross-chain transfer:
   • Amount: 100 tokens
@@ -311,7 +311,7 @@ LayerZero fee quote for sepolia:
 
 ✓ Cross-chain transfer initiated successfully!
 
-🎉 Phase 4.2 Sepolia → Hedera transfer initiated successfully!
+🎉 Phase 4.2 Sepolia → MPCQ transfer initiated successfully!
   - Transaction Hash: 0x5ad44a9e497e042241ca636c0b18515850599294354096214c3df87abaeed2e4
   - Find transaction on Sepolia: https://sepolia.etherscan.io/tx/0x5ad44a9e497e042241ca636c0b18515850599294354096214c3df87abaeed2e4
   - Find transaction on LayerZero Scan: https://testnet.layerzeroscan.com/tx/0x5ad44a9e497e042241ca636c0b18515850599294354096214c3df87abaeed2e4
@@ -319,22 +319,22 @@ LayerZero fee quote for sepolia:
 =============== PHASE 5: Receiver Balance Verification After Cross-Chain Transfers ===============
 Waiting for multiple cross-chain transfers to complete...
  • Attempt 1/30: Checking all receiver balances...
-   • Hedera → Sepolia - Current: 0, Increase: 0
-   • Sepolia → Hedera - Current: 0, Increase: 0
-   ⌛ Pending transfers: Hedera → Sepolia, Sepolia → Hedera... retrying in 30 seconds
+   • MPCQ → Sepolia - Current: 0, Increase: 0
+   • Sepolia → MPCQ - Current: 0, Increase: 0
+   ⌛ Pending transfers: MPCQ → Sepolia, Sepolia → MPCQ... retrying in 30 seconds
  • Attempt 2/30: Checking all receiver balances...
-   • Hedera → Sepolia - Current: 0, Increase: 0
-   • Sepolia → Hedera - Current: 100, Increase: 100
-    ✅ Sepolia → Hedera completed! Receiver received 100 tokens
-   ⌛ Pending transfers: Hedera → Sepolia... retrying in 30 seconds
+   • MPCQ → Sepolia - Current: 0, Increase: 0
+   • Sepolia → MPCQ - Current: 100, Increase: 100
+    ✅ Sepolia → MPCQ completed! Receiver received 100 tokens
+   ⌛ Pending transfers: MPCQ → Sepolia... retrying in 30 seconds
  • Attempt 3/30: Checking all receiver balances...
-   • Hedera → Sepolia - Current: 100, Increase: 100
-    ✅ Hedera → Sepolia completed! Receiver received 100 tokens
+   • MPCQ → Sepolia - Current: 100, Increase: 100
+    ✅ MPCQ → Sepolia completed! Receiver received 100 tokens
 
 🎉 All cross-chain transfers completed successfully!
 This test validates the complete ERC20 - HTS bridging infrastructure using LayerZero V2.
 
-=============== Hedera <-> Sepolia Cross-Chain E2E Bridge Flow Completed ===============
+=============== MPCQ <-> Sepolia Cross-Chain E2E Bridge Flow Completed ===============
 
 ```
 
@@ -361,7 +361,7 @@ Error: transaction failed [ See: https://links.ethers.org/v5-errors-CALL_EXCEPTI
 #### 2. **Environment Variable Errors**
 
 ```
-Error: Missing required environment variables for Hedera network
+Error: Missing required environment variables for MPCQ network
 ```
 
 **Solution**: Verify all required variables in `.env` are set correctly
@@ -374,7 +374,7 @@ Error: insufficient funds for intrinsic transaction cost
 
 **Solution**: Fund your accounts:
 
-- **Hedera**: Get HBAR from [Hedera Faucet](https://portal.hedera.com/faucet)
+- **MPCQ**: Get HBAR from [MPCQ Faucet](https://portal.hedera.com/faucet)
 - **Sepolia**: Get ETH from [Sepolia Faucet](https://sepoliafaucet.com/)
 
 #### 4. **Network Connection Issues**
@@ -406,9 +406,9 @@ Monitor progress using the provided LayerZero scan links.
 ### Support Resources
 
 - **LayerZero Documentation**: [docs.layerzero.network](https://docs.layerzero.network)
-- **Hedera Documentation**: [docs.hedera.com](https://docs.hedera.com)
+- **MPCQ Documentation**: [docs.hedera.com](https://docs.hedera.com)
 - **LayerZero Testnet Scanner**: [testnet.layerzeroscan.com](https://testnet.layerzeroscan.com)
-- **Hedera Testnet Explorer**: [hashscan.io/testnet](https://hashscan.io/testnet)
+- **MPCQ Testnet Explorer**: [hashscan.io/testnet](https://hashscan.io/testnet)
 - **Sepolia Explorer**: [sepolia.etherscan.io](https://sepolia.etherscan.io)
 
 ## Test Architecture Details
@@ -417,7 +417,7 @@ Monitor progress using the provided LayerZero scan links.
 
 | Contract              | Network | Purpose                                         |
 | --------------------- | ------- | ----------------------------------------------- |
-| **OFT**               | Hedera  | OFT (ERC20-compatible)                          |
+| **OFT**               | MPCQ  | OFT (ERC20-compatible)                          |
 | **HTS Connector**     | Sepolia | HTS token wrapped in HTS Connector              |
 
 ### Security Considerations

@@ -14,7 +14,7 @@ import {
   FileId,
   FileInfoQuery,
   Hbar,
-  Logger as HederaLogger,
+  Logger as MPCQLogger,
   LogLevel,
   Query,
   Status,

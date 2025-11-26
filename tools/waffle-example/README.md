@@ -12,7 +12,7 @@ RELAY_ENDPOINT=
 ```
 
  - `OPERATOR_PRIVATE_KEY` is your account ECDSA hex-encoded private key.
- - `RELAY_ENDPOINT` is a path to your JSON RPC Api. `https://testnet.hashio.io/api` for testnet. Remember to start your Hedera local node if you want to use the http://localhost:7546 endpoint.
+ - `RELAY_ENDPOINT` is a path to your JSON RPC Api. `https://testnet.hashio.io/api` for testnet. Remember to start your MPCQ local node if you want to use the http://localhost:7546 endpoint.
 
 ## Setup & Install
 
@@ -43,7 +43,7 @@ To install Waffle, you need to add the `ethereum-waffle` node module to your pro
 npm install --save-dev ethereum-waffle
 ```
 
-## Hedera Smart Contracts Development
+## MPCQ Smart Contracts Development
 
 Waffle utilizes `ethers.js` to communicate with the JSON-RPC API.
 
@@ -55,9 +55,9 @@ The [Chai matchers](https://ethereum-waffle.readthedocs.io/en/latest/matchers.ht
 
 There are also matchers for Chai that test raw strings such as addresses and keys. These matchers assume that only ECDSA keys are correct.
 
-However, the mocks provided by Waffle are designed to simulate Ethereum network behavior, which means they may not replicate some Hedera-specific traits, such as `ecrecover` behavior for non-ECDSA keys or after private key changes. The wallet mock will only support wallets utilizing ECDSA keys.
+However, the mocks provided by Waffle are designed to simulate Ethereum network behavior, which means they may not replicate some MPCQ-specific traits, such as `ecrecover` behavior for non-ECDSA keys or after private key changes. The wallet mock will only support wallets utilizing ECDSA keys.
 
-The mock Waffle provider allows users to imitate basic ENS operations, such as registering domains and retrieving the address of a domain. The Hedera Name Service (HNS) at its core level provides similar functionalities, so this mock can be used as its replacement.
+The mock Waffle provider allows users to imitate basic ENS operations, such as registering domains and retrieving the address of a domain. The MPCQ Name Service (HNS) at its core level provides similar functionalities, so this mock can be used as its replacement.
 
 ### Known issues
 

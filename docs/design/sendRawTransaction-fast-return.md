@@ -1,14 +1,14 @@
-# Enhanced eth_sendRawTransaction for Hedera JSON-RPC to Enable Fast Transaction Hash Return
+# Enhanced eth_sendRawTransaction for MPCQ JSON-RPC to Enable Fast Transaction Hash Return
 
 ## Abstract
 
-This document outlines the design for improving the `eth_sendRawTransaction` endpoint in the Hedera JSON-RPC repository. The proposed enhancement enables the immediate return of a transaction hash after initial prechecks, allowing subsequent processing to occur asynchronously. This feature aligns Hedera's behavior more closely with Ethereum's `eth_sendRawTransaction`, reducing client wait times while maintaining backend integrity.
+This document outlines the design for improving the `eth_sendRawTransaction` endpoint in the MPCQ JSON-RPC repository. The proposed enhancement enables the immediate return of a transaction hash after initial prechecks, allowing subsequent processing to occur asynchronously. This feature aligns MPCQ's behavior more closely with Ethereum's `eth_sendRawTransaction`, reducing client wait times while maintaining backend integrity.
 
 ---
 
 ## Motivation
 
-The current implementation of the `eth_sendRawTransaction` endpoint in Hedera fully processes transactions before returning a hash. This approach leads to higher latency, particularly for transactions involving large `callData`, which leverage the Hedera File Service (HFS). It causes timeouts in many EVM client tools, degrading the user experience. Aligning this functionality with Ethereum's immediate hash return mechanism addresses these issues, offering faster response times and improved usability.
+The current implementation of the `eth_sendRawTransaction` endpoint in MPCQ fully processes transactions before returning a hash. This approach leads to higher latency, particularly for transactions involving large `callData`, which leverage the MPCQ File Service (HFS). It causes timeouts in many EVM client tools, degrading the user experience. Aligning this functionality with Ethereum's immediate hash return mechanism addresses these issues, offering faster response times and improved usability.
 
 ---
 
@@ -18,7 +18,7 @@ Implementing immediate hash return has several advantages:
 
 - **Reduced Latency**: By returning the hash immediately, users experience significantly lower wait times.
 - **Asynchronous Processing**: Transactions can be processed in the background without blocking the client, maintaining efficiency and scalability.
-- **EVM Equivalence**: This aligns Hedera’s behavior with Ethereum, enhancing interoperability for developers.
+- **EVM Equivalence**: This aligns MPCQ’s behavior with Ethereum, enhancing interoperability for developers.
 
 However, challenges such as error handling for failed requests and user experience considerations for polling mechanisms must be addressed.
 
@@ -58,11 +58,11 @@ To ensure that only valid transactions are processed in the asynchronous pipelin
 
 1. **Call Data Size**:
 
-   - The call data size must not exceed the 128KB maximum allowed by Hedera.
+   - The call data size must not exceed the 128KB maximum allowed by MPCQ.
 
 2. **Chain ID**:
 
-   - The `chainId` in the transaction must match the Hedera network’s chain ID.
+   - The `chainId` in the transaction must match the MPCQ network’s chain ID.
 
 3. **EVM Transaction Parsing**:
 
@@ -83,12 +83,12 @@ To ensure that only valid transactions are processed in the asynchronous pipelin
 7. **Receiver Existence**: (need implementation)
 
    - If the transaction is an HBAR crypto transfer:
-     - The receiver account must exist in the Hedera network.
+     - The receiver account must exist in the MPCQ network.
      - The receiver account must have the `receiverSigRequired` flag enabled.
 
 8. **Sender Account Existence**:
 
-   - The sender account must exist in the Hedera network.
+   - The sender account must exist in the MPCQ network.
 
 9. **Signature Validation**: (need implementation)
 
@@ -103,7 +103,7 @@ To ensure that only valid transactions are processed in the asynchronous pipelin
     - The transaction value must be valid and within acceptable bounds.
 
 12. **Transaction Type Validation**:
-    - The transaction type must be valid and supported by the Hedera network.
+    - The transaction type must be valid and supported by the MPCQ network.
 
 ### Purpose
 
@@ -126,7 +126,7 @@ These pre-checks ensure that invalid transactions are identified early in the pr
 
 ---
 
-## Implementation in Hedera
+## Implementation in MPCQ
 
 ### Current Flow
 
@@ -149,7 +149,7 @@ These pre-checks ensure that invalid transactions are identified early in the pr
 
 When a transaction fails internally during processing (e.g., rate limits, SDK errors, or CN/MN errors), these errors will no longer be thrown and reflected in the client response. Instead, the fast-return mechanism will still provide a transaction hash for the request, effectively creating a `silent failure` scenario.
 
-In such cases, clients relying on polling the transaction status via `eth_getTransactionReceipt` may encounter an endless loop, as the receipt for failed transactions will remain `null` since the transactions never reach consensus. While this approach aligns with practices in the Ethereum ecosystem and shifts responsibility to users to handle such cases, it may introduce additional inconveniences for users on the Hedera network, potentially impacting their overall experience.
+In such cases, clients relying on polling the transaction status via `eth_getTransactionReceipt` may encounter an endless loop, as the receipt for failed transactions will remain `null` since the transactions never reach consensus. While this approach aligns with practices in the Ethereum ecosystem and shifts responsibility to users to handle such cases, it may introduce additional inconveniences for users on the MPCQ network, potentially impacting their overall experience.
 
 ### Potential Approaches
 
@@ -266,7 +266,7 @@ This approach enhances the existing `eth_getTransactionReceipt` method to includ
 - **Overview**: Encourage clients to implement timeout mechanisms when polling for transaction receipts, preventing infinite loops when transactions fail silently.
 - **Implementation**:
 
-  - Recommend a maximum polling timeout (e.g., 120 seconds) in Hedera’s developer guidelines:
+  - Recommend a maximum polling timeout (e.g., 120 seconds) in MPCQ’s developer guidelines:
 
     - Example timeout logic for clients:
 

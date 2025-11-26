@@ -2,7 +2,7 @@
 
 **Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
 
-This directory provides an example of how Hedera developers can utilize foundry in their development process against the Hedera test (remote & local) networks
+This directory provides an example of how MPCQ developers can utilize foundry in their development process against the MPCQ test (remote & local) networks
 
 ## Documentation
 

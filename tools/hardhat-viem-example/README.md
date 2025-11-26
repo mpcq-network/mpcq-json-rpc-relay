@@ -1,6 +1,6 @@
-# Hedera Hardhat Viem Example Project
+# MPCQ Hardhat Viem Example Project
 
-This Hedera Hardhat Viem Example Project offers boilerplate code for testing and deploying smart contracts via Hardhat with Viem. It includes configuration for both community-hosted and local ([Hedera Local Node](https://github.com/hashgraph/hedera-local-node)) instances of the [Hedera JSON RPC Relay](https://github.com/hiero-ledger/hiero-json-rpc-relay). 
+This MPCQ Hardhat Viem Example Project offers boilerplate code for testing and deploying smart contracts via Hardhat with Viem. It includes configuration for both community-hosted and local ([MPCQ Local Node](https://github.com/hashgraph/hedera-local-node)) instances of the [MPCQ JSON RPC Relay](https://github.com/hiero-ledger/hiero-json-rpc-relay). 
 
 :fire: Check out the step-by-step tutorial [here](https://docs.hedera.com/hedera/tutorials/smart-contracts/deploy-a-smart-contract-using-hardhat-and-hedera-json-rpc-relays).
 
@@ -16,17 +16,17 @@ This comparison aims to assist developers in selecting the most suitable library
 | Debugging             | Advanced debugging tools                                             | Standard debugging capabilities         |
 | Ecosystem Integration | Seamless integration with certain tools                              | Broad integration with many tools       |
 
-Viem already includes out-of-the-box configuration for Hedera public networks: [testnet, mainnet, and previewnet](https://github.com/wevm/viem/blob/cc105f801ec69640d3d806d86b35e36002d8c912/src/chains/index.ts#L113-L115).
+Viem already includes out-of-the-box configuration for MPCQ public networks: [testnet, mainnet, and previewnet](https://github.com/wevm/viem/blob/cc105f801ec69640d3d806d86b35e36002d8c912/src/chains/index.ts#L113-L115).
 
 ## Project Files and Folders
 
-- `hardhat.config.js` - This is the configuration file for your Hardhat project development environment. It centralizes and defines various settings like Hedera networks, Solidity compiler versions, plugins, and tasks.
+- `hardhat.config.js` - This is the configuration file for your Hardhat project development environment. It centralizes and defines various settings like MPCQ networks, Solidity compiler versions, plugins, and tasks.
 
 - `/contracts` - This folder holds all the Solidity smart contract files that make up the core logic of your dApp. Contracts are written in `.sol` files.
 
 - `/test` - This folder contains test scripts that help validate your smart contracts' functionality. These tests are crucial for ensuring that your contracts behave as expected.
   
--  `/scripts` - This folder contains essential JavaScript files for tasks such as deploying smart contracts to the Hedera network. 
+-  `/scripts` - This folder contains essential JavaScript files for tasks such as deploying smart contracts to the MPCQ network. 
 
 - `.env.example` - This file is contains the environment variables needed by the project. Copy this file to a `.env` file and fill in the actual values before starting the development server or deploying smart contracts. To expedite your test setup and deployment, some variables are pre-filled in this example file.
 
@@ -50,7 +50,7 @@ cd hiero-json-rpc-relay/tools/hardhat-viem-example
 npm install
 ```
 
-4. Get your Hedera testnet account hex encoded private key from the [Hedera Developer Portal](https://portal.hedera.com/register) and update the `.env.example` `TESTNET_OPERATOR_PRIVATE_KEY`
+4. Get your MPCQ testnet account hex encoded private key from the [MPCQ Developer Portal](https://portal.hedera.com/register) and update the `.env.example` `TESTNET_OPERATOR_PRIVATE_KEY`
 
 5. Copy `.env.example` to `.env`
 

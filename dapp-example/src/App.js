@@ -3,7 +3,7 @@ import { Button, Chip, Grid, TextField, Typography } from '@mui/material';
 import { Box, Container } from '@mui/system';
 import { ethers } from 'ethers';
 
-import useHederaSdk from './hooks/useHederaSdk';
+import useMPCQSdk from './hooks/useMPCQSdk';
 
 import ContractInteractions from './components/ContractInteractions';
 import TransferHTSTokensForm from './components/TransferHTSTokensForm';
@@ -22,7 +22,7 @@ function App() {
   const [sendHbarMsg, setSendHbarMsg] = useState(null);
   const [toBalanceAfterTransfer, setToBalanceAfterTransfer] = useState('');
 
-  const { recoveredPublicKeyToAccountId } = useHederaSdk();
+  const { recoveredPublicKeyToAccountId } = useMPCQSdk();
 
   useEffect(() => {
     if (window.ethereum) {

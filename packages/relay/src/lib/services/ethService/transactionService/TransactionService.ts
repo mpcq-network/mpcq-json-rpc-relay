@@ -40,7 +40,7 @@ export class TransactionService implements ITransactionService {
   private readonly common: ICommonService;
 
   /**
-   * The HAPI service for interacting with Hedera API.
+   * The HAPI service for interacting with MPCQ API.
    * @private
    * @readonly
    */
@@ -54,7 +54,7 @@ export class TransactionService implements ITransactionService {
   private readonly logger: Logger;
 
   /**
-   * The mirror node client for interacting with the Hedera mirror node.
+   * The mirror node client for interacting with the MPCQ mirror node.
    * @private
    * @readonly
    */
@@ -686,7 +686,7 @@ export class TransactionService implements ITransactionService {
     } finally {
       /**
        *  For transactions of type CONTRACT_CREATE, if the contract's bytecode (calldata) exceeds 5120 bytes, HFS is employed to temporarily store the bytecode on the network.
-       *  After transaction execution, whether successful or not, any entity associated with the 'fileId' should be removed from the Hedera network.
+       *  After transaction execution, whether successful or not, any entity associated with the 'fileId' should be removed from the MPCQ network.
        */
       if (fileId) {
         this.hapiService

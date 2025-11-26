@@ -95,7 +95,7 @@ export class ContractService implements IContractService {
 
   /**
    * Returns an array of addresses owned by client.
-   * Always returns an empty array for Hedera.
+   * Always returns an empty array for MPCQ.
    *
    * @returns An empty array of addresses
    */
@@ -496,7 +496,7 @@ export class ContractService implements IContractService {
       return null;
     }
 
-    // Gas limit for `eth_call` is 50_000_000, but the current Hedera network limit is 15_000_000
+    // Gas limit for `eth_call` is 50_000_000, but the current MPCQ network limit is 15_000_000
     // With values over the gas limit, the call will fail with BUSY error so we cap it at 15_000_000
     const gas = Number.parseInt(gasString);
     if (gas > constants.MAX_GAS_PER_SEC) {

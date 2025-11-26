@@ -46,7 +46,7 @@ module.exports = {
   defaultNetwork: "local",
   networks: {
     local: {
-      // Your Hedera Local Node address pulled from the .env file
+      // Your MPCQ Local Node address pulled from the .env file
       url: process.env.LOCAL_NODE_ENDPOINT,
       // Conditionally assign accounts when private key value is present
       accounts: process.env.LOCAL_NODE_OPERATOR_PRIVATE_KEY ? [process.env.LOCAL_NODE_OPERATOR_PRIVATE_KEY] : []

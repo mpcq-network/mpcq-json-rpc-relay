@@ -98,7 +98,7 @@ describe('Test SimpleVault using the HTS System Contract Mock', function () {
     expect(factoryNonceInitial).to.be.eq(factoryNonceFinal - 1);
     expect(expectedTokenAddress).to.eq(htsAddress);
 
-    htsTokenContract = await hre.ethers.getContractAt('HederaFungibleToken', htsAddress);
+    htsTokenContract = await hre.ethers.getContractAt('MPCQFungibleToken', htsAddress);
 
     const totalSupply = await htsTokenContract.totalSupply();
     const deployerBalance = await htsTokenContract.balanceOf(deployerAddress);
@@ -126,7 +126,7 @@ describe('Test SimpleVault using the HTS System Contract Mock', function () {
     const createTokenViaProxyRc = await createTokenViaProxyTx.wait();
 
     const htsTokenAddress = topicToAddress(createTokenViaProxyRc.logs[1].topics[1]);
-    const htsTokenByProxy = await hre.ethers.getContractAt('HederaFungibleToken', htsTokenAddress);
+    const htsTokenByProxy = await hre.ethers.getContractAt('MPCQFungibleToken', htsTokenAddress);
 
     const balanceOfProxy = await htsTokenByProxy.balanceOf(proxyToHtsMock.target);
     const totalSupply = await htsTokenByProxy.totalSupply();

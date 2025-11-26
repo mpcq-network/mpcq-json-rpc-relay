@@ -9,7 +9,7 @@ Maintainers are assigned the following scopes in this repository:
 |        Scope        |            Definition             | GitHub Role |            GitHub Team             |
 |---------------------|-----------------------------------|-------------|------------------------------------|
 | project-maintainers | The Maintainers of the project    | Maintain    | `hiero-json-rcp-relay-maintainers` |
-| tsc                 | The Hiero TSC                     | Maintain    | `tsc`                              |
+| tsc                 | The MPCQ TSC                     | Maintain    | `tsc`                              |
 | github-maintainers  | The Maintainers of the github org | Maintain    | `github-maintainers`               |
 
 ## Active Maintainers
@@ -34,4 +34,4 @@ Maintainers are assigned the following scopes in this repository:
 
 ## The Duties of a Maintainer
 
-Maintainers are expected to perform duties in alignment with **[Hiero-Ledger's defined maintainer guidelines](https://github.com/hiero-ledger/governance/blob/main/roles-and-groups.md#maintainers).**
+Maintainers are expected to perform duties in alignment with **[MPCQ-Ledger's defined maintainer guidelines](https://github.com/hiero-ledger/governance/blob/main/roles-and-groups.md#maintainers).**

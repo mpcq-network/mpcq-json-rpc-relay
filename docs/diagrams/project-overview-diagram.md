@@ -1,6 +1,6 @@
 ```mermaid
 flowchart TD
-A{Hedera JSON-RPC Relay}
+A{MPCQ JSON-RPC Relay}
 A --> B[Packages]
 A --> C[Tools]
 A --> D[Dapp-example]

@@ -95,7 +95,7 @@ export function getNetworkConfigs(network: string) {
       !process.env.HEDERA_LZ_EID_V2 ||
       !process.env.HEDERA_LZ_ENDPOINT_V2
     ) {
-      throw new Error('Missing required environment variables for Hedera network');
+      throw new Error('Missing required environment variables for MPCQ network');
     }
 
     const networkProvider = new hre.ethers.providers.JsonRpcProvider(process.env.HEDERA_RPC_URL);
@@ -388,7 +388,7 @@ export async function executeCrossChainTransfer(config: CrossChainTransferConfig
   // Get fee quote
   const { nativeFee, lzTokenFee } = await getLayerZeroFeeQuote(IOFTContract, transferParams, sourceNetwork);
 
-  // Calculate transaction value (different for Hedera vs other networks)
+  // Calculate transaction value (different for MPCQ vs other networks)
   const txValue =
     sourceNetwork === 'hedera' && tinybarToWeibar
       ? nativeFee.mul(BigNumber.from(tinybarToWeibar.toString()))
@@ -567,9 +567,9 @@ export async function waitForMultipleTransfers(
 /**
  * Validates bidirectional LayerZero peer configuration.
  *
- * @param hederaAdapter - Hedera OFT Adapter contract
+ * @param hederaAdapter - MPCQ OFT Adapter contract
  * @param sepoliaAdapter - Sepolia OFT Adapter contract
- * @param hederaNetworkConfig - Hedera network configuration
+ * @param hederaNetworkConfig - MPCQ network configuration
  * @param sepoliaNetworkConfig - Sepolia network configuration
  */
 export async function validatePeerConfiguration(
@@ -584,18 +584,18 @@ export async function validatePeerConfiguration(
   const sepoliaPeer = await sepoliaAdapter.peers(hederaNetworkConfig.lzEID);
 
   const expectedSepoliaPeerBytes = '0x' + sepoliaAdapter.address.substring(2).padStart(64, '0');
-  const expectedHederaPeerBytes = '0x' + hederaAdapter.address.substring(2).padStart(64, '0');
+  const expectedMPCQPeerBytes = '0x' + hederaAdapter.address.substring(2).padStart(64, '0');
 
   expect(hederaPeer.toLowerCase()).to.equal(
     expectedSepoliaPeerBytes.toLowerCase(),
-    'Hedera peer configuration mismatch',
+    'MPCQ peer configuration mismatch',
   );
   expect(sepoliaPeer.toLowerCase()).to.equal(
-    expectedHederaPeerBytes.toLowerCase(),
+    expectedMPCQPeerBytes.toLowerCase(),
     'Sepolia peer configuration mismatch',
   );
 
-  console.log('✓ Bidirectional peer configuration validated: Hedera ↔ Sepolia');
+  console.log('✓ Bidirectional peer configuration validated: MPCQ ↔ Sepolia');
 }
 
 /**
@@ -614,7 +614,7 @@ export function displayTestSummary(config: {
   };
   transfers: {
     hederaToSepolia: { completed: boolean; amount: string; hash: string };
-    sepoliaToHedera: { completed: boolean; amount: string; hash: string };
+    sepoliaToMPCQ: { completed: boolean; amount: string; hash: string };
   };
   finalBalances: {
     sepoliaReceiver: { balance: string; increase: string };
@@ -627,27 +627,27 @@ export function displayTestSummary(config: {
 
   // Network information
   console.log(`\n📋 Networks:`);
-  console.log(`  • Hedera Testnet (Chain ID: 296, LayerZero EID: ${hederaNetworkConfig.lzEID})`);
+  console.log(`  • MPCQ Testnet (Chain ID: 296, LayerZero EID: ${hederaNetworkConfig.lzEID})`);
   console.log(`  • Sepolia Testnet (Chain ID: 11155111, LayerZero EID: ${sepoliaNetworkConfig.lzEID})`);
 
   // Contract addresses
   console.log(`\n🏗️ Deployed Contracts:`);
-  console.log(`  • Hedera WHBAR: ${contracts.hederaWHBAR}`);
-  console.log(`  • Hedera OFT Adapter: ${contracts.hederaOftAdapter}`);
+  console.log(`  • MPCQ WHBAR: ${contracts.hederaWHBAR}`);
+  console.log(`  • MPCQ OFT Adapter: ${contracts.hederaOftAdapter}`);
   console.log(`  • Sepolia ERC20: ${contracts.sepoliaERC20}`);
   console.log(`  • Sepolia OFT Adapter: ${contracts.sepoliaOftAdapter}`);
 
   // Transfer results
   console.log(`\n💸 Cross-Chain Transfers:`);
-  console.log(`  • Hedera → Sepolia: ${transfers.hederaToSepolia.completed ? '✅ COMPLETED' : 'PENDING'}`);
+  console.log(`  • MPCQ → Sepolia: ${transfers.hederaToSepolia.completed ? '✅ COMPLETED' : 'PENDING'}`);
   console.log(`    • Amount: ${transfers.hederaToSepolia.amount} WHBAR`);
   console.log(`    • Transaction: https://hashscan.io/testnet/tx/${transfers.hederaToSepolia.hash}`);
   console.log(`    • LayerZero: https://testnet.layerzeroscan.com/tx/${transfers.hederaToSepolia.hash}`);
 
-  console.log(`  • Sepolia → Hedera: ${transfers.sepoliaToHedera.completed ? '✅ COMPLETED' : 'PENDING'}`);
-  console.log(`    • Amount: ${transfers.sepoliaToHedera.amount} ERC20`);
-  console.log(`    • Transaction: https://sepolia.etherscan.io/tx/${transfers.sepoliaToHedera.hash}`);
-  console.log(`    • LayerZero: https://testnet.layerzeroscan.com/tx/${transfers.sepoliaToHedera.hash}`);
+  console.log(`  • Sepolia → MPCQ: ${transfers.sepoliaToMPCQ.completed ? '✅ COMPLETED' : 'PENDING'}`);
+  console.log(`    • Amount: ${transfers.sepoliaToMPCQ.amount} ERC20`);
+  console.log(`    • Transaction: https://sepolia.etherscan.io/tx/${transfers.sepoliaToMPCQ.hash}`);
+  console.log(`    • LayerZero: https://testnet.layerzeroscan.com/tx/${transfers.sepoliaToMPCQ.hash}`);
 
   // Balance verification
   console.log(`\n📊 Final Balances:`);
@@ -655,15 +655,15 @@ export function displayTestSummary(config: {
     `  • Sepolia Receiver: ${finalBalances.sepoliaReceiver.balance} (+${finalBalances.sepoliaReceiver.increase})`,
   );
   console.log(
-    `  • Hedera Receiver: ${finalBalances.hederaReceiver.balance} (+${finalBalances.hederaReceiver.increase})`,
+    `  • MPCQ Receiver: ${finalBalances.hederaReceiver.balance} (+${finalBalances.hederaReceiver.increase})`,
   );
 
   // Overall status
-  if (transfers.hederaToSepolia.completed && transfers.sepoliaToHedera.completed) {
+  if (transfers.hederaToSepolia.completed && transfers.sepoliaToMPCQ.completed) {
     console.log(`\n✅ ALL TRANSFERS COMPLETED SUCCESSFULLY!`);
     console.log(`   🔄 Bridge Functionality: FULLY OPERATIONAL`);
     console.log(`   💰 Token Economics: 1:1 cross-chain parity maintained`);
-    console.log(`   🌐 Interoperability: Hedera ↔ Sepolia bridging confirmed`);
+    console.log(`   🌐 Interoperability: MPCQ ↔ Sepolia bridging confirmed`);
   } else {
     console.log(`\n⏳ Some transfers still pending completion`);
     console.log(`   Note: Cross-chain transfers typically take 2-10 minutes`);
@@ -693,7 +693,7 @@ export async function executeContractCallOnNetwork(
 
   if (network === 'hedera') {
     if (!process.env.HEDERA_RPC_URL || !process.env.HEDERA_PK) {
-      throw new Error('HEDERA_RPC_URL and HEDERA_PK environment variables are required for Hedera deployment');
+      throw new Error('HEDERA_RPC_URL and HEDERA_PK environment variables are required for MPCQ deployment');
     }
     wallet = new hre.ethers.Wallet(
       process.env.HEDERA_PK,
@@ -741,7 +741,7 @@ export const TEST_CONFIG = {
   ERC20_TRANSFER_AMOUNT: 1 * 10 ** 8,
 
   // Test receiver contracts will be deployed dynamically
-  RECEIVER_ADDRESS_HEDERA: '', // Will be set after deploying SimpleReceiver on Hedera
+  RECEIVER_ADDRESS_HEDERA: '', // Will be set after deploying SimpleReceiver on MPCQ
   RECEIVER_ADDRESS_SEPOLIA: '', // Will be set after deploying SimpleReceiver on Sepolia
 
   // LayerZero configuration (optimized for testing)

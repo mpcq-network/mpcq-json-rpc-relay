@@ -4,7 +4,7 @@ import { PublicKey, Client, TransferTransaction, Hbar, AccountId, AccountInfoQue
 
 const client = Client.forTestnet();
 
-const useHederaSdk = () => {
+const useMPCQSdk = () => {
   const recoveredPublicKeyToAccountId = (publicKey) => {
     const compressed = ethers.SigningKey.computePublicKey(ethers.getBytes(publicKey), true);
 
@@ -33,4 +33,4 @@ const useHederaSdk = () => {
   };
 };
 
-export default useHederaSdk;
+export default useMPCQSdk;

@@ -2,10 +2,10 @@
 pragma solidity >=0.5.0 <0.9.0;
 pragma experimental ABIEncoderV2;
 
-import "./IHederaTokenService.sol";
+import "./IMPCQTokenService.sol";
 
-abstract contract HederaTokenService {
-    // all response codes are defined here https://github.com/hashgraph/hedera-smart-contracts/blob/main/contracts/system-contracts/HederaResponseCodes.sol
+abstract contract MPCQTokenService {
+    // all response codes are defined here https://github.com/hashgraph/hedera-smart-contracts/blob/main/contracts/system-contracts/MPCQResponseCodes.sol
     int32 constant UNKNOWN_CODE = 21;
     int32 constant SUCCESS_CODE = 22;
 
@@ -13,7 +13,7 @@ abstract contract HederaTokenService {
     // 90 days in seconds
     int32 constant defaultAutoRenewPeriod = 7776000;
 
-    modifier nonEmptyExpiry(IHederaTokenService.HederaToken memory token) {
+    modifier nonEmptyExpiry(IMPCQTokenService.MPCQToken memory token) {
         if (token.expiry.second == 0 && token.expiry.autoRenewPeriod == 0) {
             token.expiry.autoRenewPeriod = defaultAutoRenewPeriod;
         }
@@ -48,7 +48,7 @@ abstract contract HederaTokenService {
     {
         (bool success, bytes memory result) = precompileAddress.call(
             abi.encodeWithSelector(
-                IHederaTokenService.mintToken.selector,
+                IMPCQTokenService.mintToken.selector,
                 token,
                 amount,
                 metadata
@@ -56,7 +56,7 @@ abstract contract HederaTokenService {
         );
         (responseCode, newTotalSupply, serialNumbers) = success
             ? abi.decode(result, (int32, int64, int64[]))
-            : (HederaTokenService.UNKNOWN_CODE, int64(0), new int64[](0));
+            : (MPCQTokenService.UNKNOWN_CODE, int64(0), new int64[](0));
     }
 
     /// Burns an amount of the token from the defined treasury account
@@ -75,7 +75,7 @@ abstract contract HederaTokenService {
     ) internal returns (int responseCode, int64 newTotalSupply) {
         (bool success, bytes memory result) = precompileAddress.call(
             abi.encodeWithSelector(
-                IHederaTokenService.burnToken.selector,
+                IMPCQTokenService.burnToken.selector,
                 token,
                 amount,
                 serialNumbers
@@ -83,7 +83,7 @@ abstract contract HederaTokenService {
         );
         (responseCode, newTotalSupply) = success
             ? abi.decode(result, (int32, int64))
-            : (HederaTokenService.UNKNOWN_CODE, int64(0));
+            : (MPCQTokenService.UNKNOWN_CODE, int64(0));
     }
 
     /// Creates a Fungible Token with the specified properties
@@ -94,7 +94,7 @@ abstract contract HederaTokenService {
     /// @return responseCode The response code for the status of the request. SUCCESS is 22.
     /// @return tokenAddress the created token's address
     function createFungibleToken(
-        IHederaTokenService.HederaToken memory token,
+        IMPCQTokenService.MPCQToken memory token,
         int64 initialTotalSupply,
         int32 decimals
     )
@@ -106,7 +106,7 @@ abstract contract HederaTokenService {
             value: msg.value
         }(
             abi.encodeWithSelector(
-                IHederaTokenService.createFungibleToken.selector,
+                IMPCQTokenService.createFungibleToken.selector,
                 token,
                 initialTotalSupply,
                 decimals
@@ -115,7 +115,7 @@ abstract contract HederaTokenService {
 
         (responseCode, tokenAddress) = success
             ? abi.decode(result, (int32, address))
-            : (HederaTokenService.UNKNOWN_CODE, address(0));
+            : (MPCQTokenService.UNKNOWN_CODE, address(0));
     }
 
     /// Transfers tokens where the calling account/contract is implicitly the first entry in the token transfer list,
@@ -133,7 +133,7 @@ abstract contract HederaTokenService {
     ) internal returns (int responseCode) {
         (bool success, bytes memory result) = precompileAddress.call(
             abi.encodeWithSelector(
-                IHederaTokenService.transferToken.selector,
+                IMPCQTokenService.transferToken.selector,
                 token,
                 sender,
                 receiver,
@@ -142,18 +142,18 @@ abstract contract HederaTokenService {
         );
         responseCode = success
             ? abi.decode(result, (int32))
-            : HederaTokenService.UNKNOWN_CODE;
+            : MPCQTokenService.UNKNOWN_CODE;
     }
 
     /// Operation to update token keys
     /// @param token The token address
     /// @param keys The token keys
     /// @return responseCode The response code for the status of the request. SUCCESS is 22.
-    function updateTokenKeys(address token, IHederaTokenService.TokenKey[] memory keys)
+    function updateTokenKeys(address token, IMPCQTokenService.TokenKey[] memory keys)
     internal returns (int64 responseCode){
         (bool success, bytes memory result) = precompileAddress.call(
-            abi.encodeWithSelector(IHederaTokenService.updateTokenKeys.selector, token, keys));
-        (responseCode) = success ? abi.decode(result, (int32)) : HederaTokenService.UNKNOWN_CODE;
+            abi.encodeWithSelector(IMPCQTokenService.updateTokenKeys.selector, token, keys));
+        (responseCode) = success ? abi.decode(result, (int32)) : MPCQTokenService.UNKNOWN_CODE;
     }
 
 }

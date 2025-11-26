@@ -1,4 +1,4 @@
-With the implementation of [HIP 694](https://hips.hedera.com/hip/hip-694), the Hedera JSON RPC Relay now includes a websocket server which allows users to receive data from contract events in real time.
+With the implementation of [HIP 694](https://hips.hedera.com/hip/hip-694), the MPCQ JSON RPC Relay now includes a websocket server which allows users to receive data from contract events in real time.
 
 
 ## Establishing a connection

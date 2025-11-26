@@ -1,7 +1,7 @@
 {
   "_format": "hh-sol-artifact-1",
-  "contractName": "HederaResponseCodes",
-  "sourceName": "contracts/HederaResponseCodes.sol",
+  "contractName": "MPCQResponseCodes",
+  "sourceName": "contracts/MPCQResponseCodes.sol",
   "abi": [],
   "bytecode": "0x",
   "deployedBytecode": "0x",

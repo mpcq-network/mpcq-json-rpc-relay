@@ -27,7 +27,7 @@ import basicContractJson from '../contracts/Basic.json';
 import callerContractJson from '../contracts/Caller.json';
 import DeployerContractJson from '../contracts/Deployer.json';
 import EstimateGasContract from '../contracts/EstimateGasContract.json';
-import HederaTokenServiceImplJson from '../contracts/HederaTokenServiceImpl.json';
+import MPCQTokenServiceImplJson from '../contracts/MPCQTokenServiceImpl.json';
 // Contracts and JSON files from local resources
 import reverterContractJson from '../contracts/Reverter.json';
 // Assertions and constants from local resources
@@ -720,16 +720,16 @@ describe('@api-batch-3 RPC Server Acceptance Tests', function () {
 
       tokenAddress = Utils.idToEvmAddress(htsResult.receipt.tokenId!.toString());
 
-      // Deploy a contract implementing HederaTokenService
-      const HederaTokenServiceImplFactory = new ethers.ContractFactory(
-        HederaTokenServiceImplJson.abi,
-        HederaTokenServiceImplJson.bytecode,
+      // Deploy a contract implementing MPCQTokenService
+      const MPCQTokenServiceImplFactory = new ethers.ContractFactory(
+        MPCQTokenServiceImplJson.abi,
+        MPCQTokenServiceImplJson.bytecode,
         accounts[1].wallet,
       );
-      htsImpl = await HederaTokenServiceImplFactory.deploy(Helper.GAS.LIMIT_15_000_000);
+      htsImpl = await MPCQTokenServiceImplFactory.deploy(Helper.GAS.LIMIT_15_000_000);
     });
 
-    it('Function calling HederaTokenService.isToken(token)', async () => {
+    it('Function calling MPCQTokenService.isToken(token)', async () => {
       const callData = {
         from: accounts[1].address,
         to: htsImpl.target,

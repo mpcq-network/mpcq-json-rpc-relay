@@ -61,7 +61,7 @@ describe('OFTTests', function() {
       process.exit(`Execution failed. Tx hash: ${tx.hash}`);
     }
 
-    console.log(`(${hre.network.name}) successfully sent to Hedera via tx: ${tx.hash}`);
+    console.log(`(${hre.network.name}) successfully sent to MPCQ via tx: ${tx.hash}`);
   });
 
   it('@hedera @test balance', async () => {

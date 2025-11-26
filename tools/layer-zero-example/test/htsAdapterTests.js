@@ -14,7 +14,7 @@ describe('HTSAdapterTests', function() {
     const contractERC20 = await ethers.getContractAt('ERC20Mock', process.env.HTS_ADAPTER_HTS_HEDERA_CONTRACT);
     const transferTx = await contractERC20.transfer(process.env.HTS_ADAPTER_HEDERA_CONTRACT, amount);
     const receipt = await transferTx.wait();
-    console.log(`(${hre.network.name}) successfully sent to Hedera via tx: ${transferTx.hash}`);
+    console.log(`(${hre.network.name}) successfully sent to MPCQ via tx: ${transferTx.hash}`);
     expect(!!receipt.status).to.be.true;
   });
 
@@ -30,7 +30,7 @@ describe('HTSAdapterTests', function() {
     const contractERC20 = await ethers.getContractAt('ERC20Mock', process.env.HTS_ADAPTER_HTS_HEDERA_CONTRACT);
     const approveTx = await contractERC20.approve(process.env.HTS_ADAPTER_HEDERA_CONTRACT, amount);
     const receipt = await approveTx.wait();
-    console.log(`(${hre.network.name}) successfully sent to Hedera via tx: ${approveTx.hash}`);
+    console.log(`(${hre.network.name}) successfully sent to MPCQ via tx: ${approveTx.hash}`);
     expect(!!receipt.status).to.be.true;
   });
 
@@ -93,7 +93,7 @@ describe('HTSAdapterTests', function() {
       process.exit(`Execution failed. Tx hash: ${tx.hash}`);
     }
 
-    console.log(`(${hre.network.name}) successfully sent to Hedera via tx: ${tx.hash}`);
+    console.log(`(${hre.network.name}) successfully sent to MPCQ via tx: ${tx.hash}`);
   });
 
   it('@hedera @test balance', async () => {

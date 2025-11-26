@@ -2,15 +2,15 @@
 pragma solidity ^0.8.20;
 
 import {OFTCore} from "@layerzerolabs/lz-evm-oapp-v2/contracts/oft/OFTCore.sol";
-import "./hts/HederaTokenService.sol";
-import "./hts/IHederaTokenService.sol";
+import "./hts/MPCQTokenService.sol";
+import "./hts/IMPCQTokenService.sol";
 import "./hts/KeyHelper.sol";
 
 /**
  * @title HTS Connector
  * @dev HTS Connector is a HTS token that extends the functionality of the OFTCore contract.
  */
-abstract contract HTSConnector is OFTCore, KeyHelper, HederaTokenService {
+abstract contract HTSConnector is OFTCore, KeyHelper, MPCQTokenService {
     address public htsTokenAddress;
 
     event TokenCreated(address tokenAddress);
@@ -28,25 +28,25 @@ abstract contract HTSConnector is OFTCore, KeyHelper, HederaTokenService {
         address _lzEndpoint,
         address _delegate
     ) payable OFTCore(8, _lzEndpoint, _delegate) {
-        IHederaTokenService.TokenKey[] memory keys = new IHederaTokenService.TokenKey[](1);
+        IMPCQTokenService.TokenKey[] memory keys = new IMPCQTokenService.TokenKey[](1);
         keys[0] = getSingleKey(
             KeyType.SUPPLY,
             KeyValueType.INHERIT_ACCOUNT_KEY,
             bytes("")
         );
 
-        IHederaTokenService.Expiry memory expiry = IHederaTokenService.Expiry(0, address(this), 8000000);
-        IHederaTokenService.HederaToken memory token = IHederaTokenService.HederaToken(
+        IMPCQTokenService.Expiry memory expiry = IMPCQTokenService.Expiry(0, address(this), 8000000);
+        IMPCQTokenService.MPCQToken memory token = IMPCQTokenService.MPCQToken(
             _name, _symbol, address(this), "memo", true, 5000, false, keys, expiry
         );
 
-        (int responseCode, address tokenAddress) = HederaTokenService.createFungibleToken(
+        (int responseCode, address tokenAddress) = MPCQTokenService.createFungibleToken(
             token, 1000, int32(int256(uint256(8)))
         );
-        require(responseCode == HederaTokenService.SUCCESS_CODE, "Failed to create HTS token");
+        require(responseCode == MPCQTokenService.SUCCESS_CODE, "Failed to create HTS token");
 
-        int256 transferResponse = HederaTokenService.transferToken(tokenAddress, address(this), msg.sender, 1000);
-        require(transferResponse == HederaTokenService.SUCCESS_CODE, "HTS: Transfer failed");
+        int256 transferResponse = MPCQTokenService.transferToken(tokenAddress, address(this), msg.sender, 1000);
+        require(transferResponse == MPCQTokenService.SUCCESS_CODE, "HTS: Transfer failed");
 
         htsTokenAddress = tokenAddress;
 
@@ -88,11 +88,11 @@ abstract contract HTSConnector is OFTCore, KeyHelper, HederaTokenService {
 
         (amountSentLD, amountReceivedLD) = _debitView(_amountLD, _minAmountLD, _dstEid);
 
-        int256 transferResponse = HederaTokenService.transferToken(htsTokenAddress, _from, address(this), int64(uint64(amountSentLD)));
-        require(transferResponse == HederaTokenService.SUCCESS_CODE, "HTS: Transfer failed");
+        int256 transferResponse = MPCQTokenService.transferToken(htsTokenAddress, _from, address(this), int64(uint64(amountSentLD)));
+        require(transferResponse == MPCQTokenService.SUCCESS_CODE, "HTS: Transfer failed");
 
-        (int256 response,) = HederaTokenService.burnToken(htsTokenAddress, int64(uint64(amountSentLD)), new int64[](0));
-        require(response == HederaTokenService.SUCCESS_CODE, "HTS: Burn failed");
+        (int256 response,) = MPCQTokenService.burnToken(htsTokenAddress, int64(uint64(amountSentLD)), new int64[](0));
+        require(response == MPCQTokenService.SUCCESS_CODE, "HTS: Burn failed");
     }
 
     /**
@@ -109,11 +109,11 @@ abstract contract HTSConnector is OFTCore, KeyHelper, HederaTokenService {
     ) internal virtual override returns (uint256) {
         require(_amountLD <= uint64(type(int64).max), "HTSConnector: amount exceeds int64 safe range");
 
-        (int256 response, ,) = HederaTokenService.mintToken(htsTokenAddress, int64(uint64(_amountLD)), new bytes[](0));
-        require(response == HederaTokenService.SUCCESS_CODE, "HTS: Mint failed");
+        (int256 response, ,) = MPCQTokenService.mintToken(htsTokenAddress, int64(uint64(_amountLD)), new bytes[](0));
+        require(response == MPCQTokenService.SUCCESS_CODE, "HTS: Mint failed");
 
-        int256 transferResponse = HederaTokenService.transferToken(htsTokenAddress, address(this), _to, int64(uint64(_amountLD)));
-        require(transferResponse == HederaTokenService.SUCCESS_CODE, "HTS: Transfer failed");
+        int256 transferResponse = MPCQTokenService.transferToken(htsTokenAddress, address(this), _to, int64(uint64(_amountLD)));
+        require(transferResponse == MPCQTokenService.SUCCESS_CODE, "HTS: Transfer failed");
 
         return _amountLD;
     }

@@ -57,7 +57,7 @@ export default class HAPIService {
   private readonly initialResetDuration: number;
 
   /**
-   * The network name for Hedera services.
+   * The network name for MPCQ services.
    */
   private readonly hederaNetwork: string;
 

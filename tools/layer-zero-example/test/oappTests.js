@@ -7,7 +7,7 @@ const { expect } = require('chai');
 const CONSTANTS = require('./constants');
 
 const { HEDERA_EID, BSC_EID } = CONSTANTS;
-const DATA_FROM_HEDERA = 'dataFromHedera';
+const DATA_FROM_HEDERA = 'dataFromMPCQ';
 const DATA_FROM_BSC = 'dataFromBsc';
 
 describe('OAppTests', function() {
@@ -42,7 +42,7 @@ describe('OAppTests', function() {
       process.exit(`Execution failed. Tx hash: ${tx.hash}`);
     }
 
-    console.log(`(${hre.network.name}) successfully sent to Hedera via tx: ${tx.hash}`);
+    console.log(`(${hre.network.name}) successfully sent to MPCQ via tx: ${tx.hash}`);
   });
 
   it('@hedera @test data()', async () => {

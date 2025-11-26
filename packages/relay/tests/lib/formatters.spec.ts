@@ -218,7 +218,7 @@ describe('Formatters', () => {
       expect(trimPrecedingZeros('')).to.eq('NaN');
       expect(trimPrecedingZeros('0x')).to.eq('NaN');
       expect(trimPrecedingZeros('Relay')).to.eq('NaN');
-      expect(trimPrecedingZeros('Hedera')).to.eq('NaN');
+      expect(trimPrecedingZeros('MPCQ')).to.eq('NaN');
     });
   });
 

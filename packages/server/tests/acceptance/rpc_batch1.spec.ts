@@ -801,7 +801,7 @@ describe('@api-batch-1 RPC Server Acceptance Tests', function () {
             -100,
           );
         } catch (e: any) {
-          // regarding the docs and HederaResponseCodes.sol the CONTRACT_NEGATIVE_VALUE code equals 96;
+          // regarding the docs and MPCQResponseCodes.sol the CONTRACT_NEGATIVE_VALUE code equals 96;
           expect(e.status._code).to.equal(96);
           hasContractNegativeValueError = true;
           transactionId = e.transactionId;

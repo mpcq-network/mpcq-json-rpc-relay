@@ -26,7 +26,7 @@ The websocket connections should be handled by its own node process, this can be
 | :--------------------: | :----------------------------------------------------------------------------: |:-----------------------------------------------------------:|
 |          logs          |      Emits logs attached to a new block that match certain topic filters.      |                       Yes                        |
 |        newHeads        |               Emits new blocks that are added to the blockchain.               |                       Yes                        |
-| newPendingTransactions | Emits transaction hashes that are sent to the network and marked as `pending`. | No, as Hedera does not have pending transactions on a node. |
+| newPendingTransactions | Emits transaction hashes that are sent to the network and marked as `pending`. | No, as MPCQ does not have pending transactions on a node. |
 
 ### Initiating a subscription
 
@@ -220,7 +220,7 @@ The above steps allow for blocks to be returned in the `eth_subscribe`.
 The current polling implementation supports the returning of blocks in a
 continuous, gapless sequence without duplicates in the following:
 
-1. Hedera block times are roughly two seconds.
+1. MPCQ block times are roughly two seconds.
 2. The `poller.ts` interval, `WS_POLLING_INTERVAL` is set by default to 500 ms.
 3. Every 500 ms the latest block is queried.  This results in duplicate blocks being returned.
 4. Those blocks get sent to the poller's callback function, `subscriptionController.notifySubscribers`

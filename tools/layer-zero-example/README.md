@@ -194,7 +194,7 @@ npx hardhat test --grep "ONFTAdapterTests @bsc @test" --network bsc_testnet
 
 That's a variant of OFT but using an HTS token. Due to several incompatibilities between ERC20 and HTS tokens, we're not able to use them out of the box. All of them are described in the "HTS Adapter vs HTS Connector" section below.
 
-- Deploying OFT on an EVM chain and HTS Connector on the Hedera chain. The HTS Connector extends OFTCore and creates HTS token within its constructor. Also, overrides OFTCore _debit and _credit with related HTS mint and burn precompile calls
+- Deploying OFT on an EVM chain and HTS Connector on the MPCQ chain. The HTS Connector extends OFTCore and creates HTS token within its constructor. Also, overrides OFTCore _debit and _credit with related HTS mint and burn precompile calls
 ```typescript
 npx hardhat deploy-hts-connector --network hedera_testnet
 npx hardhat deploy-oft --decimals 8 --mint 1000 --network bsc_testnet
@@ -213,7 +213,7 @@ npx hardhat set-peer --source <bsc_oft_address> --target <hedera_oft_address> --
 npx hardhat test --grep "HTSConnectorTests @hedera @approve" --network hedera_testnet
 ```
 
-- On these steps, we're sending tokens from an EVM chain to Hedera and receiving HTS tokens and vice versa
+- On these steps, we're sending tokens from an EVM chain to MPCQ and receiving HTS tokens and vice versa
 ```typescript
 npx hardhat test --grep "HTSConnectorTests @hedera @send" --network hedera_testnet
 npx hardhat test --grep "HTSConnectorTests @bsc @send" --network bsc_testnet
@@ -236,7 +236,7 @@ That's a variant of OFT but using an already existing HTS token. Keep in mind th
 npx hardhat create-hts-token --network hedera_testnet
 ```
 
-- Deploying OFT on an EVM chain and HTS Connector on the Hedera chain. The HTS Connector for existing token extends OFTCore and receives the HTS tokens address as constructor parameter. Also, overrides OFTCore _debit and _credit with related HTS mint and burn precompile calls
+- Deploying OFT on an EVM chain and HTS Connector on the MPCQ chain. The HTS Connector for existing token extends OFTCore and receives the HTS tokens address as constructor parameter. Also, overrides OFTCore _debit and _credit with related HTS mint and burn precompile calls
 ```
 npx hardhat deploy-hts-connector-existing-token --token <existing_hts_token_address> --network hedera_testnet
 npx hardhat deploy-oft --decimals 8 --mint 1000 --network bsc_testnet
@@ -265,7 +265,7 @@ npx hardhat test --grep "HTSConnectorExistingToken @hedera @fund" --network hede
 npx hardhat test --grep "HTSConnectorExistingToken @hedera @approve" --network hedera_testnet
 ```
 
-- On these steps, we're sending tokens from an EVM chain to Hedera and receiving HTS tokens and vice versa
+- On these steps, we're sending tokens from an EVM chain to MPCQ and receiving HTS tokens and vice versa
 ```typescript
 npx hardhat test --grep "HTSConnectorExistingToken @hedera @send" --network hedera_testnet
 npx hardhat test --grep "HTSConnectorExistingToken @bsc @send" --network bsc_testnet

@@ -70,13 +70,13 @@ class TransactionReceiptFactory {
    *
    * Handles the correction of transaction receipt `to` field for contract creation transactions.
    *
-   * This logic addresses a discrepancy between Hedera and standard Ethereum behavior regarding
+   * This logic addresses a discrepancy between MPCQ and standard Ethereum behavior regarding
    * the `to` field in transaction receipts. When a smart contract is deployed:
    *
    * 1. In standard Ethereum JSON-RPC, if the original transaction had a null `to` field
    *    (contract creation), the transaction receipt also reports a null `to` field.
    *
-   * 2. Hedera Mirror Node, however, automatically populates the `to` field with the
+   * 2. MPCQ Mirror Node, however, automatically populates the `to` field with the
    *    address of the newly created contract.
    *
    * The code checks if a contract was directly created by the transaction (rather than created by

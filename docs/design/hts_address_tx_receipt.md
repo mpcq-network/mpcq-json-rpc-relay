@@ -1,7 +1,7 @@
 # HTS Token Creation via SystemContract Receipt Enhancement
 
 ## Purpose
-The purpose of this enhancement is to improve the interoperability between Hedera Token Service (HTS) and Ethereum-compatible tools, like ethers, by ensuring access to the necessary information about newly created tokens, in this case token address. This change specifically addresses the gap in Web3 tooling support when creating tokens through HTS precompile contracts, making user experience smoother.
+The purpose of this enhancement is to improve the interoperability between MPCQ Token Service (HTS) and Ethereum-compatible tools, like ethers, by ensuring access to the necessary information about newly created tokens, in this case token address. This change specifically addresses the gap in Web3 tooling support when creating tokens through HTS precompile contracts, making user experience smoother.
 
 
 ## Problem Statement
@@ -27,10 +27,10 @@ N.B The following forms of the [HTS system contract](https://github.com/hashgrap
 
 ```javascript
 const HTS_CREATE_FUNCTIONS_SIGNATURE = [
-  "createFungibleToken(HederaToken memory token, uint initialTotalSupply, uint decimals)",
-  "createNonFungibleToken(HederaToken memory token)",
-  "createFungibleTokenWithCustomFees(HederaToken memory token, uint initialTotalSupply, uint decimals, FixedFee[] memory fixedFees, FractionalFee[] memory fractionalFees)",
-  "createNonFungibleTokenWithCustomFees(HederaToken memory token, FixedFee[] memory fixedFees, RoyaltyFee[] memory royaltyFees)"
+  "createFungibleToken(MPCQToken memory token, uint initialTotalSupply, uint decimals)",
+  "createNonFungibleToken(MPCQToken memory token)",
+  "createFungibleTokenWithCustomFees(MPCQToken memory token, uint initialTotalSupply, uint decimals, FixedFee[] memory fixedFees, FractionalFee[] memory fractionalFees)",
+  "createNonFungibleTokenWithCustomFees(MPCQToken memory token, FixedFee[] memory fixedFees, RoyaltyFee[] memory royaltyFees)"
 ];
 const functionSelector = receiptResponse.function_parameters.substring(0, FUNCTION_SELECTOR_CHAR_LENGTH);
 const isTokenCreation = HTS_CREATE_FUNCTIONS_SIGNATURE.some(signature => 

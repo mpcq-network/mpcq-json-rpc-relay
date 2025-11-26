@@ -1,6 +1,6 @@
-# Sample Hedera/Hardhat/Code coverage Project
+# Sample MPCQ/Hardhat/Code coverage Project
 
-This project demonstrates a basic usage of the solidity coverage [plugin](https://github.com/sc-forks/solidity-coverage) of HardHat in a Hedera environment. Example comes with simple contract to showcase this functionality, as well as more complex example contract with Hedera Precompile system calls. 
+This project demonstrates a basic usage of the solidity coverage [plugin](https://github.com/sc-forks/solidity-coverage) of HardHat in a MPCQ environment. Example comes with simple contract to showcase this functionality, as well as more complex example contract with MPCQ Precompile system calls. 
 
 ## The integration
 

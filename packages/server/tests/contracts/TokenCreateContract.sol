@@ -10,34 +10,34 @@ contract TokenContractContract is TokenCreate {
     event AllowanceValue(uint256 amount);
     event ApprovedAddress(address approved);
     event Approved(bool approved);
-    event FungibleTokenInfo(IHederaTokenService.FungibleTokenInfo tokenInfo);
-    event TokenCustomFees(IHederaTokenService.FixedFee[] fixedFees, IHederaTokenService.FractionalFee[] fractionalFees, IHederaTokenService.RoyaltyFee[] royaltyFees);
+    event FungibleTokenInfo(IMPCQTokenService.FungibleTokenInfo tokenInfo);
+    event TokenCustomFees(IMPCQTokenService.FixedFee[] fixedFees, IMPCQTokenService.FractionalFee[] fractionalFees, IMPCQTokenService.RoyaltyFee[] royaltyFees);
     event TokenDefaultKycStatus(bool defaultKycStatus);
     event KycGranted(bool kycGranted);
 
     function approvePublic(address token, address spender, uint256 amount) public returns (int responseCode) {
-        responseCode = HederaTokenService.approve(token, spender, amount);
+        responseCode = MPCQTokenService.approve(token, spender, amount);
         emit ResponseCode(responseCode);
-        if (responseCode != HederaResponseCodes.SUCCESS) {
+        if (responseCode != MPCQResponseCodes.SUCCESS) {
             revert ();
         }
     }
 
     function approveNFTPublic(address token, address approved, uint256 serialNumber) public returns (int responseCode)
     {
-        responseCode = HederaTokenService.approveNFT(token, approved, serialNumber);
+        responseCode = MPCQTokenService.approveNFT(token, approved, serialNumber);
 
         emit ResponseCode(responseCode);
 
-        if (responseCode != HederaResponseCodes.SUCCESS) {
+        if (responseCode != MPCQResponseCodes.SUCCESS) {
             revert ();
         }
     }
 
     function allowancePublic(address token, address owner, address spender) public returns (int responseCode, uint256 amount) {
-        (responseCode, amount) = HederaTokenService.allowance(token, owner, spender);
+        (responseCode, amount) = MPCQTokenService.allowance(token, owner, spender);
         emit ResponseCode(responseCode);
-        if (responseCode != HederaResponseCodes.SUCCESS) {
+        if (responseCode != MPCQResponseCodes.SUCCESS) {
             revert ();
         }
         emit AllowanceValue(amount);
@@ -45,27 +45,27 @@ contract TokenContractContract is TokenCreate {
 
 
     function transferTokenPublic(address token, address sender, address receiver, int64 amount) public returns (int responseCode) {
-        responseCode = HederaTokenService.transferToken(token, sender, receiver, amount);
+        responseCode = MPCQTokenService.transferToken(token, sender, receiver, amount);
         emit ResponseCode(responseCode);
-        if (responseCode != HederaResponseCodes.SUCCESS) {
+        if (responseCode != MPCQResponseCodes.SUCCESS) {
             revert();
         }
     }
 
-    function cryptoTransferPublic(IHederaTokenService.TokenTransferList[] calldata tokenTransferList) public returns (int responseCode) {
-        responseCode = HederaTokenService.cryptoTransfer(tokenTransferList);
+    function cryptoTransferPublic(IMPCQTokenService.TokenTransferList[] calldata tokenTransferList) public returns (int responseCode) {
+        responseCode = MPCQTokenService.cryptoTransfer(tokenTransferList);
         emit ResponseCode(responseCode);
-        if (responseCode != HederaResponseCodes.SUCCESS) {
+        if (responseCode != MPCQResponseCodes.SUCCESS) {
             revert();
         }
     }
 
     function getApprovedPublic(address token, uint256 serialNumber) public returns (int responseCode, address approved)
     {
-        (responseCode, approved) = HederaTokenService.getApproved(token, serialNumber);
+        (responseCode, approved) = MPCQTokenService.getApproved(token, serialNumber);
         emit ResponseCode(responseCode);
 
-        if (responseCode != HederaResponseCodes.SUCCESS) {
+        if (responseCode != MPCQResponseCodes.SUCCESS) {
             revert();
         }
 
@@ -74,10 +74,10 @@ contract TokenContractContract is TokenCreate {
 
     function setApprovalForAllPublic(address token, address operator, bool approved) public returns (int responseCode)
     {
-        responseCode = HederaTokenService.setApprovalForAll(token, operator, approved);
+        responseCode = MPCQTokenService.setApprovalForAll(token, operator, approved);
         emit ResponseCode(responseCode);
 
-        if (responseCode != HederaResponseCodes.SUCCESS) {
+        if (responseCode != MPCQResponseCodes.SUCCESS) {
             revert();
         }
     }
@@ -85,22 +85,22 @@ contract TokenContractContract is TokenCreate {
 
     function isApprovedForAllPublic(address token, address owner, address operator) public returns (int responseCode, bool approved)
     {
-        (responseCode, approved) = HederaTokenService.isApprovedForAll(token, owner, operator);
+        (responseCode, approved) = MPCQTokenService.isApprovedForAll(token, owner, operator);
         emit ResponseCode(responseCode);
 
-        if (responseCode != HederaResponseCodes.SUCCESS) {
+        if (responseCode != MPCQResponseCodes.SUCCESS) {
             revert();
         }
 
         emit Approved(approved);
     }
 
-    function getFungibleTokenInfoPublic(address token) public returns (int responseCode, IHederaTokenService.FungibleTokenInfo memory tokenInfo) {
-        (responseCode, tokenInfo) = HederaTokenService.getFungibleTokenInfo(token);
+    function getFungibleTokenInfoPublic(address token) public returns (int responseCode, IMPCQTokenService.FungibleTokenInfo memory tokenInfo) {
+        (responseCode, tokenInfo) = MPCQTokenService.getFungibleTokenInfo(token);
 
         emit ResponseCode(responseCode);
 
-        if (responseCode != HederaResponseCodes.SUCCESS) {
+        if (responseCode != MPCQResponseCodes.SUCCESS) {
             revert();
         }
 
@@ -112,28 +112,28 @@ contract TokenContractContract is TokenCreate {
         address treasury,
         address fixedFeeTokenAddress
     ) public payable {
-        IHederaTokenService.TokenKey[] memory keys = new IHederaTokenService.TokenKey[](1);
+        IMPCQTokenService.TokenKey[] memory keys = new IMPCQTokenService.TokenKey[](1);
         keys[0] = getSingleKey(0, 0, 1, bytes(""));
 
-        IHederaTokenService.Expiry memory expiry = IHederaTokenService.Expiry(
+        IMPCQTokenService.Expiry memory expiry = IMPCQTokenService.Expiry(
             0, treasury, 8000000
         );
 
-        IHederaTokenService.HederaToken memory token = IHederaTokenService.HederaToken(
+        IMPCQTokenService.MPCQToken memory token = IMPCQTokenService.MPCQToken(
             name, symbol, treasury, memo, true, maxSupply, false, keys, expiry
         );
 
-        IHederaTokenService.FixedFee[] memory fixedFees = new IHederaTokenService.FixedFee[](1);
-        fixedFees[0] = IHederaTokenService.FixedFee(1, fixedFeeTokenAddress, false, false, treasury);
+        IMPCQTokenService.FixedFee[] memory fixedFees = new IMPCQTokenService.FixedFee[](1);
+        fixedFees[0] = IMPCQTokenService.FixedFee(1, fixedFeeTokenAddress, false, false, treasury);
 
-        IHederaTokenService.FractionalFee[] memory fractionalFees = new IHederaTokenService.FractionalFee[](1);
-        fractionalFees[0] = IHederaTokenService.FractionalFee(4, 5, 10, 30, false, treasury);
+        IMPCQTokenService.FractionalFee[] memory fractionalFees = new IMPCQTokenService.FractionalFee[](1);
+        fractionalFees[0] = IMPCQTokenService.FractionalFee(4, 5, 10, 30, false, treasury);
 
         (int responseCode, address tokenAddress) =
-        HederaTokenService.createFungibleTokenWithCustomFees(token, initialTotalSupply, decimals, fixedFees, fractionalFees);
+        MPCQTokenService.createFungibleTokenWithCustomFees(token, initialTotalSupply, decimals, fixedFees, fractionalFees);
         emit ResponseCode(responseCode);
 
-        if (responseCode != HederaResponseCodes.SUCCESS) {
+        if (responseCode != MPCQResponseCodes.SUCCESS) {
             revert ();
         }
 
@@ -142,13 +142,13 @@ contract TokenContractContract is TokenCreate {
 
     function getTokenCustomFeesPublic(address token) public returns (
         int64 responseCode,
-        IHederaTokenService.FixedFee[] memory fixedFees,
-        IHederaTokenService.FractionalFee[] memory fractionalFees,
-        IHederaTokenService.RoyaltyFee[] memory royaltyFees) {
-        (responseCode, fixedFees, fractionalFees, royaltyFees) = HederaTokenService.getTokenCustomFees(token);
+        IMPCQTokenService.FixedFee[] memory fixedFees,
+        IMPCQTokenService.FractionalFee[] memory fractionalFees,
+        IMPCQTokenService.RoyaltyFee[] memory royaltyFees) {
+        (responseCode, fixedFees, fractionalFees, royaltyFees) = MPCQTokenService.getTokenCustomFees(token);
         emit ResponseCode(responseCode);
 
-        if (responseCode != HederaResponseCodes.SUCCESS) {
+        if (responseCode != MPCQResponseCodes.SUCCESS) {
             revert();
         }
 
@@ -156,20 +156,20 @@ contract TokenContractContract is TokenCreate {
     }
 
     function deleteTokenPublic(address token) public returns (int responseCode) {
-        responseCode = HederaTokenService.deleteToken(token);
+        responseCode = MPCQTokenService.deleteToken(token);
         emit ResponseCode(responseCode);
 
-        if (responseCode != HederaResponseCodes.SUCCESS) {
+        if (responseCode != MPCQResponseCodes.SUCCESS) {
             revert();
         }
     }
 
     function getTokenDefaultKycStatusPublic(address token) public returns (int responseCode, bool defaultKycStatus) {
-        (responseCode, defaultKycStatus) = HederaTokenService.getTokenDefaultKycStatus(token);
+        (responseCode, defaultKycStatus) = MPCQTokenService.getTokenDefaultKycStatus(token);
 
         emit ResponseCode(responseCode);
 
-        if (responseCode != HederaResponseCodes.SUCCESS) {
+        if (responseCode != MPCQResponseCodes.SUCCESS) {
             revert();
         }
 
@@ -181,7 +181,7 @@ contract TokenContractContract is TokenCreate {
 
         emit ResponseCode(responseCode);
 
-        if (responseCode != HederaResponseCodes.SUCCESS) {
+        if (responseCode != MPCQResponseCodes.SUCCESS) {
             revert();
         }
 
@@ -193,7 +193,7 @@ contract TokenContractContract is TokenCreate {
 
         emit ResponseCode(responseCode);
 
-        if (responseCode != HederaResponseCodes.SUCCESS) {
+        if (responseCode != MPCQResponseCodes.SUCCESS) {
             revert();
         }
     }

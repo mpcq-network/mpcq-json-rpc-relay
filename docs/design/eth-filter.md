@@ -27,7 +27,7 @@ Each new method will be described in the IFilterService interface and will be im
 2. `eth_getFilterLogs` will just use the same implementation as `eth_getLogs`, as well as the limits, which should match.
 3. `eth_getFilterChanges` checks whether the requested filter exist in cache, which if true, leads to check if the request filter is supported. Depending on the type this method returns the requested information based on filter and finally updates the filer ttl, as well as last queired block (this information is needed, if this filter is called once more to return information from said block onwards.)
 4. `eth_uninstallFilter` is going to check whether the requested `filterId` exist, if yes will just delete it.
-5. `eth_newPendingTransactionFilter` will return NOT_IMPLEMENTED error, as this filter is not possible in Hedera.
+5. `eth_newPendingTransactionFilter` will return NOT_IMPLEMENTED error, as this filter is not possible in MPCQ.
 
 Parameters accepted in the `eth_newFilter` method are:
 
@@ -49,7 +49,7 @@ Implementation of `eth_getFilterChanges` is
 | :--------------------: | :----------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------: |
 |          logs          |                               Returns all logs matching filter with given filter ID.                               |                       Yes, initially                        |
 |       newBlocks        |                            Returns all new blocks matching filter with given filter ID.                            |                 No, maybe in future release                 |
-| newPendingTransactions | Returns transaction hashes that are sent to the network and marked as `pending`, depending on the given filter ID. | No, as Hedera does not have pending transactions on a node. |
+| newPendingTransactions | Returns transaction hashes that are sent to the network and marked as `pending`, depending on the given filter ID. | No, as MPCQ does not have pending transactions on a node. |
 
 ### Initiating a filtration
 

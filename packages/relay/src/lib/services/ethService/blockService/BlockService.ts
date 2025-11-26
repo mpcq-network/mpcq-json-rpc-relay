@@ -156,7 +156,7 @@ export class BlockService implements IBlockService {
     }
 
     const receiptPromises = contractResults.map(async (contractResult) => {
-      if (Utils.isRevertedDueToHederaSpecificValidation(contractResult)) {
+      if (Utils.isRevertedDueToMPCQSpecificValidation(contractResult)) {
         if (this.logger.isLevelEnabled('debug')) {
           this.logger.debug(
             `Transaction with hash ${contractResult.hash} is skipped due to hedera-specific validation failure (${contractResult.result})`,
@@ -242,11 +242,11 @@ export class BlockService implements IBlockService {
   }
 
   /**
-   * Always returns null. There are no uncles in Hedera.
+   * Always returns null. There are no uncles in MPCQ.
    *
    * @param blockHash - The block hash
    * @param index - The uncle index
-   * @returns null as Hedera does not support uncle blocks
+   * @returns null as MPCQ does not support uncle blocks
    */
   getUncleByBlockHashAndIndex(blockHash: string, index: string): null {
     if (this.logger.isLevelEnabled('trace')) {
@@ -256,11 +256,11 @@ export class BlockService implements IBlockService {
   }
 
   /**
-   * Always returns null. There are no uncles in Hedera.
+   * Always returns null. There are no uncles in MPCQ.
    *
    * @param blockNumOrTag - The block number or tag
    * @param index - The uncle index
-   * @returns null as Hedera does not support uncle blocks
+   * @returns null as MPCQ does not support uncle blocks
    */
   getUncleByBlockNumberAndIndex(blockNumOrTag: string, index: string): null {
     if (this.logger.isLevelEnabled('trace')) {
@@ -270,10 +270,10 @@ export class BlockService implements IBlockService {
   }
 
   /**
-   * Always returns '0x0'. There are no uncles in Hedera.
+   * Always returns '0x0'. There are no uncles in MPCQ.
    *
    * @param blockHash - The block hash
-   * @returns '0x0' as Hedera does not support uncle blocks
+   * @returns '0x0' as MPCQ does not support uncle blocks
    */
   getUncleCountByBlockHash(blockHash: string): string {
     if (this.logger.isLevelEnabled('trace')) {
@@ -283,10 +283,10 @@ export class BlockService implements IBlockService {
   }
 
   /**
-   * Always returns '0x0'. There are no uncles in Hedera.
+   * Always returns '0x0'. There are no uncles in MPCQ.
    *
    * @param blockNumOrTag - The block number or tag
-   * @returns '0x0' as Hedera does not support uncle blocks
+   * @returns '0x0' as MPCQ does not support uncle blocks
    */
   getUncleCountByBlockNumber(blockNumOrTag: string): string {
     if (this.logger.isLevelEnabled('trace')) {
@@ -453,7 +453,7 @@ export class BlockService implements IBlockService {
     for (const contractResult of contractResults) {
       // there are several hedera-specific validations that occur right before entering the evm
       // if a transaction has reverted there, we should not include that tx in the block response
-      if (Utils.isRevertedDueToHederaSpecificValidation(contractResult)) {
+      if (Utils.isRevertedDueToMPCQSpecificValidation(contractResult)) {
         if (this.logger.isLevelEnabled('debug')) {
           this.logger.debug(
             `Transaction with hash ${contractResult.hash} is skipped due to hedera-specific validation failure (${contractResult.result})`,

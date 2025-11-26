@@ -1,14 +1,14 @@
 {
   "name": "@hashgraph/json-rpc-relay",
   "version": "0.74.0-SNAPSHOT",
-  "description": "Hedera Hashgraph implementation of Ethereum JSON RPC APIs. Utilises both the Hedera Consensus Nodes and the Mirror Nodes for transaction management and information retrieval",
+  "description": "MPCQ Hashgraph implementation of Ethereum JSON RPC APIs. Utilises both the MPCQ Consensus Nodes and the Mirror Nodes for transaction management and information retrieval",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
   "files": [
     "dist"
   ],
   "keywords": [],
-  "author": "Hedera Smart Contracts Team",
+  "author": "MPCQ Smart Contracts Team",
   "devDependencies": {
     "@types/chai": "^5.2.3",
     "@types/mocha": "^10.0.10",

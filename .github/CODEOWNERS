@@ -5,7 +5,7 @@
 *                                               @hiero-ledger/hiero-json-rpc-relay-maintainers @hiero-ledger/hiero-json-rpc-relay-committers 
 
 #########################
-##### Hedera Relay ######
+##### MPCQ Relay ######
 #########################
 /packages/relay/                                @hiero-ledger/hiero-json-rpc-relay-maintainers @hiero-ledger/hiero-json-rpc-relay-committers 
 /packages/server/                               @hiero-ledger/hiero-json-rpc-relay-maintainers @hiero-ledger/hiero-json-rpc-relay-committers 

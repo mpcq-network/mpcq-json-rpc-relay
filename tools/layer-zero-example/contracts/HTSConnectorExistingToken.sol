@@ -2,15 +2,15 @@
 pragma solidity ^0.8.20;
 
 import {OFTCore} from "@layerzerolabs/lz-evm-oapp-v2/contracts/oft/OFTCore.sol";
-import "./hts/HederaTokenService.sol";
-import "./hts/IHederaTokenService.sol";
+import "./hts/MPCQTokenService.sol";
+import "./hts/IMPCQTokenService.sol";
 import "./hts/KeyHelper.sol";
 
 /**
  * @title HTS Connector for existing token
  * @dev HTSConnectorExistingToken is a contract wrapped for already existing HTS token that extends the functionality of the OFTCore contract.
  */
-abstract contract HTSConnectorExistingToken is OFTCore, KeyHelper, HederaTokenService {
+abstract contract HTSConnectorExistingToken is OFTCore, KeyHelper, MPCQTokenService {
     address public htsTokenAddress;
 
     /**
@@ -60,11 +60,11 @@ abstract contract HTSConnectorExistingToken is OFTCore, KeyHelper, HederaTokenSe
     ) internal virtual override returns (uint256 amountSentLD, uint256 amountReceivedLD) {
         (amountSentLD, amountReceivedLD) = _debitView(_amountLD, _minAmountLD, _dstEid);
 
-        int256 transferResponse = HederaTokenService.transferToken(htsTokenAddress, _from, address(this), int64(uint64(amountSentLD)));
-        require(transferResponse == HederaTokenService.SUCCESS_CODE, "HTS: Transfer failed");
+        int256 transferResponse = MPCQTokenService.transferToken(htsTokenAddress, _from, address(this), int64(uint64(amountSentLD)));
+        require(transferResponse == MPCQTokenService.SUCCESS_CODE, "HTS: Transfer failed");
 
-        (int256 response,) = HederaTokenService.burnToken(htsTokenAddress, int64(uint64(amountSentLD)), new int64[](0));
-        require(response == HederaTokenService.SUCCESS_CODE, "HTS: Burn failed");
+        (int256 response,) = MPCQTokenService.burnToken(htsTokenAddress, int64(uint64(amountSentLD)), new int64[](0));
+        require(response == MPCQTokenService.SUCCESS_CODE, "HTS: Burn failed");
     }
 
     /**
@@ -79,11 +79,11 @@ abstract contract HTSConnectorExistingToken is OFTCore, KeyHelper, HederaTokenSe
         uint256 _amountLD,
         uint32 /*_srcEid*/
     ) internal virtual override returns (uint256) {
-        (int256 response, ,) = HederaTokenService.mintToken(htsTokenAddress, int64(uint64(_amountLD)), new bytes[](0));
-        require(response == HederaTokenService.SUCCESS_CODE, "HTS: Mint failed");
+        (int256 response, ,) = MPCQTokenService.mintToken(htsTokenAddress, int64(uint64(_amountLD)), new bytes[](0));
+        require(response == MPCQTokenService.SUCCESS_CODE, "HTS: Mint failed");
 
-        int256 transferResponse = HederaTokenService.transferToken(htsTokenAddress, address(this), _to, int64(uint64(_amountLD)));
-        require(transferResponse == HederaTokenService.SUCCESS_CODE, "HTS: Transfer failed");
+        int256 transferResponse = MPCQTokenService.transferToken(htsTokenAddress, address(this), _to, int64(uint64(_amountLD)));
+        require(transferResponse == MPCQTokenService.SUCCESS_CODE, "HTS: Transfer failed");
 
         return _amountLD;
     }

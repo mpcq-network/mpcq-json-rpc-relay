@@ -13,7 +13,7 @@ describe('@deployment-test Deploy ERC20 Script Integration Tests', function () {
     delete process.env.DECIMALS;
   });
 
-  describe('Hedera Network Deployment', function () {
+  describe('MPCQ Network Deployment', function () {
     it('should deploy with default parameters', async function () {
       const output = await runHardhatScript('hedera', 'scripts/deployments/deploy-erc20.ts');
 

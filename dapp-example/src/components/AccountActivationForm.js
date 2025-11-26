@@ -1,13 +1,13 @@
 import { Box, Button, InputAdornment, TextField, Typography } from '@mui/material';
 import { useCallback, useState } from 'react';
-import useHederaSdk from '../hooks/useHederaSdkClient';
+import useMPCQSdk from '../hooks/useMPCQSdkClient';
 
 const AccountActivationForm = ({ isConnected, toAccountId, alias, isActive, evmAddress, fetchAccountBalance }) => {
   const [mainAccountId, setMainAccountId] = useState('');
   const [mainPrivateKey, setMainPrivateKey] = useState('');
   const [amount, setAmount] = useState(0);
 
-  const { transferHbarsToAccount, getAccountInfo } = useHederaSdk();
+  const { transferHbarsToAccount, getAccountInfo } = useMPCQSdk();
 
   const transferHbarHandler = useCallback(async () => {
     try {
